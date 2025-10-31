@@ -20,7 +20,7 @@ function LoginPage({ setIsAuthenticated }) {
       // --- Заглушка: пока без реального API ---
       if (username === "admin" && password === "1234") {
         const token = "mock-token"; 
-        const expiry = new Date().getTime() + 5 * 60 * 1000; // токен живет 5 минут
+        const expiry = new Date().getTime() + 90 * 60 * 1000; // токен живет 5 минут
 
         localStorage.setItem("token", token);
         localStorage.setItem("tokenExpiry", expiry.toString());

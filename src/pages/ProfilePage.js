@@ -1,62 +1,36 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { profilesData } from "../data/profilesData";
+import BasicInfo from "../components/widgets/BasicInfo";
+import Communications from "../components/widgets/Communications";
+import RelatedClients from "../components/widgets/RelatedClients";
+import FinancialProfile from "../components/widgets/FinancialProfile"; // объединённый компонент
+import BankProductsPage from "../components/widgets/BankProductsPage";
+import GroupProductsPage from "../components/widgets/GroupProductsPage";
+import CollapsibleSection from "../components/CollapsibleSection";
+import { ArrowLeft, UserCircle2 } from "lucide-react";
 
 const ProfilePage = () => {
-  const { iin } = useParams();
+  const { ac_id } = useParams();
   const navigate = useNavigate();
+  const [openWidget, setOpenWidget] = useState(null);
+  const widgetRef = useRef(null);
 
-  // ⚙️ Имитация данных (в реальном проекте можно тянуть через API)
-  const profiles = [
-    {
-      id: 1,
-      iin: "990112345678",
-      msisdn: "77011234567",
-      name: "Айгерим С.",
-      segment: "High Value",
-      status: "Active",
-      region: "Алматы",
-      arpu: 4500,
-      lastActivity: "2025-10-15",
-      email: "aigerim@example.com",
-      deviceId: "dev12345",
-      events: [
-        { date: "2025-10-01", type: "Регистрация" },
-        { date: "2025-10-05", type: "Покупка" },
-        { date: "2025-10-10", type: "Вход в приложение" },
-      ],
-      products: ["Product A", "Product B"],
-    },
-    {
-      id: 2,
-      iin: "990298765432",
-      msisdn: "77029876543",
-      name: "Данияр К.",
-      segment: "Mass Market",
-      status: "Inactive",
-      region: "Астана",
-      arpu: 2300,
-      lastActivity: "2025-09-28",
-      email: "daniyar@example.com",
-      deviceId: "dev98765",
-      events: [
-        { date: "2025-09-01", type: "Регистрация" },
-        { date: "2025-09-10", type: "Вход в приложение" },
-      ],
-      products: ["Product C"],
-    },
-    
-  ];
+  const profile = profilesData.find((p) => p.ac_id === Number(ac_id));
 
-  const profile = profiles.find((p) => p.iin === iin);
+  useEffect(() => {
+    if (openWidget && widgetRef.current) {
+      widgetRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [openWidget]);
 
   if (!profile) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen text-gray-700">
-        <p className="text-xl mb-4">Профиль с ИИН {iin} не найден</p>
+      <div className="flex flex-col items-center justify-center h-screen text-gray-600">
+        <p>Клиент с AC ID {ac_id} не найден.</p>
         <button
           onClick={() => navigate(-1)}
-          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-md transition"
+          className="mt-4 px-4 py-2 bg-yellow-500 rounded-md text-gray-900"
         >
           Назад
         </button>
@@ -64,89 +38,93 @@ const ProfilePage = () => {
     );
   }
 
+  const { basicInfo, products, communications, behavior, financialHabits, financialInfo, relatedClients } = profile;
+
+  const handleOpen = (key) =>
+    setOpenWidget((prev) => (prev === key ? null : key));
+
+  // 🧩 Набор виджетов
+  const widgets = [
+    { key: "bankProducts", title: "🏦 Продукты Банка", content: <BankProductsPage data={profile} /> },
+    { key: "groupProducts", title: "💼 Продукты Группы", content: <GroupProductsPage data={profile} /> },
+    { key: "communications", title: "📞 Коммуникации", content: <Communications data={communications} /> },
+    {
+      key: "financialProfile",
+      title: "💳 Финансовый профиль",
+      content: <FinancialProfile data={{ ...financialHabits, ...behavior }} financialInfo={financialInfo} />,
+    },
+    { key: "related", title: "👥 Связанные клиенты", content: <RelatedClients related={relatedClients} /> },
+  ];
+
   return (
-    <div className="flex h-screen bg-gray-50 text-gray-900">
-      <div className="flex-1 p-6 overflow-auto">
-        {/* Кнопка назад */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center space-x-2 text-gray-700 hover:text-yellow-600 mb-6"
-        >
-          <ArrowLeft size={20} />
-          <span>Назад к списку профилей</span>
-        </button>
-
-        {/* Заголовок */}
-        <h1 className="text-2xl font-semibold mb-4">
-          Карточка клиента — {profile.name}
-        </h1>
-
-        {/* Основная информация */}
-        <div className="bg-white shadow rounded-xl p-6 mb-6">
-          <h2 className="text-lg font-medium mb-4 text-yellow-700">
-            Общая информация
-          </h2>
-          <div className="grid grid-cols-2 gap-y-3">
-            <p><strong>ИИН:</strong> {profile.iin}</p>
-            <p><strong>MSISDN:</strong> {profile.msisdn}</p>
-            <p><strong>Регион:</strong> {profile.region}</p>
-            <p><strong>Сегмент:</strong> {profile.segment}</p>
-            <p>
-              <strong>Статус:</strong>{" "}
-              <span
-                className={`font-medium ${
-                  profile.status === "Active" ? "text-green-600" : "text-red-500"
-                }`}
-              >
-                {profile.status}
-              </span>
-            </p>
-            <p><strong>ARPU:</strong> {profile.arpu.toLocaleString()} ₸</p>
-            <p><strong>Последняя активность:</strong> {profile.lastActivity}</p>
-            <p><strong>Email:</strong> {profile.email}</p>
-            <p><strong>Device ID:</strong> {profile.deviceId}</p>
+    <div className="bg-gray-50 min-h-screen flex flex-col items-center px-3 sm:px-4 pb-8">
+      {/* 🔝 Верхняя панель */}
+      <div className="sticky top-4 z-20 w-full max-w-6xl rounded-xl bg-white/90 backdrop-blur-md px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-gray-700 hover:text-yellow-700 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="font-medium">Назад</span>
+          </button>
+          <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
+            <UserCircle2 className="w-5 h-5 text-yellow-600" />
+            <h1 className="text-lg font-semibold text-gray-800">Client 360</h1>
           </div>
         </div>
-
-        {/* Секция событий */}
-        <div className="bg-white shadow rounded-xl p-6 mb-6">
-          <h2 className="text-lg font-medium mb-4 text-yellow-700">
-            История событий
-          </h2>
-          <table className="min-w-full border-collapse text-gray-700">
-            <thead className="bg-yellow-50 text-yellow-700">
-              <tr>
-                <th className="p-3 text-left">Дата</th>
-                <th className="p-3 text-left">Тип события</th>
-              </tr>
-            </thead>
-            <tbody>
-              {profile.events.map((event, index) => (
-                <tr key={index} className="border-t hover:bg-yellow-100">
-                  <td className="p-3">{event.date}</td>
-                  <td className="p-3">{event.type}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Секция продуктов */}
-        <div className="bg-white shadow rounded-xl p-6">
-          <h2 className="text-lg font-medium mb-4 text-yellow-700">
-            Продукты клиента
-          </h2>
-          {profile.products.length > 0 ? (
-            <ul className="list-disc list-inside space-y-1">
-              {profile.products.map((product, index) => (
-                <li key={index}>{product}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500">Нет активных продуктов</p>
-          )}
+        <div className="text-sm text-gray-600 truncate max-w-[160px] sm:max-w-[200px] text-right">
+          {basicInfo?.fio || profile.name}
         </div>
       </div>
+
+      {/* 🧍 Основной блок информации */}
+      <div
+        className="w-full max-w-6xl bg-white p-6 sm:p-8 md:p-10 mt-6 shadow-sm rounded-xl"
+        style={{ minHeight: "33vh" }}
+      >
+        <BasicInfo data={profile} />
+      </div>
+
+      {/* 🔽 Нижние компактные виджеты */}
+      <div className="flex gap-3 sm:gap-4 mt-6 w-full max-w-6xl justify-between overflow-x-auto">
+        {widgets.map(({ key, title }) => (
+          <CollapsibleSection
+            key={key}
+            title={
+              <span
+                className="text-[0.95rem] sm:text-[1rem] font-semibold text-gray-800 leading-tight break-words text-center"
+                style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+              >
+                {title}
+              </span>
+            }
+            widgetKey={key}
+            compact
+            isActive={openWidget === key}
+            onOpen={handleOpen}
+            onClose={() => setOpenWidget(null)}
+            className="flex-1 min-w-[110px] sm:min-w-[130px] md:max-w-[150px] lg:max-w-[160px]"
+          />
+        ))}
+      </div>
+
+      {/* 📂 Раскрытый контент */}
+      {openWidget && (
+        <div
+          ref={widgetRef}
+          className="mt-6 w-full max-w-6xl bg-white p-5 sm:p-6 rounded-xl shadow-md outline outline-1 outline-yellow-400/60"
+          style={{
+            minHeight: "60vh",
+            maxHeight: "70vh",
+            overflowY: "auto",
+          }}
+        >
+          <div className="h-full overflow-y-auto pr-2">
+            {widgets.find((w) => w.key === openWidget)?.content}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
