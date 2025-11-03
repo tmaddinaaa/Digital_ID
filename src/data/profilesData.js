@@ -146,7 +146,7 @@ export const profilesData = [
       campaigns: "Да",
       lastPush: {
         date: "2025-10-20",
-        text: "Верни 10% за покупки в Small",
+        text: "Бонусы 10% за покупки в Small",
         topic: "Бонусы",
         status: "Прочитан",
       },
@@ -155,7 +155,7 @@ export const profilesData = [
         { date: "2025-09-15", text: "Вклад под 11%", campaign: "Deposit", status: "Клик" },
         { date: "2025-08-28", text: "Обновите приложение", campaign: "Service", status: "Игнор" },
       ],
-      frequency: { daily: 2.3, weekly: 12, monthly: 46, interval: "11 часов" },
+      frequency: { daily: 0.3, weekly: 2, monthly: 5, interval: "11 часов" },
       conversion: { overall: "65%", clickRate: "42%" },
       insights: { topics: "бонусы, акции" },
       topPush: { text: "Верни 10% за покупки в Small", or: "82%", ctr: "46%" },

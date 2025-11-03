@@ -78,7 +78,7 @@ const FinancialProfile = ({ data, financialInfo }) => {
       {/* --- Финансовые метрики --- */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
         <div className="bg-gray-50 p-4 rounded-xl">
-          <p className="text-sm text-gray-500">Маржа</p>
+          <p className="text-sm text-gray-500">Доходность с клиента</p>
           <p className="font-semibold text-lg">
             {formatNumber(financialInfo?.revenue?.margin)}
           </p>
