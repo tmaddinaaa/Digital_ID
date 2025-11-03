@@ -9,8 +9,8 @@ export const seasonalityAllData = {
     funnel: [
       { stage: "Регистрация", value: 1000 },
       { stage: "Активен", value: 820 },
-      { stage: "Покупка", value: 530 },
-      { stage: "Повторная активность", value: 350 },
+      { stage: "Оформление продукта", value: 530 },
+      { stage: "Оформление следующего продукта", value: 350 },
     ],
     path: {
       nodes: [

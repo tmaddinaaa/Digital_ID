@@ -151,7 +151,7 @@ export const profilesData = [
         status: "Прочитан",
       },
       history: [
-        { date: "2025-10-20", text: "Кэшбэк 10%", campaign: "Loyalty", status: "Прочитан" },
+        { date: "2025-10-20", text: "Бонус 10%", campaign: "Loyalty", status: "Прочитан" },
         { date: "2025-09-15", text: "Вклад под 11%", campaign: "Deposit", status: "Клик" },
         { date: "2025-08-28", text: "Обновите приложение", campaign: "Service", status: "Игнор" },
       ],
@@ -240,7 +240,6 @@ export const profilesData = [
     },
     tags: [
     "путешествия",
-    "кэшбэк",
     "активный пользователь",
     "инвестиции",
     "онлайн-покупки",

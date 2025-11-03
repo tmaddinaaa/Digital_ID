@@ -19,12 +19,19 @@ export default function ClientBaseAnalytics() {
 
   // ---- Фильтры ----
   const [filters, setFilters] = useState({
+    search: "",
     city: "Все города",
     segment: "Все сегменты",
+    product: "Все продукты",
+    tag: "Все теги",
+    age: "Все возраста",
+    gender: "Все",
+    activityStatus: "Все статусы",
     device: "Все устройства",
-    activityDateFrom: "",
-    activityDateTo: "",
-    search: "",
+    registrationMPFrom: "",
+    registrationMPTo: "",
+    registrationBankFrom: "",
+    registrationBankTo: "",
   });
 
   // ---- Tabs & обновление ----
@@ -38,37 +45,34 @@ export default function ClientBaseAnalytics() {
   const [filteredSeasonality, setFilteredSeasonality] = useState(seasonalityAllData);
   const [filteredRelations, setFilteredRelations] = useState(relationsAllData);
 
-  // ---- Мок-фильтрация данных ----
+  // ---- Мок-фильтрация ----
   useEffect(() => {
     console.log("⚙️ Применение фильтров:", filters);
 
-    const isDefault =
-      filters.city === "Все города" &&
-      filters.segment === "Все сегменты" &&
-      filters.device === "Все устройства" &&
-      !filters.activityDateFrom &&
-      !filters.activityDateTo &&
-      !filters.search;
+    const isDefault = Object.values(filters).every(
+      (v) => !v || v.includes("Все")
+    );
 
     const scaleFactor = (() => {
-      // имитация реакции на фильтр
       let factor = 1;
-      if (filters.city === "Алматы") factor *= 0.85;
-      if (filters.city === "Астана") factor *= 0.9;
-      if (filters.segment === "Премиум") factor *= 1.1;
-      if (filters.segment === "Массовый") factor *= 0.8;
+      if (filters.city === "Алматы") factor *= 0.9;
+      if (filters.segment === "Премиум") factor *= 1.15;
+      if (filters.segment === "Массовый") factor *= 0.85;
       if (filters.device === "iOS") factor *= 0.95;
       if (filters.device === "Android") factor *= 1.05;
-      if (filters.search) factor *= 0.5;
+      if (filters.product === "Кредиты") factor *= 1.2;
+      if (filters.product === "Карты") factor *= 0.9;
+      if (filters.activityStatus === "Неактивный") factor *= 0.6;
+      if (filters.activityStatus === "Активный") factor *= 1.1;
+      if (filters.search) factor *= 0.7;
       return factor;
     })();
 
     const applyFilter = (data) => {
       if (isDefault) return data;
-
       const clone = JSON.parse(JSON.stringify(data));
 
-      // 🔸 уменьшаем/увеличиваем KPI
+      // KPI
       if (clone.kpi) {
         Object.keys(clone.kpi).forEach((k) => {
           if (typeof clone.kpi[k] === "number") {
@@ -77,12 +81,12 @@ export default function ClientBaseAnalytics() {
         });
       }
 
-      // 🔸 модифицируем графики
+      // Charts
       if (clone.charts) {
-        Object.keys(clone.charts).forEach((chartKey) => {
-          const chart = clone.charts[chartKey];
+        Object.keys(clone.charts).forEach((key) => {
+          const chart = clone.charts[key];
           if (Array.isArray(chart)) {
-            clone.charts[chartKey] = chart.map((d) =>
+            clone.charts[key] = chart.map((d) =>
               Object.fromEntries(
                 Object.entries(d).map(([k, v]) =>
                   typeof v === "number" ? [k, Math.round(v * scaleFactor)] : [k, v]
@@ -93,7 +97,6 @@ export default function ClientBaseAnalytics() {
         });
       }
 
-      // 🔸 обновляем метаданные
       clone.meta = { ...clone.meta, updatedAt: new Date().toISOString() };
       clone.insights = [
         `Фильтры: ${Object.entries(filters)
@@ -106,7 +109,6 @@ export default function ClientBaseAnalytics() {
       return clone;
     };
 
-    // 🔁 применяем фильтры к каждому разделу
     setFilteredOverview(applyFilter(overviewAllData));
     setFilteredBehavior(applyFilter(behaviorAllData));
     setFilteredPush(applyFilter(pushAllData));
@@ -118,23 +120,26 @@ export default function ClientBaseAnalytics() {
 
   const handleReset = () =>
     setFilters({
+      search: "",
       city: "Все города",
       segment: "Все сегменты",
+      product: "Все продукты",
+      tag: "Все теги",
+      age: "Все возраста",
+      gender: "Все",
+      activityStatus: "Все статусы",
       device: "Все устройства",
-      activityDateFrom: "",
-      activityDateTo: "",
-      search: "",
+      registrationMPFrom: "",
+      registrationMPTo: "",
+      registrationBankFrom: "",
+      registrationBankTo: "",
     });
 
-  const filtersActive =
-    filters.city !== "Все города" ||
-    filters.segment !== "Все сегменты" ||
-    filters.device !== "Все устройства" ||
-    filters.activityDateFrom ||
-    filters.activityDateTo ||
-    filters.search;
+  const filtersActive = Object.entries(filters).some(
+    ([_, v]) => v && !v.includes("Все")
+  );
 
-  // ---- Рендер ----
+  // ---- UI ----
   return (
     <div className="p-6 space-y-6 bg-gray-50">
       {/* Заголовок */}
@@ -155,9 +160,9 @@ export default function ClientBaseAnalytics() {
 
       {/* Панель фильтров */}
       <div className="bg-white shadow-sm rounded-xl p-4 border border-gray-100">
-        <div className="flex flex-wrap gap-4 items-end">
-          {/* Поиск */}
-          <div className="flex flex-col flex-1 min-w-[220px]">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* 🔍 Поиск */}
+          <div className="flex flex-col">
             <label className="text-xs text-gray-500 font-medium mb-1">
               <Search size={12} className="inline mr-1 text-yellow-600" />
               Глобальный поиск
@@ -165,68 +170,118 @@ export default function ClientBaseAnalytics() {
             <input
               type="text"
               value={filters.search}
-              onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+              onChange={(e) =>
+                setFilters((f) => ({ ...f, search: e.target.value }))
+              }
               placeholder="ФИО, ИИН, ID, счёт..."
               className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
             />
           </div>
 
-          {/* Город */}
-          <div className="flex flex-col">
-            <label className="text-xs text-gray-500 mb-1">🏙 Город</label>
-            <select
-              value={filters.city}
-              onChange={(e) => setFilters({ ...filters, city: e.target.value })}
-              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
-            >
-              <option>Все города</option>
-              <option>Алматы</option>
-              <option>Астана</option>
-              <option>Шымкент</option>
-            </select>
-          </div>
+          {/* 📍 Город */}
+          <SelectBox
+            label="🏙 Город"
+            value={filters.city}
+            options={["Все города", "Алматы", "Астана", "Шымкент"]}
+            onChange={(v) => setFilters((f) => ({ ...f, city: v }))}
+          />
 
-          {/* Сегмент */}
-          <div className="flex flex-col">
-            <label className="text-xs text-gray-500 mb-1">📊 Сегмент</label>
-            <select
-              value={filters.segment}
-              onChange={(e) => setFilters({ ...filters, segment: e.target.value })}
-              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
-            >
-              <option>Все сегменты</option>
-              <option>Премиум</option>
-              <option>Массовый</option>
-              <option>Семейный</option>
-            </select>
-          </div>
+          {/* 🧩 Продукт */}
+          <SelectBox
+            label="💳 Продукт"
+            value={filters.product}
+            options={[
+              "Все продукты",
+              "Карты",
+              "Кредиты",
+              "Депозиты",
+              "Инвестиции",
+            ]}
+            onChange={(v) => setFilters((f) => ({ ...f, product: v }))}
+          />
 
-          {/* Устройство */}
-          <div className="flex flex-col">
-            <label className="text-xs text-gray-500 mb-1">📱 Устройство</label>
-            <select
-              value={filters.device}
-              onChange={(e) => setFilters({ ...filters, device: e.target.value })}
-              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
-            >
-              <option>Все устройства</option>
-              <option>iOS</option>
-              <option>Android</option>
-              <option>Web</option>
-            </select>
-          </div>
+          {/* 🏷 Теги */}
+          <SelectBox
+            label="🏷 Тег"
+            value={filters.tag}
+            options={["Все теги", "VIP", "Новичок", "Проблемный", "Loyal"]}
+            onChange={(v) => setFilters((f) => ({ ...f, tag: v }))}
+          />
 
+          {/* 📊 Сегмент */}
+          <SelectBox
+            label="📊 Сегмент"
+            value={filters.segment}
+            options={["Все сегменты", "Премиум", "Массовый", "Семейный"]}
+            onChange={(v) => setFilters((f) => ({ ...f, segment: v }))}
+          />
+
+          {/* 🎂 Возраст */}
+          <SelectBox
+            label="🎂 Возраст"
+            value={filters.age}
+            options={["Все возраста", "18–25", "26–35", "36–45", "46–60", "60+"]}
+            onChange={(v) => setFilters((f) => ({ ...f, age: v }))}
+          />
+
+          {/* 🚻 Гендер */}
+          <SelectBox
+            label="🚻 Пол"
+            value={filters.gender}
+            options={["Все", "Мужчины", "Женщины"]}
+            onChange={(v) => setFilters((f) => ({ ...f, gender: v }))}
+          />
+
+          {/* ⚡ Активность */}
+          <SelectBox
+            label="⚡ Статус активности"
+            value={filters.activityStatus}
+            options={["Все статусы", "Активный", "Неактивный"]}
+            onChange={(v) => setFilters((f) => ({ ...f, activityStatus: v }))}
+          />
+
+          {/* 📱 Устройство */}
+          <SelectBox
+            label="📱 Устройство"
+            value={filters.device}
+            options={["Все устройства", "iOS", "Android", "Web"]}
+            onChange={(v) => setFilters((f) => ({ ...f, device: v }))}
+          />
+
+          {/* 📅 Регистрация в МП */}
+          <DateRangeBox
+            label="📅 Регистрация в МП"
+            from={filters.registrationMPFrom}
+            to={filters.registrationMPTo}
+            onChange={(from, to) =>
+              setFilters((f) => ({ ...f, registrationMPFrom: from, registrationMPTo: to }))
+            }
+          />
+
+          {/* 🏦 Регистрация в банке */}
+          <DateRangeBox
+            label="🏦 Регистрация в банке"
+            from={filters.registrationBankFrom}
+            to={filters.registrationBankTo}
+            onChange={(from, to) =>
+              setFilters((f) => ({ ...f, registrationBankFrom: from, registrationBankTo: to }))
+            }
+          />
+        </div>
+
+        {/* Сброс */}
+        <div className="flex justify-end mt-4">
           <button
             onClick={handleReset}
-            className="ml-auto bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-md text-sm font-medium transition"
+            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-md text-sm font-medium transition"
           >
-            Сбросить
+            Сбросить фильтры
           </button>
         </div>
 
         {filtersActive && (
           <div className="mt-3 text-sm text-yellow-800 bg-yellow-50 border border-yellow-200 rounded-md p-2">
-            Фильтры активны:{" "}
+            Активны фильтры:{" "}
             {Object.entries(filters)
               .filter(([_, v]) => v && !v.includes("Все"))
               .map(([k, v]) => `${k}: ${v}`)
@@ -235,7 +290,7 @@ export default function ClientBaseAnalytics() {
         )}
       </div>
 
-      {/* ---- ВКЛАДКИ ---- */}
+      {/* ---- Вкладки ---- */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="flex gap-2 overflow-x-auto bg-white border rounded-lg p-2 shadow-sm">
           <TabsTrigger value="overview">Обзор</TabsTrigger>
@@ -246,35 +301,66 @@ export default function ClientBaseAnalytics() {
         </TabsList>
 
         <TabsContent value="overview">
-          <div className="mt-6 space-y-6">
-            <SectionOverview data={filteredOverview} />
-          </div>
+          <SectionOverview data={filteredOverview} />
         </TabsContent>
 
         <TabsContent value="seasonality">
-          <div className="mt-6 space-y-6">
-            <SectionSeasonality data={filteredSeasonality} />
-          </div>
+          <SectionSeasonality data={filteredSeasonality} />
         </TabsContent>
 
         <TabsContent value="behavior">
-          <div className="mt-6 space-y-6">
-            <SectionBehavior data={filteredBehavior} />
-          </div>
+          <SectionBehavior data={filteredBehavior} />
         </TabsContent>
 
         <TabsContent value="push">
-          <div className="mt-6 space-y-6">
-            <SectionPush data={filteredPush} />
-          </div>
+          <SectionPush data={filteredPush} />
         </TabsContent>
 
         <TabsContent value="relations">
-          <div className="mt-6 space-y-6">
-            <SectionRelations data={filteredRelations} />
-          </div>
+          <SectionRelations data={filteredRelations} />
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+/* -------------------- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ -------------------- */
+
+function SelectBox({ label, value, options, onChange }) {
+  return (
+    <div className="flex flex-col">
+      <label className="text-xs text-gray-500 mb-1">{label}</label>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
+      >
+        {options.map((opt) => (
+          <option key={opt}>{opt}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function DateRangeBox({ label, from, to, onChange }) {
+  return (
+    <div className="flex flex-col">
+      <label className="text-xs text-gray-500 mb-1">{label}</label>
+      <div className="flex gap-2">
+        <input
+          type="date"
+          value={from}
+          onChange={(e) => onChange(e.target.value, to)}
+          className="border border-gray-300 rounded-md px-2 py-1 text-sm w-1/2"
+        />
+        <input
+          type="date"
+          value={to}
+          onChange={(e) => onChange(from, e.target.value)}
+          className="border border-gray-300 rounded-md px-2 py-1 text-sm w-1/2"
+        />
+      </div>
     </div>
   );
 }

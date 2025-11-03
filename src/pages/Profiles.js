@@ -13,6 +13,10 @@ const Profiles = () => {
   const [segmentFilter, setSegmentFilter] = useState("Все");
   const [statusFilter, setStatusFilter] = useState("Все");
 
+  const [privateFilter, setPrivateFilter] = useState("Все");
+  const [lifeStatusFilter, setLifeStatusFilter] = useState("Все");
+  const [maritalFilter, setMaritalFilter] = useState("Все");
+
   const [dateFromBank, setDateFromBank] = useState("");
   const [dateToBank, setDateToBank] = useState("");
   const [dateFromMP, setDateFromMP] = useState("");
@@ -44,6 +48,16 @@ const Profiles = () => {
     const matchesSegment = segmentFilter === "Все" || p.segment === segmentFilter;
     const matchesStatus = statusFilter === "Все" || p.status === statusFilter;
 
+    const matchesPrivate =
+      privateFilter === "Все" ||
+      (privateFilter === "Private" ? p.isPrivate : !p.isPrivate);
+
+    const matchesLifeStatus =
+      lifeStatusFilter === "Все" || p.lifeStatus === lifeStatusFilter;
+
+    const matchesMarital =
+      maritalFilter === "Все" || p.maritalStatus === maritalFilter;
+
     const matchesDateBank =
       (!dateFromBank && !dateToBank) ||
       ((p.registrationDate || "").localeCompare(dateFromBank) >= 0 &&
@@ -60,6 +74,9 @@ const Profiles = () => {
       matchesCity &&
       matchesSegment &&
       matchesStatus &&
+      matchesPrivate &&
+      matchesLifeStatus &&
+      matchesMarital &&
       matchesDateBank &&
       matchesDateMP
     );
@@ -78,6 +95,9 @@ const Profiles = () => {
     setCityFilter("Все");
     setSegmentFilter("Все");
     setStatusFilter("Все");
+    setPrivateFilter("Все");
+    setLifeStatusFilter("Все");
+    setMaritalFilter("Все");
     setDateFromBank("");
     setDateToBank("");
     setDateFromMP("");
@@ -100,6 +120,7 @@ const Profiles = () => {
         <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6 space-y-4">
           {/* 🔍 Основная строка */}
           <div className="flex flex-wrap gap-4">
+            {/* Поиск */}
             <div className="flex flex-col flex-1 min-w-[240px]">
               <label className="text-xs font-semibold text-gray-500 mb-1">
                 🔍 Поиск
@@ -138,52 +159,58 @@ const Profiles = () => {
             </div>
 
             {/* 🏙 Город */}
-            <div className="flex flex-col">
-              <label className="text-xs font-semibold text-gray-500 mb-1">
-                🏙 Город
-              </label>
-              <select
-                value={cityFilter}
-                onChange={(e) => setCityFilter(e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-              >
-                {allCities.map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-            </div>
+            <FilterSelect
+              label="🏙 Город"
+              value={cityFilter}
+              options={allCities}
+              onChange={setCityFilter}
+            />
 
             {/* 📊 Сегмент */}
-            <div className="flex flex-col">
-              <label className="text-xs font-semibold text-gray-500 mb-1">
-                📊 Сегмент
-              </label>
-              <select
-                value={segmentFilter}
-                onChange={(e) => setSegmentFilter(e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-              >
-                {allSegments.map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </div>
+            <FilterSelect
+              label="📊 Сегмент"
+              value={segmentFilter}
+              options={allSegments}
+              onChange={setSegmentFilter}
+            />
 
             {/* ⚙️ Статус */}
-            <div className="flex flex-col">
-              <label className="text-xs font-semibold text-gray-500 mb-1">
-                ⚙️ Статус
-              </label>
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-              >
-                <option>Все</option>
-                <option>Активен</option>
-                <option>Неактивен</option>
-              </select>
-            </div>
+            <FilterSelect
+              label="⚙️ Статус"
+              value={statusFilter}
+              options={["Все", "Активен", "Неактивен"]}
+              onChange={setStatusFilter}
+            />
+
+            {/* 🔒 Private */}
+            <FilterSelect
+              label="🔒 Private статус"
+              value={privateFilter}
+              options={["Все", "Private", "Public"]}
+              onChange={setPrivateFilter}
+            />
+
+            {/* ❤️ Жизненный статус */}
+            <FilterSelect
+              label="❤️ Жизненный статус"
+              value={lifeStatusFilter}
+              options={["Все", "Жив", "Умер"]}
+              onChange={setLifeStatusFilter}
+            />
+
+            {/* 💍 Семейное положение */}
+            <FilterSelect
+              label="💍 Семейное положение"
+              value={maritalFilter}
+              options={[
+                "Все",
+                "Холост/Не замужем",
+                "Женат/Замужем",
+                "Разведён(а)",
+                "Вдовец/Вдова",
+              ]}
+              onChange={setMaritalFilter}
+            />
 
             {/* Сброс */}
             <div className="flex items-end">
@@ -217,45 +244,20 @@ const Profiles = () => {
 
             {showDates && (
               <div className="mt-4 flex flex-wrap items-end gap-6 text-sm">
-                {/* 🏦 Регистрация в банке */}
-                <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 bg-gray-50">
-                  <span className="font-semibold text-gray-600 whitespace-nowrap">
-                    🏦 Банк:
-                  </span>
-                  <input
-                    type="date"
-                    value={dateFromBank}
-                    onChange={(e) => setDateFromBank(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-                  />
-                  <span className="text-gray-500">–</span>
-                  <input
-                    type="date"
-                    value={dateToBank}
-                    onChange={(e) => setDateToBank(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-                  />
-                </div>
-
-                {/* 📱 Регистрация в мобильном приложении */}
-                <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 bg-gray-50">
-                  <span className="font-semibold text-gray-600 whitespace-nowrap">
-                    📱 МП:
-                  </span>
-                  <input
-                    type="date"
-                    value={dateFromMP}
-                    onChange={(e) => setDateFromMP(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-                  />
-                  <span className="text-gray-500">–</span>
-                  <input
-                    type="date"
-                    value={dateToMP}
-                    onChange={(e) => setDateToMP(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
-                  />
-                </div>
+                <DateRangeFilter
+                  label="🏦 Банк"
+                  from={dateFromBank}
+                  to={dateToBank}
+                  onFromChange={setDateFromBank}
+                  onToChange={setDateToBank}
+                />
+                <DateRangeFilter
+                  label="📱 МП"
+                  from={dateFromMP}
+                  to={dateToMP}
+                  onFromChange={setDateFromMP}
+                  onToChange={setDateToMP}
+                />
               </div>
             )}
           </div>
@@ -271,6 +273,9 @@ const Profiles = () => {
                 <th className="p-3 text-left">ИИН</th>
                 <th className="p-3 text-left">Город</th>
                 <th className="p-3 text-left">Сегмент</th>
+                <th className="p-3 text-left">Private</th>
+                <th className="p-3 text-left">Жизненный статус</th>
+                <th className="p-3 text-left">Семейное положение</th>
                 <th className="p-3 text-left">Статус</th>
                 <th className="p-3 text-left">Регистрация (банк)</th>
                 <th className="p-3 text-left">Регистрация (МП)</th>
@@ -289,6 +294,9 @@ const Profiles = () => {
                   <td className="p-3 font-mono">{p.iin}</td>
                   <td className="p-3">{p.city}</td>
                   <td className="p-3">{p.segment}</td>
+                  <td className="p-3">{p.isPrivate ? "Private" : "Public"}</td>
+                  <td className="p-3">{p.lifeStatus || "Жив"}</td>
+                  <td className="p-3">{p.maritalStatus || "—"}</td>
                   <td
                     className={`p-3 font-medium ${
                       p.status === "Активен"
@@ -321,5 +329,42 @@ const Profiles = () => {
     </div>
   );
 };
+
+/* ---- Вспомогательные компоненты ---- */
+const FilterSelect = ({ label, value, options, onChange }) => (
+  <div className="flex flex-col">
+    <label className="text-xs font-semibold text-gray-500 mb-1">{label}</label>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
+    >
+      {options.map((opt) => (
+        <option key={opt}>{opt}</option>
+      ))}
+    </select>
+  </div>
+);
+
+const DateRangeFilter = ({ label, from, to, onFromChange, onToChange }) => (
+  <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 bg-gray-50">
+    <span className="font-semibold text-gray-600 whitespace-nowrap">
+      {label}:
+    </span>
+    <input
+      type="date"
+      value={from}
+      onChange={(e) => onFromChange(e.target.value)}
+      className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
+    />
+    <span className="text-gray-500">–</span>
+    <input
+      type="date"
+      value={to}
+      onChange={(e) => onToChange(e.target.value)}
+      className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
+    />
+  </div>
+);
 
 export default Profiles;

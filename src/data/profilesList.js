@@ -10,8 +10,12 @@ export const profilesList = [
     segment: "Премиум",
     status: "Активен",
 
-    registrationDate: "2018-06-10", // регистрация клиента в банке
-    mobileAppRegistrationDate: "2022-08-25", // регистрация в мобильном приложении
+    registrationDate: "2018-06-10",
+    mobileAppRegistrationDate: "2022-08-25",
+
+    isPrivate: true,
+    lifeStatus: "Жив",
+    maritalStatus: "Женат",
 
     tags: [
       "путешествия",
@@ -37,6 +41,10 @@ export const profilesList = [
     registrationDate: "2019-02-20",
     mobileAppRegistrationDate: "2021-10-12",
 
+    isPrivate: false,
+    lifeStatus: "Жив",
+    maritalStatus: "Замужем",
+
     tags: [
       "ипотека",
       "семейный клиент",
@@ -60,6 +68,10 @@ export const profilesList = [
     registrationDate: "2023-01-15",
     mobileAppRegistrationDate: "2023-02-01",
 
+    isPrivate: false,
+    lifeStatus: "Жив",
+    maritalStatus: "Не замужем",
+
     tags: ["детская карта", "игры", "подарки", "викторина"],
   },
 
@@ -77,6 +89,10 @@ export const profilesList = [
     registrationDate: "2021-03-15",
     mobileAppRegistrationDate: "2022-01-10",
 
+    isPrivate: false,
+    lifeStatus: "Жив",
+    maritalStatus: "Разведён(а)",
+
     tags: ["онлайн-покупки", "акции", "кредит"],
   },
 
@@ -93,6 +109,10 @@ export const profilesList = [
 
     registrationDate: "2019-11-30",
     mobileAppRegistrationDate: "2020-04-18",
+
+    isPrivate: true,
+    lifeStatus: "Умер",
+    maritalStatus: "Вдовец/Вдова",
 
     tags: ["наличные", "ипотека"],
   },
