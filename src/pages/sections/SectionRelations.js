@@ -1,35 +1,32 @@
 import React from "react";
 import { Card, CardContent } from "../../components/ui/card";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import AutoResizeContainer from "../../components/AutoResizeContainer";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import { Users } from "lucide-react";
 
 export default function SectionRelations({ data }) {
-  if (!data) return <p>Нет данных</p>;
+  if (!data) {
+    return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
+  }
 
-  const { charts, insights } = data;
+  const { charts = {}, insights = [] } = data;
 
   return (
     <div className="space-y-8">
-      {/* --- Основная статистика --- */}
-      <Card className="shadow-sm">
+      <h2 className="text-xl font-semibold text-gray-800">👥 Связанные клиенты (социальный граф)</h2>
+
+      <Card>
         <CardContent className="p-6">
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
+          <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
             <Users className="text-[#FFB800]" />
-            Социальные связи и домохозяйства
-          </h2>
+            Основные метрики
+          </h3>
           <div className="grid md:grid-cols-4 gap-4 text-center">
-            {Object.entries(charts.relationStats).map(([key, val]) => (
-              <div key={key} className="p-3 bg-gray-50 rounded-lg border">
-                <p className="text-xs text-gray-500">{key}</p>
+            {Object.entries(charts.relationStats || {}).map(([k, v]) => (
+              <div key={k} className="p-3 bg-gray-50 rounded-lg border">
+                <p className="text-xs text-gray-500">{k}</p>
                 <h3 className="text-xl font-semibold text-yellow-600">
-                  {typeof val === "number" ? val.toLocaleString() : val}
+                  {typeof v === "number" ? v.toLocaleString() : v}
                 </h3>
               </div>
             ))}
@@ -37,37 +34,34 @@ export default function SectionRelations({ data }) {
         </CardContent>
       </Card>
 
-      {/* --- По типам связи --- */}
-      <Card className="shadow-sm">
+      <Card>
         <CardContent className="p-6">
-          <h2 className="text-lg font-medium mb-4">Типы связей</h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={charts.relationByType}>
+          <h3 className="text-lg font-medium mb-4">🔗 Типы связей</h3>
+          <AutoResizeContainer height={260}>
+            <BarChart data={charts.relationByType || []}>
               <XAxis dataKey="type" />
               <YAxis />
               <Tooltip />
               <Bar dataKey="count" fill="#FFB800" radius={[6, 6, 0, 0]} />
             </BarChart>
-          </ResponsiveContainer>
+          </AutoResizeContainer>
         </CardContent>
       </Card>
 
-      {/* --- По регионам --- */}
-      <Card className="shadow-sm">
+      <Card>
         <CardContent className="p-6">
-          <h2 className="text-lg font-medium mb-4">Региональное распределение</h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={charts.relationByRegion}>
+          <h3 className="text-lg font-medium mb-4">🏙 Региональное распределение</h3>
+          <AutoResizeContainer height={260}>
+            <BarChart data={charts.relationByRegion || []}>
               <XAxis dataKey="region" />
               <YAxis />
               <Tooltip />
               <Bar dataKey="families" fill="#FBBF24" radius={[6, 6, 0, 0]} />
             </BarChart>
-          </ResponsiveContainer>
+          </AutoResizeContainer>
         </CardContent>
       </Card>
 
-      {/* --- Инсайты --- */}
       <div className="grid md:grid-cols-2 gap-4">
         {insights.map((t, i) => (
           <div key={i} className="p-4 bg-gray-50 border rounded-lg text-gray-700">

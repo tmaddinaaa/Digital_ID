@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 
 /**
- * Универсальный компонент Tabs с поддержкой:
- * Tabs, TabsList, TabsTrigger, TabsContent
- * — в стиле shadcn/ui, но на чистом React
+ * Универсальный Tabs-компонент с контролем состояния через value/onValueChange.
+ * Работает аналогично shadcn/ui Tabs.
  */
 
-export function Tabs({ defaultValue, children }) {
-  const [activeTab, setActiveTab] = useState(defaultValue);
+export function Tabs({ value, onValueChange, defaultValue, children }) {
+  // Если Tabs не контролируется снаружи, используем внутреннее состояние
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const activeTab = value ?? internalValue;
+  const setActiveTab = onValueChange ?? setInternalValue;
 
-  // Преобразуем дочерние элементы в объект для управления состоянием
   const childrenArray = React.Children.toArray(children);
-  const tabsList = childrenArray.find((child) => child.type.displayName === "TabsList");
-  const contents = childrenArray.filter((child) => child.type.displayName === "TabsContent");
+  const tabsList = childrenArray.find(
+    (child) => child.type.displayName === "TabsList"
+  );
+  const contents = childrenArray.filter(
+    (child) => child.type.displayName === "TabsContent"
+  );
 
   return (
     <div className="space-y-4">
-      {tabsList &&
-        React.cloneElement(tabsList, { activeTab, setActiveTab })}
+      {tabsList && React.cloneElement(tabsList, { activeTab, setActiveTab })}
       {contents.map((content) =>
         React.cloneElement(content, { activeTab })
       )}
@@ -38,7 +42,6 @@ TabsList.displayName = "TabsList";
 
 export function TabsTrigger({ value, children, activeTab, setActiveTab }) {
   const isActive = activeTab === value;
-
   return (
     <button
       onClick={() => setActiveTab(value)}
@@ -56,6 +59,6 @@ TabsTrigger.displayName = "TabsTrigger";
 
 export function TabsContent({ value, activeTab, children }) {
   if (value !== activeTab) return null;
-  return <div>{children}</div>;
+  return <div className="mt-4">{children}</div>;
 }
 TabsContent.displayName = "TabsContent";

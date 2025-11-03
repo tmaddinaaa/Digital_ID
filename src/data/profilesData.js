@@ -7,7 +7,7 @@ export const profilesData = [
     name: "Айдаров Ерлан Сакенович",
     iin: "900512301234",
     city: "Алматы",
-    segment: "Премиум",
+    segment: "Credit-oriented",
 
     // 🧾 Базовая информация
     basicInfo: {
@@ -142,12 +142,12 @@ export const profilesData = [
 
     // 📲 Коммуникации
     communications: {
-      pushStatus: "Нет",
-      campaigns: "Нет",
+      pushStatus: "Да",
+      campaigns: "Да",
       lastPush: {
         date: "2025-10-20",
         text: "Верни 10% за покупки в Small",
-        topic: "Кэшбэк",
+        topic: "Бонусы",
         status: "Прочитан",
       },
       history: [
@@ -157,7 +157,7 @@ export const profilesData = [
       ],
       frequency: { daily: 2.3, weekly: 12, monthly: 46, interval: "11 часов" },
       conversion: { overall: "65%", clickRate: "42%" },
-      insights: { topics: "бонусы, акции, кэшбэк" },
+      insights: { topics: "бонусы, акции" },
       topPush: { text: "Верни 10% за покупки в Small", or: "82%", ctr: "46%" },
       heatmap: {
   data: {

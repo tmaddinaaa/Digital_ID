@@ -29,20 +29,20 @@ const Communications = ({ data }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="bg-gray-50 p-4 rounded-xl space-y-2 text-gray-700">
           <p>
-            <strong>Отключил push:</strong>{" "}
+            <strong>Включены push-уведомления:</strong>{" "}
             <span
               className={
-                pushStatus === "Да" ? "text-red-600" : "text-green-600"
+                pushStatus === "Да" ? "text-green-600" : "text-red-600"
               }
             >
               {pushStatus || "—"}
             </span>
           </p>
           <p>
-            <strong>Не получал кампании за месяц:</strong>{" "}
+            <strong>Получал кампании за последний месяц:</strong>{" "}
             <span
               className={
-                campaigns === "Да" ? "text-red-600" : "text-green-600"
+                campaigns === "Да" ? "text-green-600" : "text-red-600"
               }
             >
               {campaigns || "—"}
@@ -75,9 +75,6 @@ const Communications = ({ data }) => {
           </p>
           <p>
             <strong>Среднемесячное:</strong> {frequency?.monthly || "—"}
-          </p>
-          <p>
-            <strong>Интервал:</strong> {frequency?.interval || "—"}
           </p>
           <p>
             <strong>Конверсия (OR):</strong> {conversion?.overall || "—"}
