@@ -10,7 +10,7 @@ const BasicInfo = ({ data }) => {
     language, citizenship, residenceCity, activeCity, device,
     status, isNew, involvement, maritalStatus, hasChildren, childrenCount,
     mobileAppRegistrationDate, bankRegistrationDate, mobileAppRegistrationDuration,
-    bankRegistrationDuration, hasIP, hasAlatauCityInvest, hasAlatauCityGarant, serviceChannel, lifeStatus, isPrivate
+    bankRegistrationDuration, hasIP, hasLegalEntity, hasAlatauCityInvest, hasAlatauCityGarant, serviceChannel, lifeStatus, isPrivate
   } = info;
 
   const ac_id = data.ac_id;
@@ -72,6 +72,7 @@ const BasicInfo = ({ data }) => {
           <p><strong>Статус:</strong> {status || "—"}</p>
           <p><strong>Вовлечённость:</strong> {involvement || "—"}</p>
           <p><strong>Наличие ИП:</strong> {hasIP ? "Да" : "Нет"}</p>
+          <p><strong>Признак ЮЛ:</strong> {hasLegalEntity ? "Да" : "Нет"}</p>
         </div>
 
         <div>

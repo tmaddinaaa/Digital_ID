@@ -34,6 +34,7 @@ export const profilesData = [
       mobileAppRegistrationDuration: "3 года 2 месяца",
       bankRegistrationDuration: "7 лет 4 месяца",
       hasIP: false,
+      hasLegalEntity: false,
       hasAlatauCityInvest: true,
       hasAlatauCityGarant: true,
       serviceChannel: "МП",

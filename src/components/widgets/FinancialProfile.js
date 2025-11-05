@@ -13,14 +13,14 @@ import {
 } from "recharts";
 
 const COLORS = [
-  "#FACC15",
-  "#4ADE80",
-  "#60A5FA",
-  "#A78BFA",
-  "#F472B6",
-  "#FB923C",
-  "#34D399",
-  "#FCD34D",
+  "#FDE68A", // светло-жёлтый
+  "#A7F3D0", // мятный
+  "#BFDBFE", // светло-голубой
+  "#DDD6FE", // нежно-фиолетовый
+  "#FBCFE8", // розоватый
+  "#FCD7B3", // кремово-оранжевый
+  "#C7EFCF", // зелёно-пастельный
+  "#F9EAB0", // мягкий песочный
 ];
 
 const FinancialProfile = ({ data, financialInfo }) => {
