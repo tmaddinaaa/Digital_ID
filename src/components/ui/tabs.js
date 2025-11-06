@@ -62,3 +62,4 @@ export function TabsContent({ value, activeTab, children }) {
   return <div className="mt-4">{children}</div>;
 }
 TabsContent.displayName = "TabsContent";
+
