@@ -165,11 +165,17 @@ export default function UnifiedFilters({
           value={filters.segment || "Все сегменты"}
           options={[
             "Все сегменты",
-            "CORE_HIGH_INCOME",
-            "PASSIVE_BUT_PROFITABLE",
             "ACTIVE_BUT_LOW_INCOME",
-            "DEPOSIT_ORIENTED",
-            "CREDIT_ORIENTED",
+            "CORE_HIGH_INCOME",
+            "CORE_MID_INCOME_ACTIVE",
+            "CORE_MID_INCOME_PASSIVE",
+            "CREDIT_ORIENTED", 
+            "DEPOSIT_ORIENTED", 
+            "HIGH_VALUE_ALL_ROUND", 
+            "LOW_ENGAGEMENT_LOW_INCOME", 
+            "MIXED_INCOME", 
+            "PASSIVE_BUT_PROFITABLE", 
+            "PASSIVE_LOW_INCOME", 
           ]}
           onChange={(v) => handleChange("segment", v)}
         />

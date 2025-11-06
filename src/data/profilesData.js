@@ -38,15 +38,15 @@ export const profilesData = [
       hasAlatauCityInvest: false,
       hasAlatauCityGarant: false,
       serviceChannel: "МП",
-      lifeStatus: "Жив",
+      lifeStatus: "Актуальный",
       isPrivate: false,
     },
 
     // 💰 Финансовая информация --Нету данных--
     financialInfo: {
-      revenue: { margin: 1200000, commission: 180000, interest: 320000 },
-      ltv: 2400000,
-      clv: 2900000,
+      revenue: { margin: 120000, commission: 18000, interest: 32000 },
+      ltv: 10000,
+      clv: 12000,
     },
 
     geoMaps: {
@@ -193,7 +193,7 @@ export const profilesData = [
         name: "Менетаева Алтыншаш Куанышевна",
         type: "Супруга",
         birthDate: "1996-01-08",
-        jointProducts: ["Ипотека"],
+        jointProducts: ["-"],
         status: "Активен",
         lastActivity: "2025-11-06",
         ac_id: 100031196251,
@@ -256,7 +256,7 @@ export const profilesData = [
       hasAlatauCityInvest: false,
       hasAlatauCityGarant: false,
       serviceChannel: "МП",
-      lifeStatus: "Жива",
+      lifeStatus: "Актуальный",
       isPrivate: false,
     },
 
@@ -407,7 +407,7 @@ export const profilesData = [
         name: "Жұмағали Алмат",
         type: "Супруг",
         birthDate: "1991-05-17",
-        jointProducts: ["Ипотека"],
+        jointProducts: ["-"],
         status: "Активен",
         lastActivity: "2025-11-06",
         ac_id: 100031731766,

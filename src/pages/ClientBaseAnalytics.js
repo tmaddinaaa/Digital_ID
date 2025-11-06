@@ -107,10 +107,10 @@ export default function ClientBaseAnalytics() {
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="flex gap-2 overflow-x-auto bg-white border rounded-lg p-2 shadow-sm">
           <TabsTrigger value="overview">Обзор</TabsTrigger>
-          <TabsTrigger value="seasonality">Сезонность</TabsTrigger>
+       { /*  <TabsTrigger value="seasonality">Сезонность</TabsTrigger> */}
           <TabsTrigger value="behavior">Поведение</TabsTrigger>
           <TabsTrigger value="push">Push-коммуникации</TabsTrigger>
-          <TabsTrigger value="relations">Связи</TabsTrigger>
+       { /*  <TabsTrigger value="relations">Связи</TabsTrigger>*/}
           <TabsTrigger value="geomaps">Геоаналитика</TabsTrigger>
         </TabsList>
 
@@ -118,9 +118,9 @@ export default function ClientBaseAnalytics() {
           <SectionOverview data={filteredOverview} />
         </TabsContent>
 
-        <TabsContent value="seasonality">
+      {/*  <TabsContent value="seasonality">
           <SectionSeasonality data={filteredSeasonality} />
-        </TabsContent>
+        </TabsContent> */}
 
         <TabsContent value="behavior">
           <SectionBehavior data={filteredBehavior} />
@@ -130,9 +130,9 @@ export default function ClientBaseAnalytics() {
           <SectionPush data={filteredPush} />
         </TabsContent>
 
-        <TabsContent value="relations">
+       {/* <TabsContent value="relations">
           <SectionRelations data={filteredRelations} />
-        </TabsContent>
+        </TabsContent> */}
 
         <TabsContent value="geomaps">
           {SectionGeoMaps ? (

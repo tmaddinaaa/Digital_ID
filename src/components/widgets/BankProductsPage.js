@@ -131,7 +131,7 @@ const BankProductsPage = ({ data }) => {
                 <thead className="bg-gray-50 sticky top-0">
                   <tr>
                     <th className="p-2 text-left">Название</th>
-                    <th className="p-2 text-left">Сумма</th>
+                    <th className="p-2 text-left">СДОК</th>
                     <th className="p-2 text-left">Срок</th>
                     <th className="p-2 text-left">Процент</th>
                     <th className="p-2 text-left">Статус</th>
