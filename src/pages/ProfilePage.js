@@ -7,6 +7,7 @@ import RelatedClients from "../components/widgets/RelatedClients";
 import FinancialProfile from "../components/widgets/FinancialProfile"; // объединённый компонент
 import BankProductsPage from "../components/widgets/BankProductsPage";
 import GroupProductsPage from "../components/widgets/GroupProductsPage";
+import GeoAnalyticsWidget from "../components/widgets/GeoAnalyticsWidget"; // 🆕 добавлен импорт
 import CollapsibleSection from "../components/CollapsibleSection";
 import { ArrowLeft, UserCircle2 } from "lucide-react";
 
@@ -38,22 +39,56 @@ const ProfilePage = () => {
     );
   }
 
-  const { basicInfo, products, communications, behavior, financialHabits, financialInfo, relatedClients } = profile;
+  const {
+    basicInfo,
+    products,
+    communications,
+    behavior,
+    financialHabits,
+    financialInfo,
+    relatedClients,
+  } = profile;
 
   const handleOpen = (key) =>
     setOpenWidget((prev) => (prev === key ? null : key));
 
   // 🧩 Набор виджетов
   const widgets = [
-    { key: "bankProducts", title: "🏦 Продукты Банка", content: <BankProductsPage data={profile} /> },
-    { key: "groupProducts", title: "💼 Продукты Группы", content: <GroupProductsPage data={profile} /> },
-    { key: "communications", title: "📞 Коммуникации", content: <Communications data={communications} /> },
+    {
+      key: "bankProducts",
+      title: "🏦 Продукты Банка",
+      content: <BankProductsPage data={profile} />,
+    },
+    {
+      key: "groupProducts",
+      title: "💼 Продукты Группы",
+      content: <GroupProductsPage data={profile} />,
+    },
+    {
+      key: "geoAnalytics",
+      title: "🗺 Геоаналитика",
+      content: <GeoAnalyticsWidget data={profile} />, // 🆕 добавлен виджет
+    },
+    {
+      key: "communications",
+      title: "📞 Коммуникации",
+      content: <Communications data={communications} />,
+    },
     {
       key: "financialProfile",
       title: "💳 Финансовый профиль",
-      content: <FinancialProfile data={{ ...financialHabits, ...behavior }} financialInfo={financialInfo} />,
+      content: (
+        <FinancialProfile
+          data={{ ...financialHabits, ...behavior }}
+          financialInfo={financialInfo}
+        />
+      ),
     },
-    { key: "related", title: "👥 Связанные клиенты", content: <RelatedClients related={relatedClients} /> },
+    {
+      key: "related",
+      title: "👥 Связанные клиенты",
+      content: <RelatedClients related={relatedClients} />,
+    },
   ];
 
   return (
@@ -70,7 +105,9 @@ const ProfilePage = () => {
           </button>
           <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
             <UserCircle2 className="w-5 h-5 text-yellow-600" />
-            <h1 className="text-lg font-semibold text-gray-800">Client 360</h1>
+            <h1 className="text-lg font-semibold text-gray-800">
+              Client 360
+            </h1>
           </div>
         </div>
         <div className="text-sm text-gray-600 truncate max-w-[160px] sm:max-w-[200px] text-right">

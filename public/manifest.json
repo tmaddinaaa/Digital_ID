@@ -1,11 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Digital_ID",
+  "name": "Digital_ID Analytics Dashboard",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "64x64 128x128 256x256"
     },
     {
       "src": "logo192.png",
@@ -20,6 +20,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#facc15",
+  "background_color": "#ffffff",
+  "description": "Аналитическая панель клиентской базы — Digital_ID"
 }

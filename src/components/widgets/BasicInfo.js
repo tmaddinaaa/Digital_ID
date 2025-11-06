@@ -70,7 +70,6 @@ const BasicInfo = ({ data }) => {
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">💼 Статус</h3>
           <p><strong>Статус:</strong> {status || "—"}</p>
-          <p><strong>Вовлечённость:</strong> {involvement || "—"}</p>
           <p><strong>Наличие ИП:</strong> {hasIP ? "Да" : "Нет"}</p>
           <p><strong>Признак ЮЛ:</strong> {hasLegalEntity ? "Да" : "Нет"}</p>
         </div>
