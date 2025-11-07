@@ -204,7 +204,7 @@ export default function Profiles() {
   return (
     <div className="flex h-screen bg-gray-50 text-gray-900">
       <div className="flex-1 p-6 overflow-auto">
-        <h1 className="text-2xl font-semibold mb-4">👥 Client 360</h1>
+        <h1 className="text-2xl font-semibold mb-4">👥 Customer Data Platform</h1>
 
         {/* 🎛 Единая панель фильтров */}
         <UnifiedFilters filters={filters} setFilters={setFilters} onReset={handleReset} allTags={[]} />

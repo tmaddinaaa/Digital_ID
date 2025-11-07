@@ -96,69 +96,106 @@ export default function SectionOverview({ data }) {
           </CardContent>
         </Card>
       )}
+{/* 🏙 Распределение по филиалам */}
+{charts.cityDistribution && charts.cityDistribution.length > 0 && (
+  <Card>
+    <CardContent className="p-6">
+      <h3 className="text-lg font-medium mb-2">🏙 Распределение по филиалам</h3>
+      <p className="text-sm text-gray-500 mb-4">
+        Отображает количество клиентов по каждому филиалу. Названия филиалов автоматически переносятся по словам и дефисам.
+      </p>
 
-      {/* 🏙 Распределение по филиалам */}
-      {charts.cityDistribution && charts.cityDistribution.length > 0 && (
-        <Card>
-          <CardContent className="p-6">
-            <h3 className="text-lg font-medium mb-2">🏙 Распределение по филиалам</h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Отображает количество клиентов по каждому филиалу. Полные названия филиалов приведены ниже.
-            </p>
+      <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
+        <div
+          style={{
+            width: manyCities ? `${cityData.length * 130}px` : "100%",
+            height: 480,
+          }}
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={cityData}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 10,
+                bottom: 130, // 🔹 добавили больше места для многострочных подписей
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
 
-            <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
-              <div
-                style={{
-                  width: manyCities ? `${cityData.length * 120}px` : "100%",
-                  height: manyCities ? 400 : 500,
+              <XAxis
+                dataKey="city"
+                interval={0}
+                tick={({ x, y, payload }) => {
+                  // 🔹 Разбиваем название на слова и части с дефисом
+                  const words = payload.value.split(" ");
+                  const lines = [];
+                  words.forEach((word) => {
+                    if (word.includes("-")) {
+                      const parts = word.split("-");
+                      parts.forEach((part, idx) => {
+                        if (idx === 0) lines.push(part + "-");
+                        else lines.push(part);
+                      });
+                    } else {
+                      lines.push(word);
+                    }
+                  });
+
+                  // 🔹 Настраиваем отступы и высоту между строками
+                  const lineHeight = 12;
+                  const verticalOffset = 18; // 🔸 сдвигаем текст немного вниз
+                  const startY = y + verticalOffset;
+
+                  return (
+                    <g transform={`translate(${x},${startY})`}>
+                      <text textAnchor="middle" fontSize={11} fill="#555">
+                        {lines.map((line, index) => (
+                          <tspan
+                            key={index}
+                            x="0"
+                            dy={index === 0 ? 0 : lineHeight}
+                          >
+                            {line}
+                          </tspan>
+                        ))}
+                      </text>
+                    </g>
+                  );
                 }}
-              >
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={cityData}
-                    margin={{
-                      top: 20,
-                      right: 30,
-                      left: 10,
-                      bottom: manyCities ? 100 : 120,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis
-                      dataKey="shortCity"
-                      tick={{ fontSize: 12 }}
-                      interval={0}
-                      angle={manyCities ? -30 : -20}
-                      textAnchor="end"
-                    />
-                    <YAxis />
-                    <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                    <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]}>
-                      <LabelList
-                        dataKey="count"
-                        position="top"
-                        formatter={(v) => v.toLocaleString("ru-RU")}
-                        fill="#444"
-                        fontSize={11}
-                      />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+              />
 
-            {/* 🔍 Легенда филиалов */}
-            <div className="mt-6 text-xs text-gray-600 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-1">
-              {cityData.map((item, i) => (
-                <div key={i} className="flex items-start gap-1">
-                  <span className="font-semibold text-yellow-600 min-w-[30px]">{i + 1}.</span>
-                  <span title={item.city}>{item.city}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+              <YAxis />
+              <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
+              <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]}>
+                <LabelList
+                  dataKey="count"
+                  position="top"
+                  formatter={(v) => v.toLocaleString("ru-RU")}
+                  fill="#444"
+                  fontSize={11}
+                />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* 🔍 Легенда филиалов */}
+      <div className="mt-6 text-xs text-gray-600 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-1">
+        {cityData.map((item, i) => (
+          <div key={i} className="flex items-start gap-1">
+            <span className="font-semibold text-yellow-600 min-w-[30px]">{i + 1}.</span>
+            <span title={item.city}>{item.city}</span>
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+)}
+
+
 
       {/* 🌐 Пересечение клиентских источников */}
       {charts.sourceDistribution && charts.sourceDistribution.length > 0 && (

@@ -197,7 +197,7 @@ export default function UnifiedFilters({
         <FilterSelect
           label="❤️ Жизненный статус"
           value={filters.lifeStatus || "Все"}
-          options={["Все", "Жив", "Умер"]}
+          options={["Все", "Актуальный", "Смерть"]}
           onChange={(v) => handleChange("lifeStatus", v)}
         />
 
@@ -208,7 +208,7 @@ export default function UnifiedFilters({
             "Все",
             "Холост/Не замужем",
             "Женат/Замужем",
-            "Разведён(а)",
+            "Разведен(а)",
             "Вдовец/Вдова",
           ]}
           onChange={(v) => handleChange("maritalStatus", v)}

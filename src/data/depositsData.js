@@ -1,5 +1,3 @@
-
-
 export const depositsData = [
   
   // -------------------------------
@@ -15,11 +13,11 @@ export const depositsData = [
       "avgIncome": 657755
     },
     "financial": {
-      "transactionsSum": 144032568000,
-      "transactionsCount": 29250435,
-      "turnoverPerClient": 3200723,
-      "transactionsPerClient": 650,
-      "avgTransaction": 4920
+      "transactionsSum": 74171162771,
+      "transactionsCount": 7342511,
+      "turnoverPerClient": 1497227,
+      "transactionsPerClient": 149,
+      "avgTransaction": 10101,
     },
     "top5Branches": [
       { "name": "Алматинский", "value": 49997248389 },
@@ -48,11 +46,11 @@ export const depositsData = [
       "avgIncome": 584667
     },
     "financial": {
-      "transactionsSum": 62523640000,
-      "transactionsCount": 11298732,
-      "turnoverPerClient": 2500946,
-      "transactionsPerClient": 452,
-      "avgTransaction": 5535
+      "transactionsSum": 2562228301,
+      "transactionsCount": 343603,
+      "turnoverPerClient": 1147437,
+      "transactionsPerClient": 154,
+      "avgTransaction": 7457
     },
     "top5Branches": [
       { "name": "Алматинский", "value": 3138067489 },
@@ -76,14 +74,14 @@ export const depositsData = [
     "baseMetrics": {
       "clientsCount": 2083,
       "avgAge": 28,
-      "genderShare": { "male": 48, "female": 52 }
+      "genderShare": { "male": 48, "female": 52 },
     },
     "financial": {
-      "transactionsSum": 27023510000,
-      "transactionsCount": 4510368,
-      "turnoverPerClient": 1801567,
-      "transactionsPerClient": 301,
-      "avgTransaction": 4234,
+      "transactionsSum": 130967689,
+      "transactionsCount": 22117,
+      "turnoverPerClient": 818548,
+      "transactionsPerClient": 139,
+      "avgTransaction": 5921,
       "avgIncome": 453703
     },
     "top5Branches": [
@@ -102,6 +100,7 @@ export const depositsData = [
     ],
     "insights": "AQYL — депозит для накоплений на образование. Аудитория — молодые семьи и женщины, активные в детских и образовательных категориях; сильный рост в южных регионах."
   },
+
 
 ];
 

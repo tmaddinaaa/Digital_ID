@@ -383,12 +383,6 @@ function PortraitCard({ data, product, fmt }) {
                   <Metric label="Женщины" value={`${fmt(base.gender.female)}%`} />
                 </>
               ) : null}
-              {base.marriedCount !== undefined && base.marriedCount !== null && (
-                <Metric
-                  label="Женатые/замужние"
-                  value={`${fmt(base.marriedCount)} (${typeof base.marriedShare === "number" ? (base.marriedShare * 100).toFixed(1) + "%" : "—"})`}
-                />
-              )}
             </div>
           </div>
         )}
@@ -490,7 +484,7 @@ function PortraitCard({ data, product, fmt }) {
         {/* --- Категории / MCC:  */}
         {Array.isArray(categoriesArray) && categoriesArray.length > 0 && (
           <div>
-            <SectionTitle icon={Brain} title={isCard ? "Топ-5 MCC групп" : "Категории расходов"} />
+            <SectionTitle icon={Brain} title={"Топ-5 MCC групп" } />
             <ChartBarWithArray data={categoriesArray} />
           </div>
         )}
@@ -581,50 +575,148 @@ function ChartPie({ data }) {
     </ResponsiveContainer>
   );
 }
-
 function ChartBar({ data }) {
   if (!data || Object.keys(data).length === 0) return null;
+
   const barData = Object.entries(data)
-    .map(([name, value]) => ({ name, value: Number(value || 0) }))
+    .map(([name, value]) => ({
+      name,
+      value: Number(value || 0),
+    }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 10);
 
+  // 🔤 Кастомный тик с переносом слов
+  const CustomizedTick = ({ x, y, payload }) => {
+    const words = payload.value.split(" ");
+    return (
+      <g transform={`translate(${x},${y + 8})`}>
+        {words.map((word, index) => (
+          <text
+            key={index}
+            x={0}
+            y={index * 12}
+            textAnchor="middle"
+            fill="#444"
+            fontSize={11}
+          >
+            {word}
+          </text>
+        ))}
+      </g>
+    );
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <BarChart data={barData} margin={{ top: 30, right: 30, left: 20, bottom: 60 }}>
+    <ResponsiveContainer width="100%" height={420}> {/* 🔽 уменьшили с 520 */}
+      <BarChart
+        data={barData}
+        margin={{
+          top: 30,     // меньше воздуха сверху
+          right: 30,
+          left: 30,
+          bottom: 90,  // меньше снизу — график центрируется
+        }}
+        barCategoryGap="25%"
+      >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} angle={-25} dy={10} />
-        <YAxis />
-        <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
-        <Legend />
-        <Bar dataKey="value" fill="#5B8FF9">
-          <LabelList dataKey="value" position="top" formatter={(v) => v.toLocaleString("ru-RU")} />
+        <XAxis
+          dataKey="name"
+          interval={0}
+          height={100}
+          tick={<CustomizedTick />}
+        />
+        <YAxis
+          tick={{ fontSize: 11, fill: "#555" }}
+          width={90}
+        />
+        <Legend verticalAlign="top" align="center" iconType="square" height={30} /> {/* 🟩 Легенда сверху */}
+        <Tooltip
+          formatter={(v) =>
+            typeof v === "number" ? v.toLocaleString("ru-RU") : v
+          }
+        />
+        <Bar
+          dataKey="value"
+          fill="#5B8FF9"
+          radius={[6, 6, 0, 0]}
+          maxBarSize={55}
+        >
+          <LabelList
+            dataKey="value"
+            position="top"
+            fontSize={11}
+            fill="#333"
+            formatter={(v) => v.toLocaleString("ru-RU")}
+          />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
+
 // Для массивных top5MccGroups форм ([{name,value}, ...]) — отображаем bar
 function ChartBarWithArray({ data }) {
   if (!Array.isArray(data) || data.length === 0) return null;
+
   const arr = data
     .map((d) => ({ name: d.name || d[0], value: Number(d.value ?? d[1] ?? 0) }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 10);
 
+  const CustomizedTick = ({ x, y, payload }) => {
+    const words = payload.value.split(" ");
+    return (
+      <g transform={`translate(${x},${y + 8})`}>
+        {words.map((word, i) => (
+          <text key={i} x={0} y={i * 12} textAnchor="middle" fill="#444" fontSize={11}>
+            {word}
+          </text>
+        ))}
+      </g>
+    );
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <BarChart data={arr} margin={{ top: 30, right: 30, left: 20, bottom: 60 }}>
+    <ResponsiveContainer width="100%" height={420}> {/* ⚖️ ниже, но сбалансировано */}
+      <BarChart
+        data={arr}
+        margin={{
+          top: 40, // место под легенду сверху
+          right: 30,
+          left: 30,
+          bottom: 60, // меньше — график поднимается
+        }}
+        barCategoryGap="30%"
+      >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} angle={-25} dy={10} />
-        <YAxis />
+        <XAxis
+          dataKey="name"
+          interval={0}
+          height={100}
+          tick={<CustomizedTick />}
+        />
+        <YAxis tick={{ fontSize: 11, fill: "#555" }} width={90} />
+        {/* 🟩 Легенда теперь сверху */}
+        <Legend verticalAlign="top" align="center" iconType="square" height={30} />
         <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
-        <Legend />
-        <Bar dataKey="value" fill="#61DDAA">
-          <LabelList dataKey="value" position="top" formatter={(v) => v.toLocaleString("ru-RU")} />
+        <Bar
+          dataKey="value"
+          fill="#61DDAA"
+          radius={[6, 6, 0, 0]}
+          maxBarSize={60}
+        >
+          <LabelList
+            dataKey="value"
+            position="top"
+            fontSize={11}
+            fill="#333"
+            formatter={(v) => v.toLocaleString("ru-RU")}
+          />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
 }
+

@@ -17,7 +17,7 @@ const Sidebar = ({ setIsAuthenticated }) => {
 
   const menu = [
     { path: "/", label: "Base Analytics", icon: <Database size={18} /> },
-    { path: "/profiles", label: "Client 360", icon: <Users size={18} /> },
+    { path: "/profiles", label: "Customer Data Platform", icon: <Users size={18} /> },
     { path: "/segments", label: "Segments", icon: <Layers size={18} /> },
     { path: "/models", label: "Models", icon: <Cpu size={18} /> },
     { path: "/client-portrait", label: "Product Portrait", icon: <Brain size={18} /> }, 

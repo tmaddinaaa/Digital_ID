@@ -106,7 +106,7 @@ const ProfilePage = () => {
           <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
             <UserCircle2 className="w-5 h-5 text-yellow-600" />
             <h1 className="text-lg font-semibold text-gray-800">
-              Client 360
+              Customer Data Platform
             </h1>
           </div>
         </div>

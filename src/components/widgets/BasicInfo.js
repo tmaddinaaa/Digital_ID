@@ -1,16 +1,22 @@
-import React from "react";
-import { Tag } from "lucide-react";
+import React, { useState } from "react";
+import { Eye, EyeOff, Tag } from "lucide-react";
 
 const BasicInfo = ({ data }) => {
-  if (!data) return <p className="text-gray-500">Нет данных о клиенте</p>;
+  // ✅ useState всегда вызывается, даже если данных нет
+  const [showSensitive, setShowSensitive] = useState(false);
+
+  if (!data) {
+    return <p className="text-gray-500">Нет данных о клиенте</p>;
+  }
 
   const info = data.basicInfo || data;
   const {
     fio, iin, birthDate, age, gender, photoUrl, contacts,
     language, citizenship, residenceCity, activeCity, device,
-    status, isNew, involvement, maritalStatus, hasChildren, childrenCount,
+    status, isNew, maritalStatus, hasChildren, childrenCount,
     mobileAppRegistrationDate, bankRegistrationDate, mobileAppRegistrationDuration,
-    bankRegistrationDuration, hasIP, hasLegalEntity, hasAlatauCityInvest, hasAlatauCityGarant, serviceChannel, lifeStatus, isPrivate
+    bankRegistrationDuration, hasIP, hasLegalEntity, hasAlatauCityInvest, hasAlatauCityGarant,
+    serviceChannel, lifeStatus, isPrivate
   } = info;
 
   const ac_id = data.ac_id;
@@ -28,13 +34,39 @@ const BasicInfo = ({ data }) => {
             className="w-20 h-20 rounded-lg object-cover shadow-sm"
           />
         )}
-        <div className="text-center sm:text-left space-y-0.5">
-          <h2 className="text-base sm:text-lg font-semibold text-gray-900">
-            {fio || "—"}
-          </h2>
-          <div className="text-gray-700 text-[0.9rem] leading-snug">
+        <div className="text-center sm:text-left space-y-0.5 w-full">
+          <div className="flex justify-between items-center">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900">
+              {fio || "—"}
+            </h2>
+
+            {/* 👁️ Кнопка показать/скрыть */}
+            <button
+              onClick={() => setShowSensitive(!showSensitive)}
+              className="flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700 transition"
+            >
+              {showSensitive ? (
+                <>
+                  <EyeOff size={16} /> Скрыть
+                </>
+              ) : (
+                <>
+                  <Eye size={16} /> Показать
+                </>
+              )}
+            </button>
+          </div>
+
+          <div className="text-gray-700 text-[0.9rem] leading-snug mt-1">
             <p><strong>AC ID:</strong> {ac_id || "—"}</p>
-            <p><strong>ИИН:</strong> {iin || "—"}</p>
+            <p>
+              <strong>ИИН:</strong>{" "}
+              {showSensitive ? (
+                <span className="font-mono">{iin || "—"}</span>
+              ) : (
+                <span className="text-gray-400 tracking-widest">••••••••••••</span>
+              )}
+            </p>
             <p>
               <strong>Дата рождения:</strong> {birthDate || "—"}{" "}
               <span className="text-gray-500">
@@ -47,10 +79,17 @@ const BasicInfo = ({ data }) => {
       </div>
 
       {/* Основная информация */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[0.9rem] leading-relaxed">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[0.9rem] leading-relaxed mt-2">
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">📞 Контакты</h3>
-          <p><strong>Телефон:</strong> {contacts?.phone || "—"}</p>
+          <p>
+            <strong>Телефон:</strong>{" "}
+            {showSensitive ? (
+              <span className="font-mono">{contacts?.phone || "—"}</span>
+            ) : (
+              <span className="text-gray-400 tracking-widest">••••••••••</span>
+            )}
+          </p>
           <p><strong>Гражданство:</strong> {citizenship || "—"}</p>
         </div>
 
@@ -111,6 +150,8 @@ const BasicInfo = ({ data }) => {
       {tags.length > 0 && (
         <div className="border-t pt-2 mt-2">
           <div className="flex items-center gap-1 mb-1">
+            <Tag size={14} className="text-yellow-600" />
+            <span className="text-sm font-medium text-gray-700">Теги клиента</span>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {tags.slice(0, 5).map((t, i) => (
