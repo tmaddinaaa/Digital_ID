@@ -15,11 +15,10 @@ import {
   ScatterChart,
   Scatter,
   ZAxis,
-  LabelList,
   Legend,
 } from "recharts";
 import { Card, CardHeader, CardContent, CardTitle } from "../components/ui/card";
-import { BarChart3, Filter, Clock, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, Clock, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import UnifiedFilters from "../components/UnifiedFilters";
 
 /* ---------- Моки ---------- */
@@ -104,6 +103,7 @@ export default function Segments() {
     gender: "Все",
   });
   const [loading, setLoading] = useState(false);
+  const [descOpen, setDescOpen] = useState(false);
 
   const filteredData = useMemo(() => {
     setLoading(true);
@@ -123,8 +123,24 @@ export default function Segments() {
     return data;
   }, [filters]);
 
+  const segmentDescriptions = [
+    { name: "HIGH_VALUE_ALL_ROUND", desc: "Самые ценные клиенты: высокая активность, высокая доходность и низкие издержки." },
+    { name: "CREDIT_ORIENTED", desc: "Основной источник дохода — кредиты. Активные пользователи кредитных продуктов." },
+    { name: "DEPOSIT_ORIENTED", desc: "Основной источник дохода — депозиты. Делают вклады, хранят средства." },
+    { name: "MIXED_INCOME", desc: "Доход из нескольких направлений без доминирования." },
+    { name: "PASSIVE_BUT_PROFITABLE", desc: "Малоактивные клиенты, но приносят высокий доход." },
+    { name: "LOW_ENGAGEMENT_LOW_INCOME", desc: "Малоактивные и малодоходные клиенты." },
+    { name: "PASSIVE_LOW_INCOME", desc: "Самые пассивные клиенты, минимальный доход." },
+    { name: "ACTIVE_BUT_LOW_INCOME", desc: "Активные, но низкомаржинальные клиенты." },
+    { name: "CORE_MID_INCOME_PASSIVE", desc: "Среднедоходные и пассивные клиенты." },
+    { name: "CORE_MID_INCOME_ACTIVE", desc: "Среднедоходные с активным поведением." },
+    { name: "CORE_HIGH_INCOME", desc: "Высокодоходные клиенты без продуктовой специализации." },
+    { name: "OTHER_INCOME_ORIENTED", desc: "Основной доход — прочие статьи (инвестиции, сделки и пр.)." },
+  ];
+
   return (
     <div className="space-y-8 p-6 bg-gray-50 min-h-screen">
+      {/* Заголовок */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
           <Filter className="text-yellow-500" /> Аналитика по сегментам
@@ -148,6 +164,38 @@ export default function Segments() {
             <MetricCard label="Средний доход (₸)" value={filteredData.totals.avgRevenue.toLocaleString()} highlight />
             <MetricCard label="Общий доход (₸)" value={filteredData.totals.totalRevenue.toLocaleString()} />
           </div>
+
+          {/* 📘 Collapsible описание сегментов */}
+          <Card className="mt-6">
+            <CardHeader className="flex items-center justify-between">
+              <div>
+                <CardTitle>Описание клиентских сегментов</CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  12 ключевых сегментов с кратким описанием их характеристик.
+                </p>
+              </div>
+              <button
+                onClick={() => setDescOpen(!descOpen)}
+                className="flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-700 transition"
+              >
+                {descOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {descOpen ? "Скрыть" : "Показать"}
+              </button>
+            </CardHeader>
+
+            <div className={`transition-all duration-500 overflow-hidden ${descOpen ? "max-h-[800px]" : "max-h-0"}`}>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {segmentDescriptions.map((seg, i) => (
+                    <div key={i} className="p-4 bg-white border rounded-lg shadow-sm">
+                      <h3 className="text-gray-800 font-semibold text-sm mb-1">{seg.name}</h3>
+                      <p className="text-xs text-gray-600">{seg.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </div>
+          </Card>
 
           {/* Пироги */}
           <div className="grid md:grid-cols-2 gap-6">
@@ -232,7 +280,7 @@ function PieCard({ title, data }) {
   );
 }
 
-/* ---------- Выдвижное описание для RFM ---------- */
+/* ---------- Таблица для RFM ---------- */
 function CollapsibleRFMTable({ filteredRFM }) {
   const [open, setOpen] = useState(false);
 
