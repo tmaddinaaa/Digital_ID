@@ -15,9 +15,11 @@ import {
   ScatterChart,
   Scatter,
   ZAxis,
+  LabelList,
+  Legend,
 } from "recharts";
 import { Card, CardHeader, CardContent, CardTitle } from "../components/ui/card";
-import { BarChart3, Filter, Clock, Loader2 } from "lucide-react";
+import { BarChart3, Filter, Clock, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import UnifiedFilters from "../components/UnifiedFilters";
 
 /* ---------- Моки ---------- */
@@ -46,131 +48,50 @@ const BASE_DATA = {
     { month: "60+", clients: 30 },
   ],
   segments: [
-    { segement: "ACTIVE_BUT_LOW_INCOME", count: 140249 },
-    { segement: "CORE_HIGH_INCOME", count: 39652 },
-    { segement: "CORE_MID_INCOME_ACTIVE", count: 100831 },
-    { segement: "CORE_MID_INCOME_PASSIVE", count: 212646 },
+    { segement: "HIGH_VALUE_ALL_ROUND", count: 19958 },
     { segement: "CREDIT_ORIENTED", count: 17525 },
     { segement: "DEPOSIT_ORIENTED", count: 22999 },
-    { segement: "HIGH_VALUE_ALL_ROUND", count: 19958 },
-    { segement: "LOW_ENGAGEMENT_LOW_INCOME", count: 39302 },
     { segement: "MIXED_INCOME", count: 3025 },
     { segement: "PASSIVE_BUT_PROFITABLE", count: 242555 },
+    { segement: "LOW_ENGAGEMENT_LOW_INCOME", count: 39302 },
     { segement: "PASSIVE_LOW_INCOME", count: 794864 },
+    { segement: "ACTIVE_BUT_LOW_INCOME", count: 140249 },
+    { segement: "CORE_MID_INCOME_PASSIVE", count: 212646 },
+    { segement: "CORE_MID_INCOME_ACTIVE", count: 100831 },
+    { segement: "CORE_HIGH_INCOME", count: 39652 },
+    { segement: "OTHER_INCOME_ORIENTED", count: 25432 },
   ],
 };
 
 const BASE_RFM = [
-  {
-    recency: "5",
-    frequency: "222",
-    monetary: 3656956,
-    segment: "HIGH_VALUE_ALL_ROUND",
-    gender_M: 57,
-    gender_F: 43,
-    age_avg: "42",
-    age_median: "40",
-  },
-  {
-    recency: "38",
-    frequency: "119",
-    monetary: 1745636,
-    segment: "DEPOSIT_ORIENTED",
-    gender_M: 53,
-    gender_F: 47,
-    age_avg: "47",
-    age_median: "45",
-  },
-  {
-    recency: "78",
-    frequency: "42",
-    monetary: 1158806,
-    segment: "OTHER_INCOME_ORIENTED",
-    gender_M: 70,
-    gender_F: 30,
-    age_avg: "45",
-    age_median: "42",
-  },
-  {
-    recency: "40",
-    frequency: "94",
-    monetary: 701708,
-    segment: "CORE_MID_INCOME_ACTIVE",
-    gender_M: 52,
-    gender_F: 48,
-    age_avg: "40",
-    age_median: "38",
-  },
-  {
-    recency: "63",
-    frequency: "17",
-    monetary: 238652,
-    segment: "CREDIT_ORIENTED",
-    gender_M: 59,
-    gender_F: 41,
-    age_avg: "36",
-    age_median: "34",
-  },
-  {
-    recency: "77",
-    frequency: "14",
-    monetary: 182101,
-    segment: "CORE_HIGH_INCOME",
-    gender_M: 58,
-    gender_F: 42,
-    age_avg: "36",
-    age_median: "34",
-  },
-  {
-    recency: "64",
-    frequency: "34",
-    monetary: 178434,
-    segment: "ACTIVE_BUT_LOW_INCOME",
-    gender_M: 54,
-    gender_F: 46,
-    age_avg: "35",
-    age_median: "34",
-  },
-  {
-    recency: "150",
-    frequency: "2",
-    monetary: 4499,
-    segment: "CORE_MID_INCOME_PASSIVE",
-    gender_M: 51,
-    gender_F: 49,
-    age_avg: "43",
-    age_median: "41",
-  },
-  {
-    recency: "155",
-    frequency: "1",
-    monetary: 2113,
-    segment: "LOW_ENGAGEMENT_LOW_INCOME",
-    gender_M: 56,
-    gender_F: 44,
-    age_avg: "37",
-    age_median: "36",
-  },
-  {
-    recency: "169",
-    frequency: "1",
-    monetary: 1819,
-    segment: "PASSIVE_BUT_PROFITABLE",
-    gender_M: 52,
-    gender_F: 48,
-    age_avg: "40",
-    age_median: "38",
-  },
+  { recency: "5", frequency: "222", monetary: 3656956, segment: "HIGH_VALUE_ALL_ROUND" },
+  { recency: "63", frequency: "17", monetary: 238652, segment: "CREDIT_ORIENTED" },
+  { recency: "38", frequency: "119", monetary: 1745636, segment: "DEPOSIT_ORIENTED" },
+  { recency: "70", frequency: "30", monetary: 910000, segment: "MIXED_INCOME" },
+  { recency: "169", frequency: "1", monetary: 1819, segment: "PASSIVE_LOW_INCOME" },
+  { recency: "150", frequency: "2", monetary: 4499, segment: "CORE_MID_INCOME_PASSIVE" },
+  { recency: "40", frequency: "94", monetary: 701708, segment: "CORE_MID_INCOME_ACTIVE" },
+  { recency: "77", frequency: "14", monetary: 182101, segment: "CORE_HIGH_INCOME" },
+  { recency: "78", frequency: "42", monetary: 1158806, segment: "OTHER_INCOME_ORIENTED" },
+  { recency: "64", frequency: "34", monetary: 178434, segment: "ACTIVE_BUT_LOW_INCOME" },
 ];
 
-/* ---------- Цвета для сегментов ---------- */
+/* ---------- Цвета ---------- */
 function getSegmentColor(segment) {
-  if (segment.includes("HIGH")) return "#2563eb";
-  if (segment.includes("PROFITABLE")) return "#7EA8FF";
-  if (segment.includes("LOW")) return "#FACC15";
-  if (segment.includes("ACTIVE")) return "#E59E00";
-  if (segment.includes("DEPOSIT")) return "#FFB800";
-  return "#9CA3AF";
+  const COLORS = {
+    HIGH_VALUE_ALL_ROUND: "#2563EB",
+    CREDIT_ORIENTED: "#22C55E",
+    DEPOSIT_ORIENTED: "#F97316",
+    MIXED_INCOME: "#EAB308",
+    PASSIVE_LOW_INCOME: "#A3A3A3",
+    ACTIVE_BUT_LOW_INCOME: "#FB923C",
+    PASSIVE_BUT_PROFITABLE: "#7C3AED",
+    CORE_MID_INCOME_PASSIVE: "#06B6D4",
+    CORE_MID_INCOME_ACTIVE: "#EF4444",
+    CORE_HIGH_INCOME: "#10B981",
+    OTHER_INCOME_ORIENTED: "#F59E0B",
+  };
+  return COLORS[segment] || "#9CA3AF";
 }
 
 /* ---------- Главный компонент ---------- */
@@ -181,50 +102,16 @@ export default function Segments() {
     segment: "Все сегменты",
     age: "",
     gender: "Все",
-    activityStatus: "Все статусы",
-    maritalStatus: "Все",
-    privateStatus: "Все",
-    registrationMPFrom: "",
-    registrationMPTo: "",
-    registrationBankFrom: "",
-    registrationBankTo: "",
-    bankProducts: [],
-    investProducts: [],
-    garantProducts: [],
-    tags: [],
   });
-
   const [loading, setLoading] = useState(false);
-
-  const handleReset = () =>
-    setFilters({
-      search: "",
-      city: "Все города",
-      segment: "Все сегменты",
-      age: "",
-      gender: "Все",
-      activityStatus: "Все статусы",
-      maritalStatus: "Все",
-      privateStatus: "Все",
-      registrationMPFrom: "",
-      registrationMPTo: "",
-      registrationBankFrom: "",
-      registrationBankTo: "",
-      bankProducts: [],
-      investProducts: [],
-      garantProducts: [],
-      tags: [],
-    });
 
   const filteredData = useMemo(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 400);
+    setTimeout(() => setLoading(false), 400);
     let segments = BASE_DATA.segments;
-
     if (filters.segment !== "Все сегменты") {
       segments = segments.filter((s) => s.segement === filters.segment);
     }
-
     return { ...BASE_DATA, segments };
   }, [filters]);
 
@@ -232,9 +119,6 @@ export default function Segments() {
     let data = BASE_RFM;
     if (filters.segment !== "Все сегменты") {
       data = data.filter((r) => r.segment === filters.segment);
-    }
-    if (filters.gender !== "Все") {
-      data = data.filter((r) => filters.gender === "Мужчины" ? r.gender_M > r.gender_F : r.gender_F > r.gender_M);
     }
     return data;
   }, [filters]);
@@ -250,7 +134,7 @@ export default function Segments() {
         </span>
       </div>
 
-      <UnifiedFilters filters={filters} setFilters={setFilters} onReset={handleReset} />
+      <UnifiedFilters filters={filters} setFilters={setFilters} />
 
       {loading ? (
         <div className="flex justify-center py-10">
@@ -258,49 +142,12 @@ export default function Segments() {
         </div>
       ) : (
         <>
+          {/* KPI */}
           <div className="grid md:grid-cols-3 gap-6">
             <MetricCard label="Количество клиентов" value={filteredData.totals.totalUsers.toLocaleString()} />
             <MetricCard label="Средний доход (₸)" value={filteredData.totals.avgRevenue.toLocaleString()} highlight />
             <MetricCard label="Общий доход (₸)" value={filteredData.totals.totalRevenue.toLocaleString()} />
           </div>
-
-          {/* 📊 Горизонтальный бар-чарт */}
-          <Card>
-            <CardHeader className="flex items-center gap-2">
-              <BarChart3 className="text-yellow-500" />
-              <CardTitle>Распределение по сегментам</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={420}>
-                <BarChart
-                  layout="vertical"
-                  data={filteredData.segments}
-                  margin={{ top: 10, right: 30, left: 100, bottom: 10 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" />
-                  <YAxis
-                    type="category"
-                    dataKey="segement"
-                    width={200}
-                    tickFormatter={(v) => v.replace(/_/g, " ")}
-                    tick={{ fontSize: 11 }}
-                  />
-                  <Tooltip
-                    formatter={(value, _, obj) => [
-                      value.toLocaleString(),
-                      obj.payload.segement.replace(/_/g, " "),
-                    ]}
-                  />
-                  <Bar dataKey="count" radius={[0, 6, 6, 0]}>
-                    {filteredData.segments.map((entry, index) => (
-                      <Cell key={index} fill={getSegmentColor(entry.segement)} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
 
           {/* Пироги */}
           <div className="grid md:grid-cols-2 gap-6">
@@ -308,46 +155,23 @@ export default function Segments() {
             <PieCard title="Кредиты и депозиты" data={filteredData.creditDeposit} />
           </div>
 
-          {/* Линия */}
-          <Card>
-            <CardHeader className="flex items-center gap-2">
-              <Clock className="text-yellow-500" />
-              <CardTitle>Распределение по сроку обслуживания</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={filteredData.serviceDurationDistribution}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line dataKey="clients" stroke="#2563eb" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          {/* Scatter RFM */}
+          {/* RFM график */}
           <Card>
             <CardHeader>
               <CardTitle>RFM-анализ клиентов</CardTitle>
               <p className="text-sm text-gray-500 mt-1">
-                Распределение по давности активности (Recency), частоте операций (Frequency) и ценности (Monetary).
+                Распределение по давности активности (Recency), частоте операций (Frequency)
+                и ценности клиента (Monetary).
               </p>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <ScatterChart margin={{ top: 30, right: 30, bottom: 40, left: 60 }}>
+              <ResponsiveContainer width="100%" height={440}>
+                <ScatterChart margin={{ top: 40, right: 60, bottom: 40, left: 70 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" dataKey="recency" name="Recency" />
-                  <YAxis type="number" dataKey="frequency" name="Frequency" />
-                  <ZAxis dataKey="monetary" range={[60, 450]} name="Monetary (₸)" />
-                  <Tooltip
-                    formatter={(val, _, obj) => [
-                      val.toLocaleString(),
-                      obj.payload.segment.replace(/_/g, " "),
-                    ]}
-                  />
+                  <XAxis type="number" dataKey="recency" label={{ value: "Recency (дни)", position: "bottom" }} />
+                  <YAxis type="number" dataKey="frequency" label={{ value: "Frequency (операции)", angle: -90, position: "left" }} />
+                  <ZAxis dataKey="monetary" range={[100, 450]} name="Monetary (₸)" />
+                  <Tooltip formatter={(v) => `₸${v.toLocaleString("ru-RU")}`} />
                   <Scatter data={filteredRFM}>
                     {filteredRFM.map((p, i) => (
                       <Cell key={i} fill={getSegmentColor(p.segment)} />
@@ -355,6 +179,8 @@ export default function Segments() {
                   </Scatter>
                 </ScatterChart>
               </ResponsiveContainer>
+
+              <CollapsibleRFMTable filteredRFM={filteredRFM} />
             </CardContent>
           </Card>
         </>
@@ -369,9 +195,7 @@ function MetricCard({ label, value, highlight = false }) {
     <Card className="text-center p-6 shadow-sm">
       <CardContent>
         <p className="text-sm text-gray-500">{label}</p>
-        <h2 className={`text-3xl font-bold ${highlight ? "text-yellow-600" : "text-gray-800"}`}>
-          {value}
-        </h2>
+        <h2 className={`text-3xl font-bold ${highlight ? "text-yellow-600" : "text-gray-800"}`}>{value}</h2>
       </CardContent>
     </Card>
   );
@@ -385,9 +209,17 @@ function PieCard({ title, data }) {
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={300}>
           <PieChart>
-            <Pie data={data} dataKey="value" nameKey="name" outerRadius={80} label>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              outerRadius={100}
+              paddingAngle={3}
+              label={({ name, value }) => `${name}: ${value}%`}
+              labelLine={false}
+            >
               {data.map((_, i) => (
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
@@ -397,5 +229,52 @@ function PieCard({ title, data }) {
         </ResponsiveContainer>
       </CardContent>
     </Card>
+  );
+}
+
+/* ---------- Выдвижное описание для RFM ---------- */
+function CollapsibleRFMTable({ filteredRFM }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mt-6">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-700 transition"
+      >
+        {open ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        {open ? "Скрыть детали" : "Показать детали 💰"}
+      </button>
+
+      <div className={`transition-all duration-500 overflow-hidden ${open ? "max-h-[600px] mt-4" : "max-h-0"}`}>
+        <div className="overflow-x-auto border border-gray-200 rounded-lg">
+          <table className="min-w-full text-sm">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="p-2 text-left">Сегмент</th>
+                <th className="p-2 text-right">Recency (дни)</th>
+                <th className="p-2 text-right">Frequency (операции)</th>
+                <th className="p-2 text-right">Monetary (₸)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRFM.map((p, i) => (
+                <tr key={i} className="border-t hover:bg-gray-50">
+                  <td className="p-2 flex items-center gap-2">
+                    <span className="inline-block w-3 h-3 rounded-full" style={{ backgroundColor: getSegmentColor(p.segment) }}></span>
+                    {p.segment}
+                  </td>
+                  <td className="p-2 text-right">{p.recency}</td>
+                  <td className="p-2 text-right">{p.frequency}</td>
+                  <td className="p-2 text-right font-medium text-gray-800">
+                    ₸{p.monetary.toLocaleString("ru-RU")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -13,6 +13,7 @@ import {
   YAxis,
   CartesianGrid,
   Legend,
+  LabelList,
 } from "recharts";
 import {
   Filter,
@@ -45,7 +46,7 @@ const COLORS = [
 ];
 
 export default function ClientPortrait() {
-  // По умолчанию показываем "Кредиты" (как у тебя было в последних версиях).
+  // По умолчанию показываем "Кредиты".
   const [filters, setFilters] = useState({
     city: "Все города",
     segment: "Все сегменты",
@@ -413,7 +414,7 @@ function PortraitCard({ data, product, fmt }) {
                 <Metric label="Транзакций на клиента" value={fmt(metrics.transactionsPerClient)} />
               )}
               {metrics.avgIncome !== undefined && (
-                <Metric label="Средний доход" value={`${fmt(metrics.avgIncome)} ₸`} />
+                <Metric label="Средняя ЗП" value={`${fmt(metrics.avgIncome)} ₸`} />
               )}
             </div>
           </div>
@@ -486,14 +487,10 @@ function PortraitCard({ data, product, fmt }) {
           </div>
         )}
 
-        {/* --- Категории / MCC: 
-              - loyalty/cards provide array top5MccGroups => отображаем как Bar (или Pie)
-              - credits provide categories object => отображаем Bar 
-              - deposits top5MccGroups array => отображаем Bar */}
+        {/* --- Категории / MCC:  */}
         {Array.isArray(categoriesArray) && categoriesArray.length > 0 && (
           <div>
             <SectionTitle icon={Brain} title={isCard ? "Топ-5 MCC групп" : "Категории расходов"} />
-            {/* Для массивов (name,value) используем Bar — чаще всего для сравнения */}
             <ChartBarWithArray data={categoriesArray} />
           </div>
         )}
@@ -562,9 +559,19 @@ function ChartPie({ data }) {
     Array.isArray(d) ? { name: d[0], value: Number(d[1] || 0) } : { name: d.name || d[0], value: Number(d.value ?? d[1] ?? 0) }
   );
   return (
-    <ResponsiveContainer width="100%" height={240}>
+    <ResponsiveContainer width="100%" height={280}>
       <PieChart>
-        <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+        <Pie
+          data={pieData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={100}
+          paddingAngle={3} // gap between slices
+          label={({ name, value }) => `${name}: ${value.toLocaleString("ru-RU")}`}
+          labelLine
+        >
           {pieData.map((_, i) => (
             <Cell key={i} fill={COLORS[i % COLORS.length]} />
           ))}
@@ -584,21 +591,21 @@ function ChartBar({ data }) {
 
   return (
     <ResponsiveContainer width="100%" height={320}>
-      <BarChart
-        data={barData}
-        margin={{ top: 30, right: 20, left: 20, bottom: 50 }} // ✅ добавили отступ сверху
-      >
+      <BarChart data={barData} margin={{ top: 30, right: 30, left: 20, bottom: 60 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} angle={-25} dy={10} />
-        <YAxis domain={[0, "dataMax + (dataMax * 0.1)"]} /> {/* ✅ добавили 10% запаса сверху */}
+        <YAxis />
         <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
         <Legend />
-        <Bar dataKey="value" fill="#5B8FF9" />
+        <Bar dataKey="value" fill="#5B8FF9">
+          <LabelList dataKey="value" position="top" formatter={(v) => v.toLocaleString("ru-RU")} />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
+// Для массивных top5MccGroups форм ([{name,value}, ...]) — отображаем bar
 function ChartBarWithArray({ data }) {
   if (!Array.isArray(data) || data.length === 0) return null;
   const arr = data
@@ -608,16 +615,15 @@ function ChartBarWithArray({ data }) {
 
   return (
     <ResponsiveContainer width="100%" height={320}>
-      <BarChart
-        data={arr}
-        margin={{ top: 30, right: 20, left: 20, bottom: 50 }} // ✅ дополнительный отступ сверху
-      >
+      <BarChart data={arr} margin={{ top: 30, right: 30, left: 20, bottom: 60 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} angle={-25} dy={10} />
-        <YAxis domain={[0, "dataMax + (dataMax * 0.1)"]} /> {/* ✅ добавляем запас 10% */}
+        <YAxis />
         <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
         <Legend />
-        <Bar dataKey="value" fill="#61DDAA" />
+        <Bar dataKey="value" fill="#61DDAA">
+          <LabelList dataKey="value" position="top" formatter={(v) => v.toLocaleString("ru-RU")} />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );

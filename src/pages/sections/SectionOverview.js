@@ -10,22 +10,30 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+  LabelList,
 } from "recharts";
 
 export default function SectionOverview({ data }) {
-  console.log("📊 SectionOverview render:", data);
-  if (!data) {
-    return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
-  }
+  if (!data) return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
 
   const { kpi = {}, charts = {} } = data;
 
-  // Оставляем только реальные KPI
+  // KPI блок
   const kpiDisplay = [
     { key: "totalProfiles", label: "Всего профилей", value: kpi.totalProfiles },
     { key: "activeProfiles", label: "Активные профили", value: kpi.activeProfiles },
     { key: "newProfiles", label: "Новые профили", value: kpi.newProfiles },
   ];
+
+  // Подготовка данных по филиалам
+  const cityData = (charts.cityDistribution || []).map((item, i) => ({
+    ...item,
+    shortCity: item.city.length > 14 ? item.city.slice(0, 12) + "…" : item.city,
+  }));
+
+  const manyCities = cityData.length > 10;
 
   return (
     <div className="space-y-8">
@@ -40,7 +48,9 @@ export default function SectionOverview({ data }) {
             <CardContent className="p-4 text-center">
               <p className="text-sm text-gray-500">{label}</p>
               <h2 className="text-2xl font-bold text-yellow-600">
-                {typeof value === "number" ? value.toLocaleString("ru-RU") : value || "—"}
+                {typeof value === "number"
+                  ? value.toLocaleString("ru-RU")
+                  : value || "—"}
               </h2>
             </CardContent>
           </Card>
@@ -51,61 +61,148 @@ export default function SectionOverview({ data }) {
       {charts.newClients && charts.newClients.length > 0 && (
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium mb-4">📈 Динамика новых клиентов (Мобильное приложение)</h3>
-            <AutoResizeContainer height={250}>
-              <LineChart data={charts.newClients}>
-                <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-                <YAxis />
-                <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                <Line
-                  type="monotone"
-                  dataKey="count"
-                  stroke="#FFB800"
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                />
-              </LineChart>
+            <h3 className="text-lg font-medium mb-4">
+              📈 Динамика новых клиентов (Мобильное приложение)
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Отображает количество новых клиентов по месяцам. Подписи показывают точные значения.
+            </p>
+            <AutoResizeContainer height={300}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={charts.newClients} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+                  <YAxis />
+                  <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
+                  <Line
+                    type="monotone"
+                    dataKey="count"
+                    stroke="#FFB800"
+                    strokeWidth={2}
+                    dot={{ r: 4 }}
+                  >
+                    {/* ✅ Подписи значений над точками */}
+                    <LabelList
+                      dataKey="count"
+                      position="top"
+                      formatter={(v) => v.toLocaleString("ru-RU")}
+                      fill="#444"
+                      fontSize={11}
+                    />
+                  </Line>
+                </LineChart>
+              </ResponsiveContainer>
             </AutoResizeContainer>
           </CardContent>
         </Card>
       )}
 
-      {/* Распределения */}
-      <div className="grid md:grid-cols-2 gap-4">
-        {/* 🏙 Распределение по городам */}
-        {charts.cityDistribution && charts.cityDistribution.length > 0 && (
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="text-lg font-medium mb-4">🏙 Распределение по филиалам</h3>
-              <AutoResizeContainer height={250}>
-                <BarChart data={charts.cityDistribution}>
-                  <XAxis dataKey="city" tick={{ fontSize: 10 }} interval={0} angle={-30} textAnchor="end" />
-                  <YAxis />
-                  <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                  <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]} />
-                </BarChart>
-              </AutoResizeContainer>
-            </CardContent>
-          </Card>
-        )}
+      {/* 🏙 Распределение по филиалам */}
+      {charts.cityDistribution && charts.cityDistribution.length > 0 && (
+        <Card>
+          <CardContent className="p-6">
+            <h3 className="text-lg font-medium mb-2">🏙 Распределение по филиалам</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Отображает количество клиентов по каждому филиалу. Полные названия филиалов приведены ниже.
+            </p>
 
-        {/* 🌐 Каналы привлечения */}
-        {charts.sourceDistribution && charts.sourceDistribution.length > 0 && (
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="text-lg font-medium mb-4">🌐 Пересечение клиентских источников</h3>
-              <AutoResizeContainer height={250}>
-                <BarChart data={charts.sourceDistribution}>
-                  <XAxis dataKey="source" tick={{ fontSize: 12 }} />
+            <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
+              <div
+                style={{
+                  width: manyCities ? `${cityData.length * 120}px` : "100%",
+                  height: manyCities ? 400 : 500,
+                }}
+              >
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={cityData}
+                    margin={{
+                      top: 20,
+                      right: 30,
+                      left: 10,
+                      bottom: manyCities ? 100 : 120,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                      dataKey="shortCity"
+                      tick={{ fontSize: 12 }}
+                      interval={0}
+                      angle={manyCities ? -30 : -20}
+                      textAnchor="end"
+                    />
+                    <YAxis />
+                    <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
+                    <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]}>
+                      <LabelList
+                        dataKey="count"
+                        position="top"
+                        formatter={(v) => v.toLocaleString("ru-RU")}
+                        fill="#444"
+                        fontSize={11}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* 🔍 Легенда филиалов */}
+            <div className="mt-6 text-xs text-gray-600 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-1">
+              {cityData.map((item, i) => (
+                <div key={i} className="flex items-start gap-1">
+                  <span className="font-semibold text-yellow-600 min-w-[30px]">{i + 1}.</span>
+                  <span title={item.city}>{item.city}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 🌐 Пересечение клиентских источников */}
+      {charts.sourceDistribution && charts.sourceDistribution.length > 0 && (
+        <Card>
+          <CardContent className="p-6">
+            <h3 className="text-lg font-medium mb-2">
+              🌐 Пересечение клиентских источников
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Показывает, как клиенты распределены по основным каналам привлечения:
+              онлайн, офлайн, партнёрские сети и другие.
+            </p>
+
+            <div style={{ width: "100%", height: 500 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={charts.sourceDistribution}
+                  margin={{ top: 20, right: 30, left: 10, bottom: 120 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="source"
+                    tick={{ fontSize: 12 }}
+                    interval={0}
+                    angle={-30}
+                    textAnchor="end"
+                  />
                   <YAxis />
                   <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                  <Bar dataKey="value" fill="#FFB800" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="value" fill="#FFB800" radius={[6, 6, 0, 0]}>
+                    <LabelList
+                      dataKey="value"
+                      position="top"
+                      formatter={(v) => v.toLocaleString("ru-RU")}
+                      fill="#444"
+                      fontSize={11}
+                    />
+                  </Bar>
                 </BarChart>
-              </AutoResizeContainer>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
