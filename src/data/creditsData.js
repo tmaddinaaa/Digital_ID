@@ -1,6 +1,6 @@
 export const creditsData = [
   {
-    "loanType": "Онлайн",
+    "loanType": "Экспресс",
     "clients": {
       "count": 259163,
       "avgAge": 39,

@@ -101,7 +101,7 @@ export const profilesData = [
       pushStatus: "Да",
       campaigns: "Да",
       lastPush: {
-        date: "2025-11-07",
+        date: "2025-11-06",
         text: "Вам начислен штраф",
         topic: "Штраф",
         status: "Прочитан",
@@ -263,9 +263,9 @@ export const profilesData = [
 
     // 💰 Финансовая информация --Нету данных--
     financialInfo: {
-      revenue: { margin: 1200000, commission: 180000, interest: 320000 },
-      ltv: 2400000,
-      clv: 2900000,
+      revenue: { margin: 120000, commission: 18000, interest: 32000 },
+      ltv: 24000,
+      clv: 29000,
     },
 
     geoMaps: {
