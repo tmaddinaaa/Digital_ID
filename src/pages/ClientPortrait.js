@@ -446,7 +446,7 @@ function PortraitCard({ data, product, fmt }) {
               {metrics.countAll !== undefined && <Metric label="Среднее кол-во займов" value={fmt(metrics.countAll)} />}
               {metrics.sumAllKzt !== undefined && <Metric label="Средний объем выданных займов" value={`${fmt(metrics.sumAllKzt)} ₸`} />}
               {metrics.countActive !== undefined && <Metric label="Активные займы" value={fmt(metrics.countActive)} />}
-              {metrics.sumActiveKzt !== undefined && <Metric label="Объем активных займов" value={`${fmt(metrics.sumActiveKzt)} ₸`} />}
+              {metrics.sumActiveKzt !== undefined && <Metric label="Средний срок займа" value={`${fmt(metrics.sumActiveKzt)} месяца`} />}
               {metrics.sumOdKzt !== undefined && <Metric label="ОД активных займов" value={`${fmt(metrics.sumOdKzt)} ₸`} />}
             </div>
           </div>

@@ -13,7 +13,7 @@ export const creditsData = [
       "countAll": 1.61,
       "sumAllKzt": 2364022,
       "countActive": 1.52,
-      "sumActiveKzt": 2490992,
+      "sumActiveKzt": 51.9,
       "sumOdKzt": 1924314
     },
     "branches": [
@@ -81,7 +81,7 @@ export const creditsData = [
       "countAll": 1.58,
       "sumAllKzt": 492408,
       "countActive": 1.53,
-      "sumActiveKzt": 474411,
+      "sumActiveKzt": 18.1,
       "sumOdKzt": 152924
     },
     "branches": [
@@ -149,7 +149,7 @@ export const creditsData = [
       "countAll": 1.06,
       "sumAllKzt": 2989617,
       "countActive": 1.06,
-      "sumActiveKzt": 2930357,
+      "sumActiveKzt": 71.75,
       "sumOdKzt": 2335626
     },
     "branches": [
