@@ -10,15 +10,15 @@ export const clientPortraitData = [
     "baseMetrics": {
       "clientsCount": 24923,
       "avgAge": 39.1,
-      "genderShare": { "male": 53.15, "female": 46.85 },
-      "avgIncome": 1071078.41
+      "genderShare": { "male": 53, "female": 47 },
     },
     "financial": {
       "transactionsSum": 69308107525.19,
       "transactionsCount": 5362183,
       "turnoverPerClient": 2780889.44,
       "transactionsPerClient": 215.15,
-      "avgTransaction": 12925.35
+      "avgTransaction": 12925.35,
+      "avgIncome": 1071078.41
     },
     "top5Branches": [
       { "name": "Алматинский филиал", "value": 20486707215 },
@@ -41,15 +41,16 @@ export const clientPortraitData = [
     "baseMetrics": {
       "clientsCount": 288319,
       "avgAge": 39.2,
-      "genderShare": { "male": 54.85, "female": 45.15 },
-      "avgIncome": 667499.79
+      "genderShare": { "male": 55, "female": 45 },
+
     },
     "financial": {
       "transactionsSum": 96354353443.52,
       "transactionsCount": 13379313,
       "turnoverPerClient": 334193.56,
       "transactionsPerClient": 46.4,
-      "avgTransaction": 7201.74
+      "avgTransaction": 7201.74,
+      "avgIncome": 667499.79
     },
     "top5Branches": [
       { "name": "Неизвестно", "value": 17975004270 },
@@ -72,15 +73,15 @@ export const clientPortraitData = [
     "baseMetrics": {
       "clientsCount": 186939,
       "avgAge": 37.5,
-      "genderShare": { "male": 55.03, "female": 44.97 },
-      "avgIncome": 677984.42
+      "genderShare": { "male": 55, "female": 45 },
     },
     "financial": {
       "transactionsSum": 57047306616.91,
       "transactionsCount": 6454533,
       "turnoverPerClient": 305172.76,
       "transactionsPerClient": 34.52,
-      "avgTransaction": 8839.04
+      "avgTransaction": 8839.04,
+      "avgIncome": 677984.42
     },
     "top5Branches": [
       { "name": "Алматинский филиал", "value": 16425638581 },
@@ -205,17 +206,17 @@ export const clientPortraitData = [
     "product": "Кредиты",
     "type": "Онлайн",
     "baseMetrics": {
-      "clientsCount": 100000,
-      "avgAge": 32,
-      "genderShare": { "male": 51, "female": 49 },
-      "avgIncome": 580000
+      "clientsCount": 259163,
+      "avgAge": 39,
+      "genderShare": { "male": 53, "female": 47 }
     },
     "financial": {
       "transactionsSum": 893718202,
       "transactionsCount": 108608082,
       "turnoverPerClient": 8960,
       "transactionsPerClient": 15,
-      "avgTransaction": 600
+      "avgTransaction": 600,
+      "avgIncome": 580000
     },
     "top5MccGroups": [
       { "name": "Кафе и рестораны", "value": 2514767989 },
