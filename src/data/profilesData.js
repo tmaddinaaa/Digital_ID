@@ -7,7 +7,7 @@ export const profilesData = [
     name: "Жұмағали Алмат",
     iin: "910517300070",
     city: "АЛМАТЫ",
-    segment: "HIGH_VALUE_ALL_ROUND", 
+    segment: "Ценные клиенты", 
 
     // 🧾 Базовая информация
     basicInfo: {
@@ -16,7 +16,6 @@ export const profilesData = [
       birthDate: "1991-05-17",
       age: 34,
       gender: "Мужской",
-      photoUrl: "/images/almat.jpeg", 
       contacts: { phone: "+77016561717" },
       language: "Русский", 
       citizenship: "Казахстан",
@@ -104,13 +103,13 @@ export const profilesData = [
         date: "2025-11-06",
         text: "Вам начислен штраф",
         topic: "Штраф",
-        status: "Прочитан",
+        status: "Доставлено",
       },
       history: [
-        { date: "2025-10-13", text: "Алмат, это предложение только для вас", campaign: "Рекламный", status: "Прочитан" },
-        { date: "2025-10-09", text: "Будьте осторожны!", campaign: "Информационный", status: "Клик" },
+        { date: "2025-10-13", text: "Алмат, это предложение только для вас", campaign: "Рекламный", status: "Доставлено" },
+        { date: "2025-10-09", text: "Будьте осторожны!", campaign: "Информационный", status: "Доставлено" },
         { date: "2025-09-14", text: "Будьте осторожны!", campaign: "Информационный", status: "Клик" },
-        {date: "2025-10-31", text: "Платите за коммуналку быстро и удобно!", campaign: "Триггерный",  status: "Прочитан"},
+        {date: "2025-10-31", text: "Платите за коммуналку быстро и удобно!", campaign: "Триггерный",  status: "Доставлено"},
       ],
       frequency: { daily: 0.1, weekly: 1, monthly: 3},
       conversion: { overall: "65%", clickRate: "42%" },
@@ -172,7 +171,7 @@ export const profilesData = [
       habitScore: 84,
 
       expenseFlow: [
-        { stage: "Зарплата", amount: 100 },
+        { stage: "Поступления", amount: 100 },
         { stage: "Оплата жилья и коммуналки", amount: 20 },
         { stage: "Снятия наличных", amount: 15 },
         { stage: "Покупки и траты", amount: 20 },
@@ -227,7 +226,7 @@ export const profilesData = [
     name: "Менетаева Алтыншаш Куанышевна",
     iin: "960108450643",
     city: "АЛМАТЫ",
-    segment: "DEPOSIT_ORIENTED",
+    segment: "Депозитные клиенты",
 
     // 🧾 Базовая информация
     basicInfo: {
@@ -236,7 +235,6 @@ export const profilesData = [
       birthDate: "1996-01-08",
       age: 29,
       gender: "Женский",
-      photoUrl: "/images/altynwaw.jpeg", 
       contacts: { phone: "+77021477496" },
       language: "Русский",
       citizenship: "Казахстан",
@@ -325,9 +323,9 @@ export const profilesData = [
         status: "Клик",
       },
       history: [
-        { date: "2025-11-01", text: "Часто бываете в кафе и ресторанах? Получайте 3% бонусами!", campaign: "Рекламный", status: "Прочитан" },
-        { date: "2025-11-01", text: "Бонусы за доставку еды!", campaign: "Рекламный", status: "Прочитан" },
-        { date: "2025-11-01", text: "Следите за здоровьем с бонусами", campaign: "Рекламный", status: "Прочитан" },
+        { date: "2025-11-01", text: "Часто бываете в кафе и ресторанах? Получайте 3% бонусами!", campaign: "Рекламный", status: "Клик" },
+        { date: "2025-11-01", text: "Бонусы за доставку еды!", campaign: "Рекламный", status: "Клик" },
+        { date: "2025-11-01", text: "Следите за здоровьем с бонусами", campaign: "Рекламный", status: "Клик" },
       ],
       frequency: { daily: 0.3, weekly: 2, monthly: 6 },
       conversion: { overall: "65%", clickRate: "42%" },
@@ -433,4 +431,268 @@ export const profilesData = [
       },
     ],
   },
+  // 🧍 Профиль АДИЛЬ
+// --------------------------------------
+{
+  ac_id: 100052847312,
+  name: "Сулейменов Адиль Ермекович",
+  iin: "890911301245",
+  city: "АЛМАТЫ",
+  segment: "Кредитные клиенты",
+
+  // 🧾 Базовая информация
+  basicInfo: {
+    fio: "Сулейменов Адиль Ермекович",
+    iin: "890911301245",
+    birthDate: "1989-09-11",
+    age: 36,
+    gender: "Мужской",
+    contacts: { phone: "+77014561234" },
+    language: "Русский",
+    citizenship: "Казахстан",
+    residenceCity: "Алматы",
+    activeCity: "Алматы",
+    device: { os: "Android", model: "Samsung Galaxy S23 Ultra", lastLogin: "2025-11-09" },
+    status: "Активен",
+    isNew: false,
+    involvement: "Средняя",
+    maritalStatus: "Женат",
+    hasChildren: true,
+    childrenCount: 2,
+    mobileAppRegistrationDate: "2020-12-03",
+    bankRegistrationDate: "2017-05-14",
+    mobileAppRegistrationDuration: "4 года 11 месяцев",
+    bankRegistrationDuration: "8 лет 6 месяцев",
+    hasIP: false,
+    hasLegalEntity: false,
+    hasAlatauCityInvest: true,
+    hasAlatauCityGarant: true,
+    serviceChannel: "МП",
+    lifeStatus: "Актуальный",
+    isPrivate: false
+  },
+
+  // 💰 Финансовая информация
+  financialInfo: {
+    revenue: { margin: 420000, commission: 55000, interest: 160000 },
+    ltv: 2200000,
+    clv: 2700000
+  },
+
+  geoMaps: {
+    all_points: "/maps/adil_all_points.html",
+    clustered_points: "/maps/adil_clustered_points.html",
+    heatmap: "/maps/adil_heatmap.html",
+    time_heatmap: "/maps/adil_time_heatmap.html",
+    time_points: "/maps/adil_time_points.html"
+  },
+
+  // 🏦 Продукты
+  products: {
+    bankProducts: {
+      title: "Продукты Банка",
+      items: [
+        {
+          type: "Кредит",
+          name: "Онлайн Кредит",
+          term: "48 мес",
+          interestRate: "37%",
+          effectiveRate: "ГЭСВ 44,5%",
+          sum: 4200000,
+          openDate: "2024-08-15",
+          status: "Погашается",
+          overdue: false,
+          overdueSum: 0
+        },
+        {
+          type: "Депозит",
+          name: "Baytaq",
+          term: "12 мес",
+          interestRate: "15%",
+          sum: 1500000,
+          status: "Активен"
+        },
+        {
+          type: "Карта",
+          cardType: "VISA",
+          level: "Gold",
+          bonusLevel: "2.5%",
+          openDate: "2023-04-22",
+          validUntil: "2027-04-22",
+          sum: 185000,
+          status: "Активна",
+          isSalaryCard: true
+        }
+      ],
+      history: [
+        {
+          type: "Рефинансирование",
+          name: "Рефинансирование 2022",
+          term: "60 мес",
+          interestRate: "37%",
+          effectiveRate: "ГЭСВ 45%",
+          sum: 5000000,
+          openDate: "2022-05-10",
+          closeDate: "2024-06-15",
+          status: "Закрыт"
+        }
+      ]
+    },
+    groupProducts: {
+      title: "Продукты Группы",
+      alatauInvest: [
+        {
+          name: "Инвестиционный счёт",
+          type: "Инвестиции",
+          openDate: "2023-10-01",
+          status: "Активен"
+        }
+      ],
+      alatauGarant: [
+        {
+          name: "КАСКО",
+          type: "Страхование авто",
+          openDate: "2024-02-01",
+          status: "Активен"
+        },
+        {
+          name: "ОГПО",
+          type: "Страхование гражданской ответственности",
+          openDate: "2024-02-01",
+          status: "Активен"
+        }
+      ]
+    },
+    mlIndicators: {
+      churnRisk: "Нет",
+      creditInterest: "Да",
+      depositInterest: "Да"
+    }
+  },
+
+  // 📲 Коммуникации
+  communications: {
+    pushStatus: "Да",
+    campaigns: "Да",
+    lastPush: {
+      date: "2025-11-08",
+      text: "Снижение ставки по Онлайн Кредиту для лояльных клиентов",
+      topic: "Кредит",
+      status: "Клик"
+    },
+    history: [
+      { date: "2025-11-08", text: "Снижение ставки по Онлайн Кредиту", campaign: "Credit", status: "Клик" },
+      { date: "2025-10-20", text: "Попробуйте депозит Baytaq 15%", campaign: "Deposit", status: "Клик" },
+      { date: "2025-09-25", text: "КАСКО без визита в отделение", campaign: "Garant", status: "Клик" }
+    ],
+    frequency: { daily: 0.2, weekly: 1.5, monthly: 4 },
+    conversion: { overall: "62%", clickRate: "39%" },
+    insights: { topics: "кредит, депозит, страховка" },
+    topPush: { text: "Снижение ставки по Онлайн Кредиту", or: "80%", ctr: "44%" },
+    heatmap: {
+      data: {
+        Пн: [0,0,0,0,0,0,0,1,2,4,3,1,0,0,0,0,1,2,1,0,0,0,0,0],
+        Вт: [0,0,0,0,0,0,0,1,3,4,2,1,0,0,0,0,1,2,2,0,0,0,0,0],
+        Ср: [0,0,0,0,0,0,0,1,2,3,2,1,0,0,0,0,1,1,1,0,0,0,0,0],
+        Чт: [0,0,0,0,0,0,0,1,3,4,3,1,0,0,0,0,1,2,1,0,0,0,0,0],
+        Пт: [0,0,0,0,0,0,0,2,4,5,4,2,1,0,0,0,1,3,2,0,0,0,0,0],
+        Сб: [0,0,0,0,0,0,0,1,2,3,2,1,0,0,0,0,1,1,1,0,0,0,0,0],
+        Вс: [0,0,0,0,0,0,0,1,1,2,1,1,0,0,0,0,0,1,1,0,0,0,0,0]
+      }
+    }
+  },
+
+  // 💳 Поведение
+  behavior: {
+    operations: {
+      atmWithdrawals: { freq: 2, avgSum: 85000, trend: "+3%" },
+      ownTransfers: { freq: 4, avgSum: 130000 },
+      internalTransfers: { freq: 2, avgSum: 50000 },
+      externalTransfers: { freq: 3, avgSum: 175000 },
+      internationalTransfers: { freq: 0, avgSum: 0 },
+      retailPurchases: [
+        { mcc: "Grocery", share: "32%" },
+        { mcc: "Fuel", share: "20%" },
+        { mcc: "Health", share: "12%" },
+        { mcc: "Online", share: "25%" },
+        { mcc: "Travel", share: "11%" }
+      ],
+      transactions: [
+        { id: 1, date: "2025-10-08", type: "Retail", amount: 32500, location: "Small", currency: "₸" },
+        { id: 2, date: "2025-10-11", type: "Оплата Kaspi QR", amount: 18000, location: "GreenMart", currency: "₸" },
+        { id: 3, date: "2025-10-14", type: "Apple Pay", amount: 54000, location: "Melem", currency: "₸" },
+        { id: 4, date: "2025-10-17", type: "Kaspi QR", amount: 29000, location: "Sulpak", currency: "₸" },
+        { id: 5, date: "2025-10-22", type: "Оплата картой", amount: 41000, location: "Fix Price", currency: "₸" }
+      ]
+    },
+    insights: [
+      "Основная активность — FMCG и онлайн покупки",
+      "Использует Apple Pay и QR-платежи"
+    ]
+  },
+
+  // 💵 Финансовые привычки
+  financialHabits: {
+    salaryDay: "25 число",
+    salarySource: "TOO «City Logistic»",
+    allocation: [
+      "Оплата кредита (30%)",
+      "Коммунальные платежи (10%)",
+      "Покупки (25%)",
+      "Пополнение депозита (15%)",
+      "Инвестиции (10%)",
+      "Прочее (10%)"
+    ],
+    mlInsight: "65% зарплаты распределяется в течение 48 часов после поступления",
+    habitScore: 82,
+
+    expenseFlow: [
+      { stage: "Поступления", amount: 100 },
+      { stage: "Оплата кредита", amount: 30 },
+      { stage: "Коммунальные платежи", amount: 10 },
+      { stage: "Покупки", amount: 25 },
+      { stage: "Пополнение депозита", amount: 15 },
+      { stage: "Инвестиции", amount: 10 },
+      { stage: "Свободные средства", amount: 10 }
+    ],
+
+    paymentMethods: [
+      { name: "Apple Pay", value: 35 },
+      { name: "Samsung Pay", value: 20 },
+      { name: "Kaspi QR", value: 25 },
+      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Карта банка", value: 10 }
+    ]
+  },
+
+  tags: [
+    "онлайн платежи",
+    "активный заемщик",
+    "инвестиции",
+    "клиент с депозитом"
+  ],
+
+  // 👨‍👩‍👧‍👦 Родственники
+  relatedClients: [
+    {
+      name: "Сулейменова Алия Ерлановна",
+      type: "Супруга",
+      birthDate: "1991-08-22",
+      jointProducts: ["КАСКО"],
+      status: "Активен",
+      lastActivity: "2025-11-07",
+      ac_id: 100052847313
+    },
+    {
+      name: "Сулеймен Адильевич",
+      type: "Сын",
+      birthDate: "2012-05-10",
+      jointProducts: [],
+      status: "Не активен",
+      lastActivity: "2025-10-29",
+      ac_id: 100052847314
+    }
+  ]
+}
+
 ];

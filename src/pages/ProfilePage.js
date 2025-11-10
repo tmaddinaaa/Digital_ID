@@ -4,17 +4,18 @@ import { profilesData } from "../data/profilesData";
 import BasicInfo from "../components/widgets/BasicInfo";
 import Communications from "../components/widgets/Communications";
 import RelatedClients from "../components/widgets/RelatedClients";
-import FinancialProfile from "../components/widgets/FinancialProfile"; // объединённый компонент
+import FinancialProfile from "../components/widgets/FinancialProfile";
 import BankProductsPage from "../components/widgets/BankProductsPage";
 import GroupProductsPage from "../components/widgets/GroupProductsPage";
-import GeoAnalyticsWidget from "../components/widgets/GeoAnalyticsWidget"; // 🆕 добавлен импорт
+import GeoAnalyticsWidget from "../components/widgets/GeoAnalyticsWidget";
 import CollapsibleSection from "../components/CollapsibleSection";
-import { ArrowLeft, UserCircle2 } from "lucide-react";
+import { ArrowLeft, UserCircle2, Eye, EyeOff } from "lucide-react";
 
 const ProfilePage = () => {
   const { ac_id } = useParams();
   const navigate = useNavigate();
   const [openWidget, setOpenWidget] = useState(null);
+  const [showName, setShowName] = useState(false); // 👁 логика скрытия имени
   const widgetRef = useRef(null);
 
   const profile = profilesData.find((p) => p.ac_id === Number(ac_id));
@@ -41,7 +42,6 @@ const ProfilePage = () => {
 
   const {
     basicInfo,
-    products,
     communications,
     behavior,
     financialHabits,
@@ -67,7 +67,7 @@ const ProfilePage = () => {
     {
       key: "geoAnalytics",
       title: "🗺 Геоаналитика",
-      content: <GeoAnalyticsWidget data={profile} />, // 🆕 добавлен виджет
+      content: <GeoAnalyticsWidget data={profile} />,
     },
     {
       key: "communications",
@@ -103,6 +103,7 @@ const ProfilePage = () => {
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">Назад</span>
           </button>
+
           <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
             <UserCircle2 className="w-5 h-5 text-yellow-600" />
             <h1 className="text-lg font-semibold text-gray-800">
@@ -110,8 +111,21 @@ const ProfilePage = () => {
             </h1>
           </div>
         </div>
-        <div className="text-sm text-gray-600 truncate max-w-[160px] sm:max-w-[200px] text-right">
-          {basicInfo?.fio || profile.name}
+
+        {/* 🔐 Имя клиента с кнопкой 👁 */}
+        <div className="flex items-center gap-3 text-sm text-gray-600 truncate max-w-[180px] sm:max-w-[220px] text-right">
+          <span className="truncate font-medium">
+            {showName
+              ? basicInfo?.fio || profile.name || "—"
+              : "ФИО скрыто"}
+          </span>
+          <button
+            onClick={() => setShowName(!showName)}
+            className="flex items-center gap-1 text-amber-600 hover:text-amber-700 transition"
+            title={showName ? "Скрыть ФИО" : "Показать ФИО"}
+          >
+            {showName ? <EyeOff size={16} /> : <Eye size={16} />}
+          </button>
         </div>
       </div>
 

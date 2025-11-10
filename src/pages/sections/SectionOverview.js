@@ -65,7 +65,7 @@ export default function SectionOverview({ data }) {
               📈 Динамика новых клиентов (Мобильное приложение)
             </h3>
             <p className="text-sm text-gray-500 mb-4">
-              Отображает количество новых клиентов по месяцам. Подписи показывают точные значения.
+              Отображает количество новых клиентов по месяцам.
             </p>
             <AutoResizeContainer height={300}>
               <ResponsiveContainer width="100%" height="100%">
@@ -101,9 +101,6 @@ export default function SectionOverview({ data }) {
   <Card>
     <CardContent className="p-6">
       <h3 className="text-lg font-medium mb-2">🏙 Распределение по филиалам</h3>
-      <p className="text-sm text-gray-500 mb-4">
-        Отображает количество клиентов по каждому филиалу. Названия филиалов автоматически переносятся по словам и дефисам.
-      </p>
 
       <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
         <div
@@ -119,7 +116,7 @@ export default function SectionOverview({ data }) {
                 top: 20,
                 right: 30,
                 left: 10,
-                bottom: 130, // 🔹 добавили больше места для многострочных подписей
+                bottom: 130, // оставляем место для подписей городов
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
@@ -128,7 +125,6 @@ export default function SectionOverview({ data }) {
                 dataKey="city"
                 interval={0}
                 tick={({ x, y, payload }) => {
-                  // 🔹 Разбиваем название на слова и части с дефисом
                   const words = payload.value.split(" ");
                   const lines = [];
                   words.forEach((word) => {
@@ -143,9 +139,8 @@ export default function SectionOverview({ data }) {
                     }
                   });
 
-                  // 🔹 Настраиваем отступы и высоту между строками
                   const lineHeight = 12;
-                  const verticalOffset = 18; // 🔸 сдвигаем текст немного вниз
+                  const verticalOffset = 18;
                   const startY = y + verticalOffset;
 
                   return (
@@ -181,65 +176,12 @@ export default function SectionOverview({ data }) {
           </ResponsiveContainer>
         </div>
       </div>
-
-      {/* 🔍 Легенда филиалов */}
-      <div className="mt-6 text-xs text-gray-600 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-1">
-        {cityData.map((item, i) => (
-          <div key={i} className="flex items-start gap-1">
-            <span className="font-semibold text-yellow-600 min-w-[30px]">{i + 1}.</span>
-            <span title={item.city}>{item.city}</span>
-          </div>
-        ))}
-      </div>
     </CardContent>
   </Card>
 )}
 
 
 
-      {/* 🌐 Пересечение клиентских источников */}
-      {charts.sourceDistribution && charts.sourceDistribution.length > 0 && (
-        <Card>
-          <CardContent className="p-6">
-            <h3 className="text-lg font-medium mb-2">
-              🌐 Пересечение клиентских источников
-            </h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Показывает, как клиенты распределены по основным каналам привлечения:
-              онлайн, офлайн, партнёрские сети и другие.
-            </p>
-
-            <div style={{ width: "100%", height: 500 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={charts.sourceDistribution}
-                  margin={{ top: 20, right: 30, left: 10, bottom: 120 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                    dataKey="source"
-                    tick={{ fontSize: 12 }}
-                    interval={0}
-                    angle={-30}
-                    textAnchor="end"
-                  />
-                  <YAxis />
-                  <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                  <Bar dataKey="value" fill="#FFB800" radius={[6, 6, 0, 0]}>
-                    <LabelList
-                      dataKey="value"
-                      position="top"
-                      formatter={(v) => v.toLocaleString("ru-RU")}
-                      fill="#444"
-                      fontSize={11}
-                    />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Tag } from "lucide-react";
 
 const BasicInfo = ({ data }) => {
-  // ✅ useState всегда вызывается, даже если данных нет
+  // 👁️ Управление скрытием чувствительных данных (ФИО, ИИН, телефон)
   const [showSensitive, setShowSensitive] = useState(false);
 
   if (!data) {
@@ -27,6 +27,7 @@ const BasicInfo = ({ data }) => {
     <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm flex flex-col gap-3 max-h-[70vh] overflow-y-auto">
       {/* Верхняя часть: фото + ФИО */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
+        {/* Фото профиля */}
         {photoUrl && (
           <img
             src={photoUrl}
@@ -34,10 +35,12 @@ const BasicInfo = ({ data }) => {
             className="w-20 h-20 rounded-lg object-cover shadow-sm"
           />
         )}
+
+        {/* Основные данные */}
         <div className="text-center sm:text-left space-y-0.5 w-full">
           <div className="flex justify-between items-center">
             <h2 className="text-base sm:text-lg font-semibold text-gray-900">
-              {fio || "—"}
+              {showSensitive ? fio || "—" : "ФИО скрыто"}
             </h2>
 
             {/* 👁️ Кнопка показать/скрыть */}
@@ -57,6 +60,7 @@ const BasicInfo = ({ data }) => {
             </button>
           </div>
 
+          {/* Общая информация */}
           <div className="text-gray-700 text-[0.9rem] leading-snug mt-1">
             <p><strong>AC ID:</strong> {ac_id || "—"}</p>
             <p>
@@ -78,8 +82,9 @@ const BasicInfo = ({ data }) => {
         </div>
       </div>
 
-      {/* Основная информация */}
+      {/* Основная информация о клиенте */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[0.9rem] leading-relaxed mt-2">
+        {/* Контакты */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">📞 Контакты</h3>
           <p>
@@ -93,12 +98,14 @@ const BasicInfo = ({ data }) => {
           <p><strong>Гражданство:</strong> {citizenship || "—"}</p>
         </div>
 
+        {/* Локация */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">🏙️ Локация</h3>
           <p><strong>Регистрация:</strong> {residenceCity || "—"}</p>
           <p><strong>Активность:</strong> {activeCity || "—"}</p>
         </div>
 
+        {/* Личная информация */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">👤 Личная информация</h3>
           <p><strong>Семья:</strong> {maritalStatus || "—"}</p>
@@ -106,6 +113,7 @@ const BasicInfo = ({ data }) => {
           <p><strong>Жизненный статус:</strong> {lifeStatus || "—"}</p>
         </div>
 
+        {/* Статус клиента */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">💼 Статус</h3>
           <p><strong>Статус:</strong> {status || "—"}</p>
@@ -113,6 +121,7 @@ const BasicInfo = ({ data }) => {
           <p><strong>Признак ЮЛ:</strong> {hasLegalEntity ? "Да" : "Нет"}</p>
         </div>
 
+        {/* Мобильное приложение */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">📱 Мобильное приложение</h3>
           <p>
@@ -123,6 +132,7 @@ const BasicInfo = ({ data }) => {
           <p><strong>Устройство:</strong> {device?.os || "—"} ({device?.model || "—"})</p>
         </div>
 
+        {/* Информация о банке */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">🏦 Банк</h3>
           <p>
@@ -133,12 +143,14 @@ const BasicInfo = ({ data }) => {
           <p><strong>Признак нового клиента:</strong> {isNew ? "Да" : "—"}</p>
         </div>
 
+        {/* Сегментация */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">🧩 Сегментация</h3>
           <p><strong>Сегмент:</strong> {segment || "—"}</p>
           <p><strong>Private статус:</strong> {isPrivate ? "Да" : "Нет"}</p>
         </div>
 
+        {/* Продукты группы */}
         <div>
           <h3 className="font-semibold text-gray-800 mb-0.5">💰 Продукты группы</h3>
           <p><strong>Invest:</strong> {hasAlatauCityInvest ? "Да" : "—"}</p>

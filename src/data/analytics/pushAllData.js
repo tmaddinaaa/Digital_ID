@@ -4,9 +4,9 @@ export const pushAllData = {
     pushPerformance: {
       sent: 926303,
       delivered: 777966,
-      opened: 21005,
-      ctr: 2.7,
-      conversion: 0.78,
+      opened: "coming soon...",
+      ctr: "coming soon...",
+      conversion: "coming soon...",
     },
 
     // 📈 Новый график — доля пушей по месяцам

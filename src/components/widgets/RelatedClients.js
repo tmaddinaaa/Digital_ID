@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Calendar, Link2, Activity } from "lucide-react";
+import { Users, Calendar, Link2, Activity, AlertTriangle } from "lucide-react";
 
 const RelatedClients = ({ related }) => {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   if (!related?.length)
     return (
@@ -12,15 +13,40 @@ const RelatedClients = ({ related }) => {
       </div>
     );
 
-  const handleClick = (ac_id) => navigate(`/profiles/${ac_id}`);
+  // 🔹 Проверка клиента перед переходом
+  const handleClick = async (ac_id) => {
+    try {
+      // Пример: проверяем наличие JSON/данных профиля
+      const res = await fetch(`/api/profiles/${ac_id}`, { method: "HEAD" });
+
+      if (res.ok) {
+        navigate(`/profiles/${ac_id}`);
+      } else {
+        setError("Клиент не найден или недоступен");
+        setTimeout(() => setError(null), 3000);
+      }
+    } catch (err) {
+      console.warn("Ошибка при проверке клиента:", err);
+      setError("Ошибка при загрузке профиля клиента");
+      setTimeout(() => setError(null), 3000);
+    }
+  };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 space-y-5">
+    <div className="bg-white rounded-xl shadow-md p-6 space-y-5 relative">
+      {/* 🔸 Всплывающее сообщение об ошибке */}
+      {error && (
+        <div className="absolute top-3 right-3 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-lg border border-red-200 shadow-sm animate-fadeIn z-10">
+          <AlertTriangle className="w-4 h-4" />
+          <span className="text-sm font-medium">{error}</span>
+        </div>
+      )}
+
       {/* Заголовок */}
       <div className="flex items-center gap-2 mb-2">
         <Users className="w-5 h-5 text-yellow-600" />
         <h2 className="text-lg font-semibold text-gray-800">
-           Связанные клиенты
+          Связанные клиенты
         </h2>
       </div>
 
@@ -66,9 +92,7 @@ const RelatedClients = ({ related }) => {
               </p>
               <p>
                 <strong>Совместные продукты:</strong>{" "}
-                {r.jointProducts?.length
-                  ? r.jointProducts.join(", ")
-                  : "—"}
+                {r.jointProducts?.length ? r.jointProducts.join(", ") : "—"}
               </p>
               <p className="flex items-center gap-1">
                 <Activity className="w-4 h-4 text-gray-400" />

@@ -4,14 +4,19 @@ import {
   ChevronDown,
   ChevronUp,
   Search,
-  Package,
   Tags,
-  Briefcase,
-  Shield,
-  Building2,
   X,
 } from "lucide-react";
 import Select from "react-select";
+
+/**
+ * UnifiedFilters.js
+ * Полная версия фильтров:
+ * - все опции на русском
+ * - сегменты на русском
+ * - чипы с выбранными значениями (удаление по клику на X)
+ * - функции toggle/selectAll/clear/remove используются и ESLint не ругается
+ */
 
 export default function UnifiedFilters({
   filters,
@@ -24,6 +29,7 @@ export default function UnifiedFilters({
   const handleChange = (key, value) =>
     setFilters((prev) => ({ ...prev, [key]: value }));
 
+  // Добавляем / удаляем элементы в массивном фильтре (checkbox-подход)
   const toggleCheckbox = (group, item) => {
     setFilters((prev) => {
       const list = new Set(prev[group] || []);
@@ -40,11 +46,12 @@ export default function UnifiedFilters({
     setFilters((prev) => ({ ...prev, [group]: [] }));
   };
 
+  // удаление отдельного тега/чипа
   const handleRemoveTag = (group, item) => {
-    setFilters((prev) => ({
-      ...prev,
-      [group]: prev[group].filter((i) => i !== item),
-    }));
+    setFilters((prev) => {
+      if (!prev[group]) return prev;
+      return { ...prev, [group]: prev[group].filter((i) => i !== item) };
+    });
   };
 
   const dateFilterActive =
@@ -62,20 +69,12 @@ export default function UnifiedFilters({
       "&:hover": { borderColor: "#facc15" },
       minHeight: "38px",
     }),
-    menu: (base) => ({
-      ...base,
-      zIndex: 50,
-    }),
-    multiValue: (base) => ({
-      ...base,
-      backgroundColor: "#fef3c7",
-    }),
-    multiValueLabel: (base) => ({
-      ...base,
-      color: "#92400e",
-    }),
+    menu: (base) => ({ ...base, zIndex: 50 }),
+    multiValue: (base) => ({ ...base, backgroundColor: "#fef3c7" }),
+    multiValueLabel: (base) => ({ ...base, color: "#92400e" }),
   };
 
+  // Примеры тегов (группированные)
   const defaultTags = [
     {
       label: "Активность",
@@ -105,15 +104,18 @@ export default function UnifiedFilters({
 
   const tagOptions = allTags.length > 0 ? allTags : defaultTags;
 
+  // Списки для checkbox-блоков (products) — можно расширить/заменить
+  const bankProductsList = ["Кредит", "Депозит", "Карта"];
+  const investProductsList = ["Инвестиции", "Облигации", "Акции"];
+  const garantProductsList = ["Страховка жизни", "Медицинская страховка", "КАСКО"];
+
   return (
     <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6 space-y-4">
-      {/* 🔍 Поиск и теги */}
+      {/* Поиск и теги */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Поиск */}
         <div className="flex flex-col">
-          <label className="text-xs font-semibold text-gray-500 mb-1">
-            🔍 Поиск
-          </label>
+          <label className="text-xs font-semibold text-gray-500 mb-1">🔍 Поиск</label>
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" />
             <input
@@ -126,7 +128,7 @@ export default function UnifiedFilters({
           </div>
         </div>
 
-        {/* 🏷 Теги */}
+        {/* Теги (react-select мульти) */}
         <div className="flex flex-col">
           <label className="text-xs font-semibold text-gray-500 mb-1 flex items-center gap-1">
             <Tags className="w-3.5 h-3.5 text-yellow-500" /> Теги
@@ -141,9 +143,60 @@ export default function UnifiedFilters({
             className="text-sm"
           />
         </div>
+
+        {/* Отображение текущих выбранных фильтров как чипы */}
+        <div className="flex flex-col">
+          <label className="text-xs font-semibold text-gray-500 mb-1">Выбранные фильтры</label>
+          <div className="min-h-[42px] border border-gray-100 rounded-md px-3 py-2 bg-gray-50 flex items-center flex-wrap gap-2">
+            {/* сегмент */}
+            {filters.segment && filters.segment !== "Все сегменты" && (
+              <FilterChip onRemove={() => handleChange("segment", "Все сегменты")}>
+                {filters.segment}
+              </FilterChip>
+            )}
+            {/* город */}
+            {filters.city && filters.city !== "Все города" && (
+              <FilterChip onRemove={() => handleChange("city", "Все города")}>
+                {filters.city}
+              </FilterChip>
+            )}
+            {/* теги */}
+            {filters.tags && filters.tags.length > 0 && filters.tags.map((t) => (
+              <FilterChip key={t.value || t} onRemove={() => handleChange("tags", (filters.tags || []).filter(x => x.value !== t.value))}>
+                {t.label || t}
+              </FilterChip>
+            ))}
+            {/* продуктовые группы */}
+            {filters.bankProducts && filters.bankProducts.length > 0 && filters.bankProducts.map((p) => (
+              <FilterChip key={p} onRemove={() => handleRemoveTag("bankProducts", p)}>
+                {p}
+              </FilterChip>
+            ))}
+            {filters.investProducts && filters.investProducts.length > 0 && filters.investProducts.map((p) => (
+              <FilterChip key={p} onRemove={() => handleRemoveTag("investProducts", p)}>
+                {p}
+              </FilterChip>
+            ))}
+            {filters.garantProducts && filters.garantProducts.length > 0 && filters.garantProducts.map((p) => (
+              <FilterChip key={p} onRemove={() => handleRemoveTag("garantProducts", p)}>
+                {p}
+              </FilterChip>
+            ))}
+
+            {/* если ничего не выбрано */}
+            {(!filters.segment || filters.segment === "Все сегменты") &&
+             (!filters.city || filters.city === "Все города") &&
+             (!filters.tags || filters.tags.length === 0) &&
+             (!filters.bankProducts || filters.bankProducts.length === 0) &&
+             (!filters.investProducts || filters.investProducts.length === 0) &&
+             (!filters.garantProducts || filters.garantProducts.length === 0) && (
+              <span className="text-xs text-gray-400">Пока нет выбранных фильтров</span>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* 🧩 Основные фильтры */}
+      {/* Основные фильтры */}
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
         <FilterSelect
           label="🏙 Город"
@@ -160,22 +213,24 @@ export default function UnifiedFilters({
           onChange={(v) => handleChange("city", v)}
         />
 
+        {/* Сегменты на русском */}
         <FilterSelect
           label="📊 Сегмент"
           value={filters.segment || "Все сегменты"}
           options={[
             "Все сегменты",
-            "ACTIVE_BUT_LOW_INCOME",
-            "CORE_HIGH_INCOME",
-            "CORE_MID_INCOME_ACTIVE",
-            "CORE_MID_INCOME_PASSIVE",
-            "CREDIT_ORIENTED", 
-            "DEPOSIT_ORIENTED", 
-            "HIGH_VALUE_ALL_ROUND", 
-            "LOW_ENGAGEMENT_LOW_INCOME", 
-            "MIXED_INCOME", 
-            "PASSIVE_BUT_PROFITABLE", 
-            "PASSIVE_LOW_INCOME", 
+            "Ценные клиенты",
+            "Кредитные клиенты",
+            "Депозитные клиенты",
+            "Смешанный доход",
+            "Пассивные, но прибыльные",
+            "Низкая активность и доход",
+            "Пассивные низкодоходные",
+            "Активные, но малодоходные",
+            "Средний доход, пассивные",
+            "Средний доход, активные",
+            "Высокий доход",
+            "Прочие источники дохода",
           ]}
           onChange={(v) => handleChange("segment", v)}
         />
@@ -221,7 +276,7 @@ export default function UnifiedFilters({
           onChange={(v) => handleChange("gender", v)}
         />
 
-        {/* 🎂 Возраст */}
+        {/* Возраст */}
         <div className="flex flex-col">
           <label className="text-xs font-semibold text-gray-500 mb-1">
             🎂 Возраст (число или диапазон)
@@ -236,47 +291,45 @@ export default function UnifiedFilters({
         </div>
       </div>
 
-      {/* 🏦 Продукты */}
+      {/* Продукты (checkbox-блоки) */}
       <div className="mt-2 grid md:grid-cols-3 gap-6">
         <ProductBlock
           title="🏦 Продукты Банка"
-          items={["Кредит", "Депозит", "Карта"]}
+          items={bankProductsList}
           activeList={filters.bankProducts || []}
           onToggle={(i) => toggleCheckbox("bankProducts", i)}
-          onSelectAll={() => handleSelectAll("bankProducts", ["Кредит", "Депозит", "Карта"])}
+          onSelectAll={() => handleSelectAll("bankProducts", bankProductsList)}
           onClear={() => handleClearAll("bankProducts")}
           onRemove={(i) => handleRemoveTag("bankProducts", i)}
         />
 
         <ProductBlock
           title="💼 AC Invest (инвестиционная)"
-          items={["Инвестиции", "Облигации", "Акции"]}
+          items={investProductsList}
           activeList={filters.investProducts || []}
           onToggle={(i) => toggleCheckbox("investProducts", i)}
-          onSelectAll={() => handleSelectAll("investProducts", ["Инвестиции", "Облигации", "Акции"])}
+          onSelectAll={() => handleSelectAll("investProducts", investProductsList)}
           onClear={() => handleClearAll("investProducts")}
           onRemove={(i) => handleRemoveTag("investProducts", i)}
         />
 
         <ProductBlock
           title="🛡️ AC Garant (страховая)"
-          items={["Страховка жизни", "Медицинская страховка", "КАСКО"]}
+          items={garantProductsList}
           activeList={filters.garantProducts || []}
           onToggle={(i) => toggleCheckbox("garantProducts", i)}
-          onSelectAll={() => handleSelectAll("garantProducts", ["Страховка жизни", "Медицинская страховка", "КАСКО"])}
+          onSelectAll={() => handleSelectAll("garantProducts", garantProductsList)}
           onClear={() => handleClearAll("garantProducts")}
           onRemove={(i) => handleRemoveTag("garantProducts", i)}
         />
       </div>
 
-      {/* 📅 Фильтры по дате регистрации */}
+      {/* Дата */}
       <div className="mt-3 border-t border-gray-200 pt-3">
         <button
           onClick={() => setShowDates((prev) => !prev)}
           className={`flex items-center gap-2 text-sm font-semibold transition ${
-            dateFilterActive
-              ? "text-yellow-600"
-              : "text-gray-700 hover:text-yellow-600"
+            dateFilterActive ? "text-yellow-600" : "text-gray-700 hover:text-yellow-600"
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -303,20 +356,27 @@ export default function UnifiedFilters({
         )}
       </div>
 
-      {/* 🔁 Сброс */}
-      <div className="flex justify-end mt-4">
+      {/* Кнопки Сброс/Применить */}
+      <div className="flex justify-end mt-4 gap-3">
         <button
           onClick={onReset}
-          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-md text-sm font-medium transition flex items-center gap-2"
+          className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition"
         >
-          Сбросить фильтры
+          Сбросить
+        </button>
+        <button
+          onClick={() => {}}
+          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-md text-sm font-medium transition"
+        >
+          Применить
         </button>
       </div>
     </div>
   );
 }
 
-/* 🔹 Подкомпоненты */
+/* ---------------- Подкомпоненты ---------------- */
+
 const FilterSelect = ({ label, value, options, onChange }) => (
   <div className="flex flex-col">
     <label className="text-xs font-semibold text-gray-500 mb-1">{label}</label>
@@ -326,7 +386,9 @@ const FilterSelect = ({ label, value, options, onChange }) => (
       className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400 hover:border-yellow-300 transition"
     >
       {options.map((opt) => (
-        <option key={opt}>{opt}</option>
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
       ))}
     </select>
   </div>
@@ -353,7 +415,6 @@ const DateRangeFilter = ({ label, from, to, onFromChange, onToChange }) => (
 
 const ProductBlock = ({
   title,
-  icon,
   items,
   activeList,
   onToggle,
@@ -369,12 +430,8 @@ const ProductBlock = ({
       }`}
     >
       <div className="flex justify-between items-center mb-2">
-        <h3
-          className={`text-sm font-semibold flex items-center gap-2 ${
-            isActive ? "text-yellow-600" : "text-gray-700"
-          }`}
-        >
-          {icon} {title}
+        <h3 className={`text-sm font-semibold ${isActive ? "text-yellow-600" : "text-gray-700"}`}>
+          {title}
         </h3>
         <div className="flex gap-2 text-xs">
           <button
@@ -428,3 +485,12 @@ const ProductBlock = ({
     </div>
   );
 };
+
+const FilterChip = ({ children, onRemove }) => (
+  <div className="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-full text-xs text-gray-700">
+    <span>{children}</span>
+    <button onClick={onRemove} className="p-1 rounded-full hover:bg-gray-200">
+      <X className="w-3 h-3" />
+    </button>
+  </div>
+);
