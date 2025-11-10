@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Users, Calendar, Link2, Activity, AlertTriangle } from "lucide-react";
+import { profilesData } from "../../data/profilesData";
 
 const RelatedClients = ({ related }) => {
   const navigate = useNavigate();
@@ -13,21 +14,13 @@ const RelatedClients = ({ related }) => {
       </div>
     );
 
-  // 🔹 Проверка клиента перед переходом
-  const handleClick = async (ac_id) => {
-    try {
-      // Пример: проверяем наличие JSON/данных профиля
-      const res = await fetch(`/api/profiles/${ac_id}`, { method: "HEAD" });
-
-      if (res.ok) {
-        navigate(`/profiles/${ac_id}`);
-      } else {
-        setError("Клиент не найден или недоступен");
-        setTimeout(() => setError(null), 3000);
-      }
-    } catch (err) {
-      console.warn("Ошибка при проверке клиента:", err);
-      setError("Ошибка при загрузке профиля клиента");
+  // ✅ Проверка: есть ли клиент в локальных данных
+  const handleClick = (ac_id) => {
+    const exists = profilesData.some((p) => p.ac_id === ac_id);
+    if (exists) {
+      navigate(`/profiles/${ac_id}`);
+    } else {
+      setError("❌ Клиент не найден");
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -36,7 +29,7 @@ const RelatedClients = ({ related }) => {
     <div className="bg-white rounded-xl shadow-md p-6 space-y-5 relative">
       {/* 🔸 Всплывающее сообщение об ошибке */}
       {error && (
-        <div className="absolute top-3 right-3 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-lg border border-red-200 shadow-sm animate-fadeIn z-10">
+        <div className="absolute top-3 right-3 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2 rounded-lg border border-red-200 shadow-sm z-10">
           <AlertTriangle className="w-4 h-4" />
           <span className="text-sm font-medium">{error}</span>
         </div>
