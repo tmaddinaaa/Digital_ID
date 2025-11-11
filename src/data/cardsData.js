@@ -8,8 +8,8 @@ export const cardsData = [
       "avgAge": 38,
       "genderShare": { "male": 52, "female": 48 },
       "avgIncome": 340762,
-      "clientsWithCredits": 383818,
-      "clientsWithDeposits": 130503,
+      "clientsWithCredits": 288320,
+      "clientsWithDeposits": 130507,
     },
     "financial": {
       "transactionsSum": 196741084975,
@@ -34,8 +34,8 @@ export const cardsData = [
       "avgAge": 37,
       "genderShare": { "male": 50, "female": 50 },
       "avgIncome": 675366,
-      "clientsWithCredits": 8006,
-      "clientsWithDeposits": 7891,
+      "clientsWithCredits": 5120,
+      "clientsWithDeposits": 7874,
     },
     "financial": {
       "transactionsSum": 39878074934,
