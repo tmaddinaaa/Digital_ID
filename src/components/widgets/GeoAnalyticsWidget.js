@@ -18,6 +18,8 @@ export default function GeoAnalyticsWidget({ data }) {
   const [tableData, setTableData] = useState([]);
   const [tableLoading, setTableLoading] = useState(false);
   const [tableError, setTableError] = useState(null);
+  // НОВОЕ СОСТОЯНИЕ: для управления раскрытием/свертыванием таблицы
+  const [tableExpanded, setTableExpanded] = useState(false);
 
   const iframeRefs = useRef([]);
   const maps = data?.geoMaps || {};
@@ -44,7 +46,7 @@ export default function GeoAnalyticsWidget({ data }) {
 
             // 🚫 Пропускаем index.html React приложения
             if (
-              text.includes("<div id=\"root\"") ||
+              text.includes('<div id="root"') ||
               text.includes("React") ||
               text.includes("vite") ||
               text.includes("Client Base Analytics")
@@ -92,6 +94,8 @@ export default function GeoAnalyticsWidget({ data }) {
   const toggleTable = async () => {
     if (showTable) {
       setShowTable(false);
+      // При скрытии сбрасываем состояние развертывания
+      setTableExpanded(false);
       return;
     }
 
@@ -118,6 +122,8 @@ export default function GeoAnalyticsWidget({ data }) {
 
       setTableData(json);
       setShowTable(true);
+      // При успешной загрузке устанавливаем tableExpanded в false, чтобы показать только 5 строк
+      setTableExpanded(false); 
     } catch (err) {
       console.error("Ошибка при чтении XLSX:", err);
       setTableError("Ошибка при чтении таблицы");
@@ -239,38 +245,83 @@ export default function GeoAnalyticsWidget({ data }) {
                       <XCircle className="w-5 h-5 mr-2" /> {tableError}
                     </div>
                   ) : (
-                    <table className="min-w-full border border-gray-200 text-sm text-gray-700">
-                      <thead className="bg-gray-100">
-                        <tr>
-                          {Object.keys(tableData[0] || {}).map((key) => (
-                            <th
-                              key={key}
-                              className="px-3 py-2 text-left border-b border-gray-200 font-medium"
-                            >
-                              {key}
-                            </th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tableData.map((row, i) => (
-                          <tr
-                            key={i}
-                            className={
-                              i % 2 === 0
-                                ? "bg-white"
-                                : "bg-gray-50 hover:bg-gray-100"
-                            }
-                          >
-                            {Object.values(row).map((val, j) => (
-                              <td key={j} className="px-3 py-2 border-b">
-                                {val}
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <>
+                      {/* Логика обрезки таблицы */}
+                      {(() => {
+                        const rowsToShow = tableExpanded
+                          ? tableData
+                          : tableData.slice(0, 5);
+                        const hasMoreRows = tableData.length > 5;
+
+                        return (
+                          <>
+                            <table className="min-w-full border border-gray-200 text-sm text-gray-700">
+                              <thead className="bg-gray-100">
+                                <tr>
+                                  {Object.keys(tableData[0] || {}).map(
+                                    (key) => (
+                                      <th
+                                        key={key}
+                                        className="px-3 py-2 text-left border-b border-gray-200 font-medium"
+                                      >
+                                        {key}
+                                      </th>
+                                    )
+                                  )}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {rowsToShow.map((row, i) => (
+                                  <tr
+                                    key={i}
+                                    className={
+                                      i % 2 === 0
+                                        ? "bg-white"
+                                        : "bg-gray-50 hover:bg-gray-100"
+                                    }
+                                  >
+                                    {Object.values(row).map((val, j) => (
+                                      <td
+                                        key={j}
+                                        className="px-3 py-2 border-b"
+                                      >
+                                        {val}
+                                      </td>
+                                    ))}
+                                  </tr>
+                                ))}
+                                {/* Добавляем строку-заполнитель, если таблица свернута */}
+                                {!tableExpanded && hasMoreRows && (
+                                  <tr className="bg-gray-200">
+                                    <td
+                                      colSpan={
+                                        Object.keys(tableData[0] || {}).length
+                                      }
+                                      className="px-3 py-2 text-center italic text-gray-500"
+                                    >
+                                      ... Еще {tableData.length - 5} строк ...
+                                    </td>
+                                  </tr>
+                                )}
+                              </tbody>
+                            </table>
+                            {/* Кнопка Развернуть/Свернуть */}
+                            {hasMoreRows && (
+                              <div className="text-center mt-3">
+                                <button
+                                  onClick={() => setTableExpanded((p) => !p)}
+                                  className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors bg-blue-50 px-4 py-2 rounded-lg border border-blue-200 hover:border-blue-300"
+                                >
+                                  {tableExpanded
+                                    ? "Свернуть таблицу ▲"
+                                    : `Развернуть таблицу (Все ${tableData.length} строк) ▼`}
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
+                    </>
                   )}
                 </div>
               )}
