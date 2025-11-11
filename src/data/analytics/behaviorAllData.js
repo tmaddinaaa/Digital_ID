@@ -19,12 +19,68 @@ allocation: [
   { category: "Туристические агентства", share: 1.0 },
   { category: "Другие", share: 22.2 },
 ],
-    depositComparison: [  
-      { segment: "Бакалейные магазины, супермаркеты", avgBill: 3740 },
-      { segment: "Места общественного питания, рестораны", avgBill: 7124 },
-      { segment: "Маркетплейсы", avgBill: 10640 },
-      { segment: "Заправочные станции (с вспомогательными услугами или без)", avgBill: 5938 },
-    ],
+  transactionsBySegment: [
+    {
+      "segment": "Бакалейные магазины, супермаркеты",
+      "transactionCount": 753613,
+      "transactionSum": 2806502734,
+      "avgTransaction": 3724
+    },
+    {
+      "segment": "Такси",
+      "transactionCount": 178802,
+      "transactionSum": 385367353,
+      "avgTransaction": 2155
+    },
+    {
+      "segment": "Места общественного питания, рестораны",
+      "transactionCount": 167905,
+      "transactionSum": 1221900198,
+      "avgTransaction": 7277
+    },
+    {
+      "segment": "Фастфуд",
+      "transactionCount": 116823,
+      "transactionSum": 648819022,
+      "avgTransaction": 5554
+    },
+    {
+      "segment": "Заправочные станции",
+      "transactionCount": 71293,
+      "transactionSum": 559296227,
+      "avgTransaction": 7845
+    },
+    {
+      "segment": "Аптеки",
+      "transactionCount": 63681,
+      "transactionSum": 348608707,
+      "avgTransaction": 5474
+    },
+    {
+      "segment": "Различные товары общего назначения",
+      "transactionCount": 59527,
+      "transactionSum": 300777092,
+      "avgTransaction": 5053
+    },
+    {
+      "segment": "Автобусные линии",
+      "transactionCount": 52296,
+      "transactionSum": 19535336,
+      "avgTransaction": 374
+    },
+    {
+      "segment": "Различные продовольственные магазины",
+      "transactionCount": 47966,
+      "transactionSum": 226113301,
+      "avgTransaction": 4714
+    },
+    {
+      "segment": "Маркетплейсы",
+      "transactionCount": 42788,
+      "transactionSum": 460795726,
+      "avgTransaction": 10769
+    }
+  ],
   },
   insights: [  ],
 };

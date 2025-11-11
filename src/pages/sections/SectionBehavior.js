@@ -6,37 +6,28 @@ import {
   PieChart,
   Pie,
   Cell,
-  BarChart,
-  Bar,
+  Bar, // Импортируем Bar
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
   LabelList,
   CartesianGrid,
+  Legend,
+  ComposedChart, // Импортируем ComposedChart
+  Line, // Импортируем Line
 } from "recharts";
-import { TrendingUp, Calendar } from "lucide-react";
+import { TrendingUp, Calendar, Filter } from "lucide-react";
 
 export default function SectionBehavior({ data }) {
   const colors = [
-    "#FFD966",
-    "#FFB800",
-    "#E59E00",
-    "#FACC15",
-    "#FDE68A",
-    "#FBBF24",
-    "#F59E0B",
-    "#D97706",
-    "#B45309",
-    "#FCD34D",
-    "#FCA311",
-    "#FFCA3A",
-    "#FF9F1C",
-    "#FDB813",
-    "#FEE440",
+    "#FFD966", "#FFB800", "#E59E00", "#FACC15", "#FDE68A", "#FBBF24", "#F59E0B",
+    "#D97706", "#B45309", "#FCD34D", "#FCA311", "#FFCA3A", "#FF9F1C", "#FDB813", "#FEE440",
   ];
 
   const { charts = {}, insights = [] } = data || {};
+
+  // --- 1. ВСЕ ХУКИ ВЫЗЫВАЕМ В НАЧАЛЕ ---
 
   const [reportDate, setReportDate] = useState("2025-10-01");
   const [spendingRange, setSpendingRange] = useState({
@@ -47,14 +38,43 @@ export default function SectionBehavior({ data }) {
     start: "2025-09-01",
     end: "2025-09-30",
   });
+  const [selectedMcc, setSelectedMcc] = useState("all"); 
 
+  // Данные для первого графика
   const filteredDepositData = useMemo(() => {
     if (!charts.depositComparison) return [];
     return charts.depositComparison;
   }, [charts.depositComparison]);
 
+  // Данные для второго графика (MCC)
+  const filteredTransactionsData = useMemo(() => {
+    if (!charts.transactionsBySegment) return [];
+    
+    // Масштабируем Объем транзакций в миллионы
+    let processedData = charts.transactionsBySegment.map(item => ({
+        ...item,
+        transactionSumMln: item.transactionSum / 1_000_000, 
+    }));
+
+    if (selectedMcc === "all") {
+        return processedData;
+    }
+    return processedData.filter(item => item.segment === selectedMcc);
+  }, [charts.transactionsBySegment, selectedMcc]);
+  
+  // Список MCC для фильтра
+  const mccOptions = useMemo(() => {
+    if (!charts.transactionsBySegment) return [];
+    return ["all", ...charts.transactionsBySegment.map(item => item.segment)];
+  }, [charts.transactionsBySegment]);
+
+
+  // --- 2. РАННИЙ ВЫХОД ---
+
   if (!data)
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
+
+  // --- 3. ОСНОВНОЙ РЕНДЕРИНГ ---
 
   return (
     <div className="space-y-8">
@@ -79,11 +99,11 @@ export default function SectionBehavior({ data }) {
         </div>
       </div>
 
-      {/* 💳 Распределение трат */}
+      {/* 💳 Распределение трат (Оставлен без изменений) */}
       {charts.allocation && charts.allocation.length > 0 && (
         <Card>
           <CardContent className="p-6 space-y-4">
-            {/* Заголовок + диапазон */}
+            {/* ... (Ваш код для первого графика) ... */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="text-lg font-medium mb-1">
@@ -134,16 +154,11 @@ export default function SectionBehavior({ data }) {
                       labelLine={true}
                       label={({ cx, cy, midAngle, outerRadius, percent, index }) => {
                         const RADIAN = Math.PI / 180;
-
-                        // 🔹 Автоматическая адаптация длины выносной линии
-                        let extraRadius = 20 + (index % 3) * 10; // немного варьируем длину
+                        let extraRadius = 20 + (index % 3) * 10;
                         const adjustedAngle = midAngle % 360;
-
-                        // Немного увеличиваем для верхних сегментов, чтобы не пересекались
                         if (adjustedAngle > 60 && adjustedAngle < 120) extraRadius += 15;
                         if (adjustedAngle > 120 && adjustedAngle < 180) extraRadius += 10;
                         if (adjustedAngle > 240 && adjustedAngle < 300) extraRadius += 5;
-
                         const radius = outerRadius + extraRadius;
                         const x = cx + radius * Math.cos(-midAngle * RADIAN);
                         const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -190,108 +205,205 @@ export default function SectionBehavior({ data }) {
           </CardContent>
         </Card>
       )}
+      
+{/* 🏦 Средний чек по категориям MCC */}
+{charts.transactionsBySegment && charts.transactionsBySegment.length > 0 && (
+  <Card>
+    <CardContent className="p-6 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <h3 className="text-lg font-medium mb-1">
+            🏦 Средний чек и активность по категориям MCC
+          </h3>
+          <p className="text-sm text-gray-500">
+            Отображает средний чек, объем и количество транзакций по категориям MCC.
+          </p>
+        </div>
 
-      {/* 🏦 Средний чек по категориям MCC */}
-      {charts.depositComparison && charts.depositComparison.length > 0 && (
-        <Card>
-          <CardContent className="p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h3 className="text-lg font-medium mb-1">
-                  🏦 Средний чек по категориям MCC
-                </h3>
-                <p className="text-sm text-gray-500">
-                  Сравнение среднего чека по различным категориям MCC помогает определить, где клиенты тратят больше всего.
-                </p>
-              </div>
+        {/* 📆 Диапазон дат и фильтр MCC */}
+        <div className="flex flex-wrap items-center justify-end gap-4 ml-auto mt-2 sm:mt-0">
+          {/* Фильтр по MCC */}
+          <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+            <Filter size={15} className="text-indigo-600" />
+            <select
+              value={selectedMcc}
+              onChange={(e) => setSelectedMcc(e.target.value)}
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            >
+              <option value="all">Все категории</option>
+              {mccOptions
+                .filter((o) => o !== "all")
+                .map((mcc) => (
+                  <option key={mcc} value={mcc}>
+                    {mcc}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-              {/* 📆 Диапазон дат */}
-              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
-                <Calendar size={15} className="text-yellow-600" />
-                <div className="flex items-center gap-2">
-                  <input
-                    type="date"
-                    value={mccRange.start}
-                    onChange={(e) =>
-                      setMccRange({ ...mccRange, start: e.target.value })
-                    }
-                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
-                  />
-                  <span>–</span>
-                  <input
-                    type="date"
-                    value={mccRange.end}
-                    onChange={(e) =>
-                      setMccRange({ ...mccRange, end: e.target.value })
-                    }
-                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
-                  />
-                </div>
-              </div>
+          {/* Диапазон дат */}
+          <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+            <Calendar size={15} className="text-yellow-600" />
+            <div className="flex items-center gap-2">
+              <input
+                type="date"
+                value={mccRange.start}
+                onChange={(e) =>
+                  setMccRange({ ...mccRange, start: e.target.value })
+                }
+                className="bg-transparent outline-none text-gray-800 cursor-pointer"
+              />
+              <span>–</span>
+              <input
+                type="date"
+                value={mccRange.end}
+                onChange={(e) =>
+                  setMccRange({ ...mccRange, end: e.target.value })
+                }
+                className="bg-transparent outline-none text-gray-800 cursor-pointer"
+              />
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* 📊 График */}
-            <div style={{ width: "100%", height: 340 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={filteredDepositData}
-                  margin={{ top: 20, right: 20, left: 10, bottom: 100 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                    dataKey="segment"
-                    interval={0}
-                    tick={({ x, y, payload }) => {
-                      const words = payload.value.split(" ");
-                      const lines = [];
-                      words.forEach((word) => {
-                        if (word.includes("-")) {
-                          const parts = word.split("-");
-                          parts.forEach((part, idx) => {
-                            if (idx === 0) lines.push(part + "-");
-                            else lines.push(part);
-                          });
-                        } else {
-                          lines.push(word);
-                        }
-                      });
-                      const lineHeight = 12;
-                      const verticalOffset = 16;
-                      const startY = y + verticalOffset;
-                      return (
-                        <g transform={`translate(${x},${startY})`}>
-                          <text textAnchor="middle" fontSize={11} fill="#555">
-                            {lines.map((line, index) => (
-                              <tspan
-                                key={index}
-                                x="0"
-                                dy={index === 0 ? 0 : lineHeight}
-                              >
-                                {line}
-                              </tspan>
-                            ))}
-                          </text>
-                        </g>
-                      );
-                    }}
-                  />
-                  <YAxis />
-                  <Tooltip formatter={(value) => `${value.toLocaleString()} ₸`} />
-                  <Bar dataKey="avgBill" fill="#FFB800" radius={[6, 6, 0, 0]}>
-                    <LabelList
-                      dataKey="avgBill"
-                      position="top"
-                      formatter={(v) => v.toLocaleString()}
-                      fontSize={10}
-                      fill="#333"
-                    />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      {/* 📊 График ComposedChart */}
+      <div style={{ width: "100%", height: 400 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <ComposedChart
+            data={filteredTransactionsData.map((d) => ({
+              ...d,
+              transactionSumMln: d.transactionSum / 1_000_000, // объем в млн ₸
+              transactionCountK: d.transactionCount / 1_000, // кол-во в тыс.
+            }))}
+            margin={{ top: 20, right: 40, left: 10, bottom: 100 }}
+            barCategoryGap="10%"
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+
+            {/* Ось X с переносом слов */}
+            <XAxis
+              dataKey="segment"
+              interval={0}
+              height={100}
+              tick={({ x, y, payload }) => {
+                const words = payload.value.split(" ");
+                const lineHeight = 12;
+                const startY = y + 16;
+                return (
+                  <g transform={`translate(${x},${startY})`}>
+                    <text textAnchor="middle" fontSize={11} fill="#555">
+                      {words.map((word, index) => (
+                        <tspan
+                          key={index}
+                          x="0"
+                          dy={index === 0 ? 0 : lineHeight}
+                        >
+                          {word}
+                        </tspan>
+                      ))}
+                    </text>
+                  </g>
+                );
+              }}
+            />
+
+            {/* Левая ось — Средний чек */}
+            <YAxis
+              yAxisId="left"
+              orientation="left"
+              label={{
+                value: "Средний чек (₸)",
+                angle: -90,
+                position: "insideLeft",
+                style: { fontSize: 12, fill: "#F59E0B" },
+              }}
+              tickFormatter={(v) => v.toLocaleString()}
+            />
+
+            {/* Правая ось — Объем (млн ₸) / Кол-во (тыс.) */}
+            <YAxis
+              yAxisId="right"
+              orientation="right"
+              label={{
+                value: "Объем (млн ₸) / Кол-во (тыс.)",
+                angle: -90,
+                position: "insideRight",
+                style: { fontSize: 12, fill: "#3B82F6" },
+              }}
+              tickFormatter={(v) =>
+                v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v
+              }
+            />
+
+            <Tooltip
+              formatter={(value, name) => {
+                if (name.includes("Средний чек"))
+                  return [`${value.toLocaleString()} ₸`, name];
+                if (name.includes("Объем транзакций"))
+                  return [`${value.toFixed(1)} млн ₸`, name];
+                if (name.includes("Кол-во транзакций"))
+                  return [`${value.toFixed(1)} тыс.`, name];
+                return [value, name];
+              }}
+            />
+            <Legend verticalAlign="bottom" height={36} />
+
+            {/* 🟩 Объем транзакций */}
+            <Bar
+              yAxisId="right"
+              dataKey="transactionSumMln"
+              name="Объем транзакций (млн ₸)"
+              fill="#34D399"
+              radius={[6, 6, 0, 0]}
+              barSize={20}
+            >
+              <LabelList
+                dataKey="transactionSumMln"
+                position="top"
+                formatter={(v) => `${v.toFixed(1)} млн`}
+                fontSize={9}
+                fill="#065F46"
+              />
+            </Bar>
+
+            {/* 🟨 Средний чек */}
+            <Bar
+              yAxisId="left"
+              dataKey="avgTransaction"
+              name="Средний чек (₸)"
+              fill="#FBBF24"
+              radius={[6, 6, 0, 0]}
+              barSize={20}
+            >
+              <LabelList
+                dataKey="avgTransaction"
+                position="bottom"
+                formatter={(v) => v.toLocaleString()}
+                fontSize={10}
+                fill="#333"
+              />
+            </Bar>
+
+            {/* 🟦 Количество транзакций */}
+            <Line
+              yAxisId="right"
+              type="monotone"
+              dataKey="transactionCountK"
+              name="Кол-во транзакций (тыс.)"
+              stroke="#3B82F6"
+              strokeWidth={2}
+              dot={{ r: 4 }}
+              activeDot={{ r: 6 }}
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </CardContent>
+  </Card>
+)}
+
+
 
       {/* 💡 Инсайты */}
       {insights && insights.length > 0 && (
