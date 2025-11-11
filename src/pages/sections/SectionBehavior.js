@@ -18,52 +18,96 @@ import {
 import { TrendingUp, Calendar } from "lucide-react";
 
 export default function SectionBehavior({ data }) {
-  // ✅ Все хуки должны быть вызваны до любых return
   const colors = ["#FFD966", "#FFB800", "#E59E00", "#FACC15", "#FDE68A"];
   const { charts = {}, insights = [] } = data || {};
 
-  // 🔹 Формируем точки по датам
-  const datePoints =
-    charts.depositComparison?.map((item) => item.date) || [
-      "2024-10-01",
-      "2024-11-01",
-      "2024-12-01",
-      "2025-01-01",
-      "2025-02-01",
-    ];
+  // 📅 Основная дата отчета
+  const [reportDate, setReportDate] = useState("2025-10-01");
 
-  const [dateIndex, setDateIndex] = useState(datePoints.length - 1);
-  const currentDate = datePoints[dateIndex];
+  // 📆 Диапазоны для графиков
+  const [spendingRange, setSpendingRange] = useState({
+    start: "2025-09-01",
+    end: "2025-09-30",
+  });
 
+  const [mccRange, setMccRange] = useState({
+    start: "2025-09-01",
+    end: "2025-09-30",
+  });
+
+  // Подготовка данных (заглушки)
   const filteredDepositData = useMemo(() => {
     if (!charts.depositComparison) return [];
-    return charts.depositComparison.filter(
-      (item) => !item.date || item.date === currentDate
-    );
-  }, [charts.depositComparison, currentDate]);
+    return charts.depositComparison;
+  }, [charts.depositComparison]);
 
-  // ✅ Теперь ранний return не мешает хукам
   if (!data)
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
 
   return (
     <div className="space-y-8">
-      <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-        📊 Поведение клиентов
-      </h2>
+      {/* 📊 Заголовок с датой */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+          📊 Поведение клиентов
+        </h2>
+
+        {/* 📅 Фильтр даты отчёта */}
+        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
+          <Calendar size={16} className="text-yellow-600" />
+          <span>
+            Данные на{" "}
+            <input
+              type="date"
+              value={reportDate}
+              onChange={(e) => setReportDate(e.target.value)}
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </span>
+        </div>
+      </div>
 
       {/* 💳 Распределение трат */}
       {charts.allocation && charts.allocation.length > 0 && (
         <Card>
-          <CardContent className="p-6">
-            <h3 className="text-lg font-medium mb-1">
-              💳 Распределение трат по категориям
-            </h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Отображает, какая доля всех расходов клиентов приходится на разные
-              категории товаров и услуг.
-            </p>
+          <CardContent className="p-6 space-y-4">
+            {/* Заголовок + диапазон */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 className="text-lg font-medium mb-1">
+                  💳 Распределение трат по категориям
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Отображает долю расходов клиентов по различным категориям товаров и услуг.
+                </p>
+              </div>
 
+              {/* 📆 Диапазон дат */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
+                <Calendar size={15} className="text-yellow-600" />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    value={spendingRange.start}
+                    onChange={(e) =>
+                      setSpendingRange({ ...spendingRange, start: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                  <span>–</span>
+                  <input
+                    type="date"
+                    value={spendingRange.end}
+                    onChange={(e) =>
+                      setSpendingRange({ ...spendingRange, end: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 📊 Визуализация */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               {/* Пирог */}
               <div style={{ width: "100%", height: 280, maxWidth: 400 }}>
@@ -95,9 +139,7 @@ export default function SectionBehavior({ data }) {
                       className="inline-block w-4 h-4 rounded-sm"
                       style={{ backgroundColor: colors[i % colors.length] }}
                     ></span>
-                    <span className="font-medium text-gray-800">
-                      {entry.category}
-                    </span>
+                    <span className="font-medium text-gray-800">{entry.category}</span>
                     <span className="text-amber-600 font-semibold ml-auto">
                       {entry.share}%
                     </span>
@@ -113,40 +155,44 @@ export default function SectionBehavior({ data }) {
       {charts.depositComparison && charts.depositComparison.length > 0 && (
         <Card>
           <CardContent className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
+            {/* Заголовок + диапазон */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="text-lg font-medium mb-1">
                   🏦 Средний чек по категориям MCC
                 </h3>
                 <p className="text-sm text-gray-500">
                   Сравнение среднего чека по различным категориям MCC помогает
-                  определить, в каких направлениях клиенты тратят больше всего.
+                  определить, где клиенты тратят больше всего.
                 </p>
               </div>
 
-              {/* 🔹 Выбор даты */}
-              <div className="flex items-center gap-2 text-gray-700 text-sm">
-                <Calendar className="w-4 h-4 text-amber-500" />
-                <span>{new Date(currentDate).toLocaleDateString("ru-RU")}</span>
+              {/* 📆 Диапазон дат */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
+                <Calendar size={15} className="text-yellow-600" />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    value={mccRange.start}
+                    onChange={(e) =>
+                      setMccRange({ ...mccRange, start: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                  <span>–</span>
+                  <input
+                    type="date"
+                    value={mccRange.end}
+                    onChange={(e) =>
+                      setMccRange({ ...mccRange, end: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* 🔹 Ползунок периода */}
-            <div className="flex items-center gap-4 mt-2">
-              <input
-                type="range"
-                min="0"
-                max={datePoints.length - 1}
-                value={dateIndex}
-                onChange={(e) => setDateIndex(Number(e.target.value))}
-                className="w-full accent-amber-500 cursor-pointer"
-              />
-              <span className="text-xs text-gray-500 whitespace-nowrap">
-                {datePoints.length} точек
-              </span>
-            </div>
-
-            {/* График */}
+            {/* 📊 График */}
             <div style={{ width: "100%", height: 340 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart

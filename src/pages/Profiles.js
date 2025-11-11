@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { profilesList } from "../data/profilesList";
 import UnifiedFilters from "../components/UnifiedFilters";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; 
 
 export default function Profiles() {
   const navigate = useNavigate();
@@ -27,6 +28,10 @@ export default function Profiles() {
     tags: [],
     age: "",
   });
+
+  // --- Состояние для скрытия/показа ФИО и ИИН ---
+  // КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Изначально устанавливаем в false (скрыто)
+  const [showPII, setShowPII] = useState(false);
 
   const handleReset = () =>
     setFilters({
@@ -263,6 +268,17 @@ export default function Profiles() {
     else if (centuryCode === 3 || centuryCode === 4) fullYear = 1900 + year;
     else if (centuryCode === 5 || centuryCode === 6) fullYear = 2000 + year;
     else fullYear = 1900 + year;
+
+    const isValidDate = (y, m, d) => { 
+        const date = new Date(y, m - 1, d);
+        return (
+          date.getFullYear() === y &&
+          date.getMonth() === m - 1 &&
+          date.getDate() === d
+        );
+    };
+    if (!isValidDate(fullYear, month, day)) return null;
+
     return `${fullYear}-${String(month).padStart(2, "0")}-${String(
       day
     ).padStart(2, "0")}`;
@@ -282,9 +298,22 @@ export default function Profiles() {
           allTags={[]}
         />
 
-        <div className="text-sm text-gray-700 mb-3">
+        <div className="flex items-center text-sm text-gray-700 mb-3">
           Найдено клиентов:{" "}
-          <span className="font-semibold">{filteredProfiles.length}</span>
+          <span className="font-semibold ml-1 mr-3">
+            {filteredProfiles.length}
+          </span>
+          <button
+            onClick={() => setShowPII((prev) => !prev)}
+            className="p-1 rounded-full text-gray-500 hover:text-gray-700 transition-colors"
+            title={showPII ? "Скрыть ФИО и ИИН" : "Показать ФИО и ИИН"}
+          >
+            {showPII ? (
+              <EyeIcon className="w-5 h-5" />
+            ) : (
+              <EyeSlashIcon className="w-5 h-5" />
+            )}
+          </button>
         </div>
 
         <div className="overflow-x-auto bg-white shadow rounded-xl">
@@ -296,6 +325,7 @@ export default function Profiles() {
                 <th className="p-3 text-left">ИИН</th>
                 <th className="p-3 text-left">Город</th>
                 <th className="p-3 text-left">Сегмент</th>
+                <th className="p-3 text-left">Статус активности</th> 
                 <th className="p-3 text-left">Пол</th>
                 <th className="p-3 text-left">Private</th>
                 <th className="p-3 text-left">Жизненный статус</th>
@@ -313,6 +343,15 @@ export default function Profiles() {
                   p.gender || p.basicInfo?.gender || "—";
                 const birthDate = p.birthDate || getBirthDateFromIIN(p.iin);
                 const age = birthDate ? getAgeFromBirthDate(birthDate) : "—";
+
+                // Определяем отображаемое ФИО и ИИН
+                const displayFio = showPII
+                  ? p.fio
+                  : "**********";
+                const displayIin = showPII
+                  ? p.iin
+                  : "************"; 
+
                 return (
                   <tr
                     key={p.ac_id}
@@ -320,10 +359,21 @@ export default function Profiles() {
                     onClick={() => navigate(`/profiles/${p.ac_id}`)}
                   >
                     <td className="p-3 font-mono">{p.ac_id}</td>
-                    <td className="p-3">{p.fio}</td>
-                    <td className="p-3 font-mono">{p.iin}</td>
+                    <td className="p-3">{displayFio}</td> 
+                    <td className="p-3 font-mono">{displayIin}</td> 
                     <td className="p-3">{p.city}</td>
                     <td className="p-3">{p.segment}</td>
+                    <td className="p-3">
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          p.status === "Активен"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {p.status || "—"}
+                      </span>
+                    </td> 
                     <td className="p-3">{profileGender}</td>
                     <td className="p-3">{p.isPrivate ? "Private" : "Public"}</td>
                     <td className="p-3">{p.lifeStatus || "—"}</td>

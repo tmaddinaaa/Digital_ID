@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/card";
-import AutoResizeContainer from "../../components/AutoResizeContainer";
 import {
   LineChart,
   Line,
@@ -16,6 +15,15 @@ import {
 import { MessageSquare, Calendar } from "lucide-react";
 
 export default function SectionPush({ data }) {
+  // 📆 Основная дата отчёта
+  const [reportDate, setReportDate] = useState("2025-10-01");
+
+  // 📆 Диапазон для графика
+  const [dateRange, setDateRange] = useState({
+    start: "2025-09-01",
+    end: "2025-09-30",
+  });
+
   if (!data) {
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
   }
@@ -28,7 +36,26 @@ export default function SectionPush({ data }) {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-xl font-semibold text-gray-800">📩 Push-коммуникации</h2>
+      {/* 📩 Заголовок с датой */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+          📩 Push-коммуникации
+        </h2>
+
+        {/* 📅 Фильтр даты отчёта */}
+        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
+          <Calendar size={16} className="text-yellow-600" />
+          <span>
+            Данные на{" "}
+            <input
+              type="date"
+              value={reportDate}
+              onChange={(e) => setReportDate(e.target.value)}
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </span>
+        </div>
+      </div>
 
       {/* 📊 Общие показатели */}
       <Card>
@@ -52,20 +79,46 @@ export default function SectionPush({ data }) {
 
       {/* 📈 Доля отправленных пушей по месяцам */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <Calendar className="text-[#FFB800]" />
-            Доля отправленных пушей по месяцам
-          </h3>
+        <CardContent className="p-6 space-y-4">
+          {/* Заголовок и диапазон */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h3 className="text-lg font-medium flex items-center gap-2">
+              <Calendar className="text-[#FFB800]" />
+              Доля отправленных пушей по месяцам
+            </h3>
 
+            {/* 📆 Диапазон дат */}
+            <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
+              <Calendar size={15} className="text-yellow-600" />
+              <div className="flex items-center gap-2">
+                <input
+                  type="date"
+                  value={dateRange.start}
+                  onChange={(e) =>
+                    setDateRange({ ...dateRange, start: e.target.value })
+                  }
+                  className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                />
+                <span>–</span>
+                <input
+                  type="date"
+                  value={dateRange.end}
+                  onChange={(e) =>
+                    setDateRange({ ...dateRange, end: e.target.value })
+                  }
+                  className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* График */}
           <div className="w-full overflow-x-auto">
             <div style={{ width: chartWidth, height: 360 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={monthlyData}
                   margin={{ top: 20, right: 80, left: 60, bottom: 30 }}
-                  barCategoryGap="45%"
-                  barGap={10}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
 
@@ -95,12 +148,12 @@ export default function SectionPush({ data }) {
                     }}
                   />
 
-                  {/* 📊 Правая ось (CTR / Конверсия) */}
+                  {/* 📊 Правая ось */}
                   <YAxis
                     yAxisId="right"
                     orientation="right"
                     stroke="#F59E0B"
-                    domain={[0, 7]} // ✅ фиксированный максимум 7%
+                    domain={[0, 7]}
                     tickFormatter={(v) => `${v}%`}
                     label={{
                       value: "CTR / Конверсия (%)",
@@ -122,7 +175,7 @@ export default function SectionPush({ data }) {
                   />
                   <Legend verticalAlign="bottom" height={36} />
 
-                  {/* 💚 Доля доставленных — линия */}
+                  {/* 💚 Доля доставленных */}
                   <Line
                     yAxisId="left"
                     type="monotone"
@@ -136,7 +189,7 @@ export default function SectionPush({ data }) {
                     animationDuration={800}
                   />
 
-                  {/* 🟧 CTR — столбики */}
+                  {/* 🟧 CTR */}
                   <Bar
                     yAxisId="right"
                     dataKey="ctr"
@@ -156,7 +209,7 @@ export default function SectionPush({ data }) {
                     />
                   </Bar>
 
-                  {/* 🔵 Conversion — столбики */}
+                  {/* 🔵 Conversion */}
                   <Bar
                     yAxisId="right"
                     dataKey="conversion"
@@ -187,7 +240,10 @@ export default function SectionPush({ data }) {
       {insights && insights.length > 0 && (
         <div className="grid md:grid-cols-2 gap-4">
           {insights.map((t, i) => (
-            <div key={i} className="p-4 bg-gray-50 border rounded-lg text-gray-700">
+            <div
+              key={i}
+              className="p-4 bg-gray-50 border rounded-lg text-gray-700"
+            >
               💡 {t}
             </div>
           ))}

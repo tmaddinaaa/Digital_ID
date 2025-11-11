@@ -106,8 +106,8 @@ export default function UnifiedFilters({
 
   // Списки для checkbox-блоков (products) — можно расширить/заменить
   const bankProductsList = ["Кредит", "Депозит", "Карта"];
-  const investProductsList = ["Инвестиции", "Облигации", "Акции"];
-  const garantProductsList = ["Страховка жизни", "Медицинская страховка", "КАСКО"];
+  const investProductsList = ["Золото и другие металлы", "Облигации", "Акции", "Валюта", "Денежные средства", "Фонды (ETF)", "Прочее"];
+  const garantProductsList = ["Автострахование", "Путешествия", "Страхование жизни"];
 
   return (
     <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6 space-y-4">

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo, useState } from "react";
 import {
   BarChart,
@@ -16,7 +18,7 @@ import {
   LabelList,
 } from "recharts";
 import { Card, CardHeader, CardContent, CardTitle } from "../components/ui/card";
-import { Filter, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, Loader2, ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import UnifiedFilters from "../components/UnifiedFilters";
 
 /* ---------- Русские названия сегментов ---------- */
@@ -35,7 +37,7 @@ const segmentNames = {
   OTHER_INCOME_ORIENTED: "Прочие источники дохода",
 };
 
-/* ---------- Цвета (по русскому названию) ---------- */
+/* ---------- Цвета ---------- */
 function getSegmentColor(segmentName) {
   const COLORS = {
     "Ценные клиенты": "#2563EB",
@@ -54,7 +56,7 @@ function getSegmentColor(segmentName) {
   return COLORS[segmentName] || "#D1D5DB";
 }
 
-/* ---------- Основные данные ---------- */
+/* ---------- Основные данные (пример) ---------- */
 const BASE_DATA = {
   totals: {
     totalUsers: 1633617,
@@ -105,6 +107,7 @@ const BASE_RFM = [
 
 /* ---------- Главный компонент ---------- */
 export default function Segments() {
+  // хуки — в начале компонента
   const [filters, setFilters] = useState({
     search: "",
     city: "Все города",
@@ -114,16 +117,19 @@ export default function Segments() {
   });
   const [loading, setLoading] = useState(false);
 
+  // единый диапазон дат для всех графиков — по умолчанию сентябрь 2025
+  const [dateRange, setDateRange] = useState({
+    start: "2025-09-01",
+    end: "2025-09-30",
+  });
+
   const filteredData = useMemo(() => {
     setLoading(true);
     setTimeout(() => setLoading(false), 300);
     let segments = BASE_DATA.segments;
-
-    // фильтрация по русским названиям
     if (filters.segment && filters.segment !== "Все сегменты") {
       segments = segments.filter((s) => s.name === filters.segment);
     }
-
     return { ...BASE_DATA, segments };
   }, [filters]);
 
@@ -137,14 +143,28 @@ export default function Segments() {
 
   return (
     <div className="space-y-8 p-6 bg-gray-50 min-h-screen">
-      {/* Заголовок */}
+      {/* Заголовок + глобальный диапазон */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
           <Filter className="text-yellow-500" /> Аналитика по сегментам
         </h1>
-        <span className="text-sm text-gray-500">
-          Обновлено: {new Date().toLocaleTimeString("ru-RU")}
-        </span>
+
+        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">
+          <Calendar size={15} className="text-yellow-600" />
+          <input
+            type="date"
+            value={dateRange.start}
+            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+            className="bg-transparent outline-none cursor-pointer text-sm"
+          />
+          <span className="select-none">–</span>
+          <input
+            type="date"
+            value={dateRange.end}
+            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+            className="bg-transparent outline-none cursor-pointer text-sm"
+          />
+        </div>
       </div>
 
       <UnifiedFilters filters={filters} setFilters={setFilters} />
@@ -166,10 +186,31 @@ export default function Segments() {
             />
           </div>
 
-          {/* Распределение по сегментам */}
+          {/* Распределение по сегментам (тут добавлен диапазон дат) */}
           <Card>
-            <CardHeader>
-              <CardTitle>Распределение клиентов по сегментам</CardTitle>
+            <CardHeader className="flex items-center justify-between gap-4">
+              <div>
+                <CardTitle>Распределение клиентов по сегментам</CardTitle>
+                <p className="text-sm text-gray-500 mt-1">Период: {dateRange.start} — {dateRange.end}</p>
+              </div>
+
+              {/* Локальный контрол дат для этого блока (синхронизирован с общим dateRange) */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">
+                <Calendar size={14} className="text-yellow-600" />
+                <input
+                  type="date"
+                  value={dateRange.start}
+                  onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                  className="bg-transparent outline-none cursor-pointer text-sm"
+                />
+                <span className="select-none">–</span>
+                <input
+                  type="date"
+                  value={dateRange.end}
+                  onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                  className="bg-transparent outline-none cursor-pointer text-sm"
+                />
+              </div>
             </CardHeader>
 
             <CardContent>
@@ -177,24 +218,26 @@ export default function Segments() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={filteredData.segments}
-                    margin={{ top: 20, right: 20, left: 10, bottom: 140 }}
+                    margin={{ top: 20, right: 20, left: 10, bottom: 120 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                       dataKey="name"
                       interval={0}
                       tick={({ x, y, payload }) => {
-                        // разбиваем подпись на слова и части с дефисом, рендерим в столбик (tspan)
                         const value = payload.value || "";
-                        // split by spaces, but keep hyphen parts as separate tokens too
                         const words = value.split(" ").flatMap((w) =>
-                          w.includes("-") ? w.split("-").map((p, idx, arr) => (idx < arr.length - 1 ? p + "-" : p)) : [w]
+                          w.includes("-")
+                            ? w.split("-").map((p, idx, arr) =>
+                                idx < arr.length - 1 ? p + "-" : p
+                              )
+                            : [w]
                         );
-                        const lineHeight = 14;
-                        const startY = y + 6; // немного опустить
+                        const lineHeight = 12;
+                        const startY = y + 6;
                         return (
                           <g transform={`translate(${x},${startY})`}>
-                            <text textAnchor="middle" fontSize={11} fill="#555">
+                            <text textAnchor="middle" fontSize={10} fill="#555">
                               {words.map((line, i) => (
                                 <tspan key={i} x="0" dy={i === 0 ? 0 : lineHeight}>
                                   {line}
@@ -208,13 +251,12 @@ export default function Segments() {
                     <YAxis />
                     <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
                     <Bar dataKey="count" radius={[6, 6, 0, 0]}>
-                      {/* показываем подписи над столбцами сразу */}
                       <LabelList
                         dataKey="count"
                         position="top"
                         formatter={(v) => v.toLocaleString("ru-RU")}
                         fill="#444"
-                        fontSize={12}
+                        fontSize={10}
                       />
                       {filteredData.segments.map((s, i) => (
                         <Cell key={i} fill={getSegmentColor(s.name)} />
@@ -226,22 +268,43 @@ export default function Segments() {
             </CardContent>
           </Card>
 
-          {/* Пироги */}
+          {/* Пироги (каждый пирог имеет локальный контрол диапазона дат, синхронизирован с общим dateRange) */}
           <div className="grid md:grid-cols-2 gap-6">
-            <PieCard title="Распределение по полу" data={filteredData.genderDistribution} />
-            <PieCard title="Кредиты и депозиты" data={filteredData.creditDeposit} />
+            <PieCard title="Распределение по полу" data={filteredData.genderDistribution} dateRange={dateRange} />
+            <PieCard title="Кредиты и депозиты" data={filteredData.creditDeposit} dateRange={dateRange} smallLabels />
           </div>
 
           {/* RFM-анализ */}
           <Card>
-            <CardHeader>
-              <CardTitle>RFM-анализ клиентов</CardTitle>
-              <p className="text-sm text-gray-500 mt-1">
-                Анализ активности (Recency), частоты (Frequency) и ценности клиента (Monetary).
-              </p>
+            <CardHeader className="flex items-center justify-between gap-4">
+              <div>
+                <CardTitle>RFM-анализ клиентов</CardTitle>
+                <p className="text-sm text-gray-500 mt-1">Период: {dateRange.start} — {dateRange.end}</p>
+              </div>
+
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">
+                <Calendar size={14} className="text-yellow-600" />
+                <input
+                  type="date"
+                  value={dateRange.start}
+                  onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                  className="bg-transparent outline-none cursor-pointer text-sm"
+                />
+                <span className="select-none">–</span>
+                <input
+                  type="date"
+                  value={dateRange.end}
+                  onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                  className="bg-transparent outline-none cursor-pointer text-sm"
+                />
+              </div>
             </CardHeader>
 
             <CardContent>
+              <p className="text-sm text-gray-500 mb-3">
+                Анализ активности (Recency), частоты (Frequency) и ценности клиента (Monetary).
+              </p>
+
               <ResponsiveContainer width="100%" height={440}>
                 <ScatterChart margin={{ top: 40, right: 60, bottom: 40, left: 70 }}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -266,7 +329,7 @@ export default function Segments() {
   );
 }
 
-/* ---------- Компоненты ---------- */
+/* ---------- Вспомогательные компоненты ---------- */
 
 function MetricCard({ label, value, highlight = false, note }) {
   return (
@@ -280,13 +343,30 @@ function MetricCard({ label, value, highlight = false, note }) {
   );
 }
 
-function PieCard({ title, data }) {
+function PieCard({ title, data, dateRange, smallLabels = false }) {
   const COLORS = ["#FFB800", "#7EA8FF", "#2563eb", "#E59E00", "#FACC15"];
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex items-center justify-between gap-3">
         <CardTitle>{title}</CardTitle>
+        <div className="flex items-center gap-2 text-xs bg-gray-50 border border-gray-200 rounded-md px-2 py-1 text-gray-700">
+          <Calendar size={13} className="text-yellow-600" />
+          <input
+            type="date"
+            value={dateRange.start}
+            onChange={() => {}}
+            className="bg-transparent outline-none cursor-pointer text-xs"
+          />
+          <span className="select-none">–</span>
+          <input
+            type="date"
+            value={dateRange.end}
+            onChange={() => {}}
+            className="bg-transparent outline-none cursor-pointer text-xs"
+          />
+        </div>
       </CardHeader>
+
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
@@ -294,9 +374,11 @@ function PieCard({ title, data }) {
               data={data}
               dataKey="value"
               nameKey="name"
-              outerRadius={100}
+              outerRadius={90}
               paddingAngle={3}
-              label={({ name, value }) => `${name}: ${value}%`}
+              label={({ name, value }) =>
+                smallLabels ? `${name.split(" ")[0]}: ${value}%` : `${name}: ${value}%`
+              }
               labelLine={false}
             >
               {data.map((_, i) => (
@@ -311,7 +393,6 @@ function PieCard({ title, data }) {
   );
 }
 
-/* ---------- Таблица для RFM ---------- */
 function CollapsibleRFMTable({ filteredRFM }) {
   const [open, setOpen] = useState(false);
 
@@ -326,24 +407,14 @@ function CollapsibleRFMTable({ filteredRFM }) {
       </button>
 
       <div className={`transition-all duration-500 overflow-hidden ${open ? "max-h-[800px] mt-4" : "max-h-0"}`}>
-        <div className="p-4 bg-gray-50 rounded-md border border-gray-100 mb-4">
-          {/* Описание полей RFM */}
-          <p className="text-sm text-gray-700 mb-2 font-medium">Пояснение к столбцам RFM:</p>
-          <ul className="text-sm text-gray-600 list-disc list-inside space-y-1">
-            <li><strong>Recency (дни)</strong> — количество дней с последней активности клиента (меньше — лучше).</li>
-            <li><strong>Frequency (операции)</strong> — число операций/взаимодействий за выбранный период (больше — лучше).</li>
-            <li><strong>Monetary (₸)</strong> — суммарная ценность клиента в тенге (₸) за период. Валовая выручка, без вычета комиссий и операционных издержек.</li>
-          </ul>
-        </div>
-
         <div className="overflow-x-auto border border-gray-200 rounded-lg">
           <table className="min-w-full text-sm">
             <thead className="bg-white/50 text-gray-700">
               <tr>
                 <th className="p-2 text-left">Сегмент</th>
-                <th className="p-2 text-right">Recency (дни)</th>
-                <th className="p-2 text-right">Frequency (операции)</th>
-                <th className="p-2 text-right">Monetary (₸)</th>
+                <th className="p-2 text-right">Recency</th>
+                <th className="p-2 text-right">Frequency</th>
+                <th className="p-2 text-right">Monetary</th>
               </tr>
             </thead>
             <tbody>
@@ -366,10 +437,6 @@ function CollapsibleRFMTable({ filteredRFM }) {
             </tbody>
           </table>
         </div>
-
-        <p className="text-xs text-gray-400 mt-3">
-          Примечание: значения Recency/Frequency/Monetary рассчитаны по доступным данным; при отсутствии транзакций возможны пропуски.
-        </p>
       </div>
     </div>
   );

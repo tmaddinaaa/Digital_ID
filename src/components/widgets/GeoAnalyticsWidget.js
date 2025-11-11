@@ -1,19 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Maximize2, Minimize2, MapPinOff } from "lucide-react";
+import * as XLSX from "xlsx";
+import {
+  Maximize2,
+  Minimize2,
+  Table,
+  MapPinOff,
+  Loader2,
+  XCircle,
+} from "lucide-react";
 
 export default function GeoAnalyticsWidget({ data }) {
   const [expanded, setExpanded] = useState(true);
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
   const [availableMaps, setAvailableMaps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showTable, setShowTable] = useState(false);
+  const [tableData, setTableData] = useState([]);
+  const [tableLoading, setTableLoading] = useState(false);
+  const [tableError, setTableError] = useState(null);
 
   const iframeRefs = useRef([]);
   const maps = data?.geoMaps || {};
 
-  // ✅ Проверяем, что URL не возвращает index.html React-приложения
+  // ✅ Проверка доступных карт
   useEffect(() => {
     const checkFiles = async () => {
-      const entries = Object.entries(maps);
+      const entries = Object.entries(maps).filter(([k]) => k !== "table");
       if (entries.length === 0) {
         setAvailableMaps([]);
         setLoading(false);
@@ -29,16 +41,18 @@ export default function GeoAnalyticsWidget({ data }) {
             const res = await fetch(url);
             if (!res.ok) return;
             const text = await res.text();
-            // 🚫 Если это React index.html — пропускаем
+
+            // 🚫 Пропускаем index.html React приложения
             if (
               text.includes("<div id=\"root\"") ||
               text.includes("React") ||
               text.includes("vite") ||
               text.includes("Client Base Analytics")
             ) {
-              console.warn(`⚠️ ${url} не содержит карту (вернулся index.html)`);
+              console.warn(`⚠️ ${url} не содержит карту`);
               return;
             }
+
             valid.push([key, url]);
           } catch (err) {
             console.warn(`Ошибка при загрузке ${url}:`, err);
@@ -53,7 +67,7 @@ export default function GeoAnalyticsWidget({ data }) {
     checkFiles();
   }, [maps]);
 
-  // fullscreen toggle
+  // ✅ Отслеживание выхода из fullscreen
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) setFullscreenIndex(null);
@@ -74,7 +88,45 @@ export default function GeoAnalyticsWidget({ data }) {
     }
   };
 
-  // 🔄 Загрузка
+  // ✅ Чтение XLSX через Blob без скачивания
+  const toggleTable = async () => {
+    if (showTable) {
+      setShowTable(false);
+      return;
+    }
+
+    if (!maps.table) {
+      setTableError("⚠️ Таблица недоступна для данного пользователя.");
+      return;
+    }
+
+    setTableLoading(true);
+    setTableError(null);
+
+    try {
+      // 🧩 Читаем бинарные данные в память
+      const res = await fetch(maps.table, { cache: "no-store" });
+      if (!res.ok) throw new Error("Ошибка при загрузке файла");
+
+      const blob = await res.arrayBuffer();
+
+      // 📖 Читаем как Excel
+      const workbook = XLSX.read(blob, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const json = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+
+      setTableData(json);
+      setShowTable(true);
+    } catch (err) {
+      console.error("Ошибка при чтении XLSX:", err);
+      setTableError("Ошибка при чтении таблицы");
+    } finally {
+      setTableLoading(false);
+    }
+  };
+
+  // 🔄 Состояние загрузки
   if (loading) {
     return (
       <div className="bg-white shadow rounded-2xl p-6 text-center text-gray-500 italic">
@@ -83,20 +135,20 @@ export default function GeoAnalyticsWidget({ data }) {
     );
   }
 
-  // 🚫 Нет реальных файлов
+  // 🚫 Нет карт
   if (availableMaps.length === 0) {
     return (
       <div className="bg-white shadow rounded-2xl p-8 flex flex-col items-center text-center text-gray-500">
         <MapPinOff className="w-10 h-10 text-gray-400 mb-2" />
         <p className="text-base font-medium">Нет данных по геолокации</p>
         <p className="text-sm text-gray-400">
-          Файлы карт отсутствуют или не найдены 
-                  </p>
+          Файлы карт отсутствуют или не найдены
+        </p>
       </div>
     );
   }
 
-  // ✅ Отображение карт
+  // ✅ Основной рендер
   return (
     <div className="bg-white shadow rounded-2xl p-6 space-y-6">
       <div className="flex justify-between items-center">
@@ -118,12 +170,25 @@ export default function GeoAnalyticsWidget({ data }) {
               key={key}
               className="rounded-xl overflow-hidden border border-gray-200 shadow-sm"
             >
+              {/* Заголовок блока */}
               <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-700 text-sm flex justify-between items-center">
                 <span>{mapTitles[key] || key}</span>
+
                 <div className="flex items-center gap-3">
-                  <span className="text-gray-400 text-xs italic">
-                    {mapDescriptions[key] || ""}
-                  </span>
+                  {/* 📊 Табличный вид */}
+                  {key === "all_points" && (
+                    <button
+                      onClick={toggleTable}
+                      className="flex items-center gap-1 text-gray-600 hover:text-green-600 text-xs border border-gray-300 hover:border-green-400 px-2 py-1 rounded-md transition-all duration-200"
+                    >
+                      <Table className="w-3.5 h-3.5" />
+                      <span>
+                        {showTable ? "Скрыть таблицу" : "Табличный вид"}
+                      </span>
+                    </button>
+                  )}
+
+                  {/* ⛶ Развернуть */}
                   <button
                     onClick={() => toggleFullscreen(index)}
                     className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-xs border border-gray-300 hover:border-blue-400 px-2 py-1 rounded-md transition-all duration-200"
@@ -143,18 +208,72 @@ export default function GeoAnalyticsWidget({ data }) {
                 </div>
               </div>
 
+              {/* iframe */}
               <iframe
                 ref={(el) => (iframeRefs.current[index] = el)}
                 src={url}
                 title={key}
                 width="100%"
-                height="400"
+                height="420"
+                loading="lazy"
                 className="rounded-b-xl bg-gray-50"
-                style={{
-                  border: "none",
-                  transition: "all 0.3s ease",
+                style={{ border: "none", transition: "all 0.3s ease" }}
+                onError={(e) => {
+                  e.target.outerHTML = `
+                    <div class='flex items-center justify-center h-52 bg-gray-50 text-gray-500 text-sm rounded-lg border border-gray-200'>
+                      ⚠️ Не удалось загрузить карту
+                    </div>`;
                 }}
               />
+
+              {/* 📋 Таблица под картой */}
+              {key === "all_points" && showTable && (
+                <div className="p-4 bg-gray-50 border-t border-gray-200 overflow-x-auto">
+                  {tableLoading ? (
+                    <div className="flex justify-center items-center py-8 text-gray-500">
+                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                      Загрузка таблицы...
+                    </div>
+                  ) : tableError ? (
+                    <div className="flex justify-center items-center py-8 text-red-500 text-sm">
+                      <XCircle className="w-5 h-5 mr-2" /> {tableError}
+                    </div>
+                  ) : (
+                    <table className="min-w-full border border-gray-200 text-sm text-gray-700">
+                      <thead className="bg-gray-100">
+                        <tr>
+                          {Object.keys(tableData[0] || {}).map((key) => (
+                            <th
+                              key={key}
+                              className="px-3 py-2 text-left border-b border-gray-200 font-medium"
+                            >
+                              {key}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tableData.map((row, i) => (
+                          <tr
+                            key={i}
+                            className={
+                              i % 2 === 0
+                                ? "bg-white"
+                                : "bg-gray-50 hover:bg-gray-100"
+                            }
+                          >
+                            {Object.values(row).map((val, j) => (
+                              <td key={j} className="px-3 py-2 border-b">
+                                {val}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -163,20 +282,11 @@ export default function GeoAnalyticsWidget({ data }) {
   );
 }
 
-// Названия и описания
+// Названия карт
 const mapTitles = {
   all_points: "📍 Все точки пользователя",
   clustered_points: "🧩 Кластеризация точек",
   heatmap: "🔥 Тепловая карта плотности",
   time_heatmap: "⏱ Тепловая карта по времени суток",
   time_points: "🕒 Точки по времени суток",
-};
-
-const mapDescriptions = {
-  all_points: "Отображает все зафиксированные локации клиента на карте.",
-  clustered_points:
-    "Группирует близкие точки для наглядного анализа концентраций.",
-  heatmap: "Показывает зоны с наибольшей активностью пользователя.",
-  time_heatmap: "Показывает, как плотность точек меняется в течение суток.",
-  time_points: "Демонстрирует динамику появления точек клиента по времени.",
 };

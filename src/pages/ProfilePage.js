@@ -117,7 +117,7 @@ const ProfilePage = () => {
           <span className="truncate font-medium">
             {showName
               ? basicInfo?.fio || profile.name || "—"
-              : "ФИО скрыто"}
+              : "ФИО"}
           </span>
           <button
             onClick={() => setShowName(!showName)}

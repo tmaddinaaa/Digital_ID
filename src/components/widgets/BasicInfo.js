@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Tag } from "lucide-react";
 
 const BasicInfo = ({ data }) => {
-  // 👁️ Управление скрытием чувствительных данных (ФИО, ИИН, телефон)
+  // 👁️ Управление скрытием чувствительных данных (ФИО, ИИН, телефон, дата рождения)
   const [showSensitive, setShowSensitive] = useState(false);
 
   if (!data) {
@@ -40,7 +40,7 @@ const BasicInfo = ({ data }) => {
         <div className="text-center sm:text-left space-y-0.5 w-full">
           <div className="flex justify-between items-center">
             <h2 className="text-base sm:text-lg font-semibold text-gray-900">
-              {showSensitive ? fio || "—" : "ФИО скрыто"}
+              {showSensitive ? fio || "—" : "ФИО ..."}
             </h2>
 
             {/* 👁️ Кнопка показать/скрыть */}
@@ -63,6 +63,8 @@ const BasicInfo = ({ data }) => {
           {/* Общая информация */}
           <div className="text-gray-700 text-[0.9rem] leading-snug mt-1">
             <p><strong>AC ID:</strong> {ac_id || "—"}</p>
+
+            {/* ИИН */}
             <p>
               <strong>ИИН:</strong>{" "}
               {showSensitive ? (
@@ -71,12 +73,24 @@ const BasicInfo = ({ data }) => {
                 <span className="text-gray-400 tracking-widest">••••••••••••</span>
               )}
             </p>
+
+            {/* Дата рождения */}
             <p>
-              <strong>Дата рождения:</strong> {birthDate || "—"}{" "}
-              <span className="text-gray-500">
-                ({age ? `${age} лет` : "—"})
-              </span>
+              <strong>Дата рождения:</strong>{" "}
+              {showSensitive ? (
+                <>
+                  {birthDate || "—"}{" "}
+                  <span className="text-gray-500">
+                    ({age ? `${age} лет` : "—"})
+                  </span>
+                </>
+              ) : (
+                <span className="text-gray-400 tracking-widest">
+                  ••••••
+                </span>
+              )}
             </p>
+
             <p><strong>Пол:</strong> {gender || "—"}</p>
           </div>
         </div>
