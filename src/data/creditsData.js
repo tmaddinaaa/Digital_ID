@@ -2,14 +2,14 @@ export const creditsData = [
   {
     "loanType": "Экспресс",
     "clients": {
-      "count": 259163,
+      "count": 414000,
       "avgAge": 39,
       "gender": { "male": 53, "female": 47 },
       "marriedShare": 0.1388,
       "marriedCount": 36237,
       "avgSalary": 378609,
-      "clientsWithDeposits": 112000,
-      "clientsWithCards": 174000,
+      "clientsWithDeposits": 16451,
+      "clientsWithCards": 373934,
     },
     "loans": {
       "countAll": 1.61,
@@ -73,14 +73,14 @@ export const creditsData = [
   {
     "loanType": "Под 0%",
     "clients": {
-      "count": 17286,
+      "count": 51000,
       "avgAge": 38,
       "gender": { "male": 51, "female": 49 },
       "marriedShare": 0.1286,
       "marriedCount": 2224,
       "avgSalary": 425044,
-      "clientsWithDeposits": 112000,
-      "clientsWithCards": 174000,
+      "clientsWithDeposits": 1198,
+      "clientsWithCards": 32155,
     },
     "loans": {
       "countAll": 1.58,
@@ -143,14 +143,14 @@ export const creditsData = [
   {
     "loanType": "Рефинансирование",
     "clients": {
-      "count": 95108,
+      "count": 151000,
       "avgAge": 39,
       "gender": { "male": 45, "female": 55 },
       "marriedShare": 0.1479,
       "marriedCount": 14103,
       "avgSalary": 321766,
-      "clientsWithDeposits": 112000,
-      "clientsWithCards": 174000,
+      "clientsWithDeposits": 5812,
+      "clientsWithCards": 131099,
     },
     "loans": {
       "countAll": 1.06,

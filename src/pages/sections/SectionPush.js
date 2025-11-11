@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/card";
 import {
@@ -15,34 +17,29 @@ import {
 import { MessageSquare, Calendar } from "lucide-react";
 
 export default function SectionPush({ data }) {
-  // 📆 Основная дата отчёта
   const [reportDate, setReportDate] = useState("2025-10-01");
-
-  // 📆 Диапазон для графика
   const [dateRange, setDateRange] = useState({
-    start: "2025-09-01",
-    end: "2025-09-30",
+    start: "",
+    end: "",
   });
 
   if (!data) {
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
   }
 
-  const { charts = {}, insights = [] } = data;
+  const { charts = {}, insights = [], isDraft = true } = data; // 👈 для теста включим overlay
   const monthlyData = charts.pushByMonth || [];
-
   const chartWidth =
     monthlyData.length < 12 ? `${monthlyData.length * 140}px` : "100%";
 
   return (
     <div className="space-y-8">
-      {/* 📩 Заголовок с датой */}
+      {/* 📩 Заголовок */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
           📩 Push-коммуникации
         </h2>
 
-        {/* 📅 Фильтр даты отчёта */}
         <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
           <Calendar size={16} className="text-yellow-600" />
           <span>
@@ -77,17 +74,15 @@ export default function SectionPush({ data }) {
         </CardContent>
       </Card>
 
-      {/* 📈 Доля отправленных пушей по месяцам */}
+      {/* 📈 График */}
       <Card>
         <CardContent className="p-6 space-y-4">
-          {/* Заголовок и диапазон */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <h3 className="text-lg font-medium flex items-center gap-2">
               <Calendar className="text-[#FFB800]" />
               Доля отправленных пушей по месяцам
             </h3>
 
-            {/* 📆 Диапазон дат */}
             <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
               <Calendar size={15} className="text-yellow-600" />
               <div className="flex items-center gap-2">
@@ -112,17 +107,20 @@ export default function SectionPush({ data }) {
             </div>
           </div>
 
-          {/* График */}
           <div className="w-full overflow-x-auto">
-            <div style={{ width: chartWidth, height: 360 }}>
+            <div
+              style={{
+                width: chartWidth,
+                height: 360,
+                position: "relative",
+              }}
+            >
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={monthlyData}
                   margin={{ top: 20, right: 80, left: 60, bottom: 30 }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-
-                  {/* 📅 Ось X */}
                   <XAxis
                     dataKey="date"
                     padding={{ left: 30, right: 30 }}
@@ -133,8 +131,6 @@ export default function SectionPush({ data }) {
                     }
                     tick={{ fontSize: 12 }}
                   />
-
-                  {/* 🧮 Левая ось */}
                   <YAxis
                     yAxisId="left"
                     orientation="left"
@@ -147,8 +143,6 @@ export default function SectionPush({ data }) {
                       style: { fill: "#10B981", fontSize: 12 },
                     }}
                   />
-
-                  {/* 📊 Правая ось */}
                   <YAxis
                     yAxisId="right"
                     orientation="right"
@@ -163,8 +157,6 @@ export default function SectionPush({ data }) {
                       style: { fill: "#F59E0B", fontSize: 12 },
                     }}
                   />
-
-                  {/* 💬 Tooltip */}
                   <Tooltip
                     formatter={(value, name) => `${value.toFixed(2)}%`}
                     labelFormatter={(label) =>
@@ -174,8 +166,6 @@ export default function SectionPush({ data }) {
                     }
                   />
                   <Legend verticalAlign="bottom" height={36} />
-
-                  {/* 💚 Доля доставленных */}
                   <Line
                     yAxisId="left"
                     type="monotone"
@@ -188,8 +178,6 @@ export default function SectionPush({ data }) {
                     isAnimationActive={true}
                     animationDuration={800}
                   />
-
-                  {/* 🟧 CTR */}
                   <Bar
                     yAxisId="right"
                     dataKey="ctr"
@@ -208,8 +196,6 @@ export default function SectionPush({ data }) {
                       fill="#F59E0B"
                     />
                   </Bar>
-
-                  {/* 🔵 Conversion */}
                   <Bar
                     yAxisId="right"
                     dataKey="conversion"
@@ -231,6 +217,22 @@ export default function SectionPush({ data }) {
                   </Bar>
                 </LineChart>
               </ResponsiveContainer>
+
+              {/* 🌫️ Мягкий слой поверх графика */}
+              {isDraft && (
+                <div
+                  className="absolute inset-0 z-50 flex flex-col items-center justify-center
+                             bg-gray-100/30 backdrop-blur-[2px] rounded-lg
+                             text-gray-700 font-medium text-lg select-none"
+                >
+                  <span className="flex items-center gap-2">
+                    ⚙️ Предварительные данные
+                  </span>
+                  <span className="text-sm text-gray-500 mt-1">
+                    (значения могут поменяться)
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>

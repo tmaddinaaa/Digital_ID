@@ -11,8 +11,8 @@ export const depositsData = [
       "avgAge": 48.0,
       "genderShare": { "male": 45, "female": 55 },
       "avgIncome": 657755,
-      "clientsWithCredits": 78000,
-      "clientsWithCards": 118000,
+      "clientsWithCredits": 16411,
+      "clientsWithCards": 130764,
       
     },
     "financial": {
@@ -45,8 +45,8 @@ export const depositsData = [
       "avgAge": 47,
       "genderShare": { "male": 38, "female": 62 },
       "avgIncome": 584667,
-      "clientsWithCredits": 78000,
-      "clientsWithCards": 118000,
+      "clientsWithCredits": 476,
+      "clientsWithCards": 4931,
     },
     "financial": {
       "transactionsSum": 2562228301,
@@ -77,8 +77,8 @@ export const depositsData = [
       "clientsCount": 2083,
       "avgAge": 28,
       "genderShare": { "male": 48, "female": 52 },
-      "clientsWithCredits": 78000,
-      "clientsWithCards": 118000,
+      "clientsWithCredits": 62,
+      "clientsWithCards": 504,
       "avgIncome": 453703
     },
     "financial": {

@@ -43,11 +43,14 @@ export const profilesData = [
 
     // 💰 Финансовая информация --Нету данных--
     financialInfo: {
-      revenue: { margin: 120000, commission: 18000, interest: 32000 },
-      ltv: 10000,
-      clv: 12000,
-    },
-
+  revenue: { 
+    margin: 20000,        // чистая прибыль банка с клиента за год
+    commission: 7000,     // комиссионные доходы
+    interest: 8000        // процентный доход
+  },
+  ltv: 175000,            // Lifetime Value за 5 лет
+  clv: 200000             // прогнозируемая ценность клиента
+},
     geoMaps: {
       all_points: "/maps/almat_all_points.html",
       clustered_points: "/maps/almat_clustered_points.html",

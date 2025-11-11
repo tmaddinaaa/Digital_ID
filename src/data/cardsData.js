@@ -2,67 +2,54 @@
 export const cardsData = [
   {
     "product": "Карты",
-    "cardType": "Mastercard",
+    "type": "Mastercard",
     "baseMetrics": {
-      "clientsCount": 378000,
+      "clientsCount": 3370212,
       "avgAge": 38,
       "genderShare": { "male": 52, "female": 48 },
-      "avgIncome": 405000,
-      "clientsWithCredits": 155000,
-      "clientsWithDeposits": 98000,
+      "avgIncome": 340762,
+      "clientsWithCredits": 383818,
+      "clientsWithDeposits": 130503,
     },
-    "metrics": {
-      "transactionsSum": 115660100000,
-      "transactionsCount": 27216000,
-      "turnoverPerClient": 175000,
-      "transactionsPerClient": 7.2,
-      "avgTransaction": 25400
-    },
-    "behaviorMetrics": {
-      "activeBaseShare": "63%",
-      "onlineShare": "59%",
-      "foreignOpsShare": "5%",
-      "avgBalance": 86000
+    "financial": {
+      "transactionsSum": 196741084975,
+      "transactionsCount": 21576524,
+      "turnoverPerClient": 121690,
+      "transactionsPerClient": 13.3,
+      "avgTransaction": 9118
     },
     "top5MccGroups": [
-      { "name": "Продуктовые магазины", "value": 36937800000 },
-      { "name": "Рестораны и фастфуд", "value": 33728400000 },
-      { "name": "Онлайн-услуги и мобильные платежи", "value": 29131000000 },
-      { "name": "Одежда и обувь", "value": 18987500000 },
-      { "name": "Переводы и финуслуги", "value": 16875400000 }
+      { "name": "Супермаркеты и продуктовые магазины", "value":  32642730767 },
+      { "name": "Путешествия", "value": 24294489453},
+      { "name": "Одежда и обувь", "value": 20984334789 },
+      { "name": "Кафе и рестораны", "value": 20049393807 },
+      { "name": "Подписки и онлайн покупки", "value": 10828415859 }
     ],
-
   },
   {
     "product": "Карты",
-    "cardType": "VISA",
+    "type": "VISA",
     "baseMetrics": {
-      "clientsCount": 222000,
-      "avgAge": 40,
-      "genderShare": { "male": 51, "female": 49 },
-      "avgIncome": 430000,
-      "clientsWithCredits": 155000,
-      "clientsWithDeposits": 98000,
+      "clientsCount": 154107,
+      "avgAge": 37,
+      "genderShare": { "male": 50, "female": 50 },
+      "avgIncome": 675366,
+      "clientsWithCredits": 8006,
+      "clientsWithDeposits": 7891,
     },
-    "metrics": {
-      "transactionsSum": 109356000000,
-      "transactionsCount": 14000000,
-      "turnoverPerClient": 192000,
-      "transactionsPerClient": 6.3,
-      "avgTransaction": 29800
+    "financial": {
+      "transactionsSum": 39878074934,
+      "transactionsCount": 2741377,
+      "turnoverPerClient": 223116,
+      "transactionsPerClient": 15.3,
+      "avgTransaction": 14546
     },
-    "behaviorMetrics": {
-      "activeBaseShare": "37%",
-      "onlineShare": "65%",
-      "foreignOpsShare": "9%",
-      "avgBalance": 97500
-    },
-    "top5MccGroups": [
-      { "name": "Продуктовые магазины", "value": 27879000000 },
-      { "name": "Переводы и финуслуги", "value": 25318600000 },
-      { "name": "Рестораны и кафе", "value": 23446200000 },
-      { "name": "Онлайн-подписки и сервисы", "value": 18654000000 },
-      { "name": "Путешествия и транспорт", "value": 14058000000 }
+  "top5MccGroups": [
+      { "name": "Одежда и обувь", "value": 6377286633 },
+      { "name": "Путешествия", "value": 6321265481 },
+      { "name": "Кафе и рестораны", "value": 4706448181 },
+      { "name": "Супермаркеты и продуктовые магазины", "value": 4109488720 },
+      { "name": "Детские товары и услуги", "value": 1901314711 }
     ],
   }
 ];

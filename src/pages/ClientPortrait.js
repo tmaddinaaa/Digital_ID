@@ -635,8 +635,8 @@ function getCrossMetricsForProduct(product, base) {
   } else {
     // Лояльность и другие
     return [
-      { label: "Из них клиенты с кредитом", value: withCredits },
-      { label: "Из них клиенты с депозитом", value: withDeposits },
+      { label: "Из них клиенты с кредитом", value: "coming soon" },
+      { label: "Из них клиенты с депозитом", value: "coming soon" },
     ];
   }
 }
