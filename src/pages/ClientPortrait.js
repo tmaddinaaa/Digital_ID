@@ -289,17 +289,18 @@ export default function ClientPortrait() {
           <Select label="📊 Сегмент" value={filters.segment}
             options={[
               "Все сегменты",
-              "ACTIVE_BUT_LOW_INCOME",
-              "CORE_HIGH_INCOME",
-              "CORE_MID_INCOME_ACTIVE",
-              "CORE_MID_INCOME_PASSIVE",
-              "CREDIT_ORIENTED",
-              "DEPOSIT_ORIENTED",
-              "HIGH_VALUE_ALL_ROUND",
-              "LOW_ENGAGEMENT_LOW_INCOME",
-              "MIXED_INCOME",
-              "PASSIVE_BUT_PROFITABLE",
-              "PASSIVE_LOW_INCOME",
+    "Ценные клиенты",
+    "Кредитные клиенты",
+    "Депозитные клиенты",
+    "Смешанный доход",
+    "Пассивные, но прибыльные",
+    "Низкая активность и доход",
+    "Пассивные низкодоходные",
+    "Активные, но малодоходные",
+    "Средний доход, пассивные",
+    "Средний доход, активные",
+    "Высокий доход",
+    "Прочие источники дохода",
             ]}
             onChange={(v) => setFilters((f) => ({ ...f, segment: v }))} />
           <Select label="📱 Устройство" value={filters.device}
