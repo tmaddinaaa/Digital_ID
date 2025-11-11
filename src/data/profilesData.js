@@ -1117,7 +1117,8 @@ export const profilesData = [
       { stage: "Прочее", amount: 20 }
     ],
     paymentMethods: [
-      { name: "Kaspi QR", value: 30 },
+      { name: "Kaspi QR", value: 5 },
+      { name: "Alatau City QR", value: 25 },
       { name: "Карта Банка через POS", value: 30 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
