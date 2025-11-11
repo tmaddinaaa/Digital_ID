@@ -39,7 +39,6 @@ export const overviewAllData = {
       { city: "Актюбинский филиал", count: 120728 },
       { city: "Атырауский филиал", count: 120522 },
       { city: "Другие", count: 973761 },
-      { city: "N/A", count: 2260842 },
     ],
   },
   insights: [ ],

@@ -262,75 +262,113 @@ export default function SectionOverview({ data }) {
         </Card>
       )}
 
-      {/* 🏙 Распределение по филиалам */}
-      {charts.cityDistribution && charts.cityDistribution.length > 0 && (
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-              <h3 className="text-lg font-medium">🏙 Распределение по филиалам</h3>
+{/* 🏙 Распределение по филиалам */}
+{charts.cityDistribution && charts.cityDistribution.length > 0 && (
+  <Card>
+    <CardContent className="p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+        <h3 className="text-lg font-medium flex items-center gap-2">
+          🏙 Распределение по филиалам
+        </h3>
 
-              {/* Фильтр диапазона */}
-              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
-                <Calendar size={15} className="text-yellow-600" />
-                <div className="flex items-center gap-2">
-                  <input
-                    type="date"
-                    value={cityRange.start}
-                    onChange={(e) =>
-                      setCityRange({ ...cityRange, start: e.target.value })
-                    }
-                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
-                  />
-                  <span>–</span>
-                  <input
-                    type="date"
-                    value={cityRange.end}
-                    onChange={(e) =>
-                      setCityRange({ ...cityRange, end: e.target.value })
-                    }
-                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
-                  />
-                </div>
-              </div>
-            </div>
+        {/* Фильтр диапазона */}
+        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
+          <Calendar size={15} className="text-yellow-600" />
+          <div className="flex items-center gap-2">
+            <input
+              type="date"
+              value={cityRange.start}
+              onChange={(e) =>
+                setCityRange({ ...cityRange, start: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+            <span>–</span>
+            <input
+              type="date"
+              value={cityRange.end}
+              onChange={(e) =>
+                setCityRange({ ...cityRange, end: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </div>
+        </div>
+      </div>
 
-            <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
-              <div
-                style={{
-                  width: manyCities ? `${cityData.length * 130}px` : "100%",
-                  height: 480,
+      <p className="text-sm text-gray-500 mb-3">
+        Отображает количество клиентов по каждому филиалу.
+        Все филиалы отображаются полностью, названия переносятся на новую строку.
+      </p>
+
+      <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
+        <div
+          style={{
+            width: manyCities ? `${cityData.length * 130}px` : "100%",
+            height: 480,
+          }}
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={cityData}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 10,
+                bottom: 130,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="city"
+                interval={0}
+                tick={({ x, y, payload }) => {
+                  const value = payload.value || "";
+                  const words = value.split(/\s+/); // разбиваем по пробелам
+                  const lineHeight = 12;
+                  const startY = y + 6;
+
+                  return (
+                    <g transform={`translate(${x},${startY})`}>
+                      <text
+                        textAnchor="middle"
+                        fontSize={10}
+                        fill="#555"
+                        style={{ whiteSpace: "pre-line" }}
+                      >
+                        {words.map((line, i) => (
+                          <tspan
+                            key={i}
+                            x="0"
+                            dy={i === 0 ? 0 : lineHeight}
+                          >
+                            {line}
+                          </tspan>
+                        ))}
+                      </text>
+                    </g>
+                  );
                 }}
-              >
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={cityData}
-                    margin={{
-                      top: 20,
-                      right: 30,
-                      left: 10,
-                      bottom: 130,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="city" />
-                    <YAxis />
-                    <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
-                    <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]}>
-                      <LabelList
-                        dataKey="count"
-                        position="top"
-                        formatter={(v) => v.toLocaleString("ru-RU")}
-                        fill="#444"
-                        fontSize={11}
-                      />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+              />
+              <YAxis />
+              <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
+              <Bar dataKey="count" fill="#FBBF24" radius={[6, 6, 0, 0]}>
+                <LabelList
+                  dataKey="count"
+                  position="top"
+                  formatter={(v) => v.toLocaleString("ru-RU")}
+                  fill="#444"
+                  fontSize={11}
+                />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+)}
+
     </div>
   );
 }

@@ -414,20 +414,39 @@ function CollapsibleRFMTable({ filteredRFM }) {
         {open ? "Скрыть детали" : "Показать детали 💰"}
       </button>
 
-      <div className={`transition-all duration-500 overflow-hidden ${open ? "max-h-[800px] mt-4" : "max-h-0"}`}>
+      <div
+        className={`transition-all duration-500 overflow-hidden ${
+          open ? "max-h-[800px] mt-4" : "max-h-0"
+        }`}
+      >
         <div className="overflow-x-auto border border-gray-200 rounded-lg">
           <table className="min-w-full text-sm">
             <thead className="bg-white/50 text-gray-700">
               <tr>
                 <th className="p-2 text-left">Сегмент</th>
-                <th className="p-2 text-right">Recency</th>
-                <th className="p-2 text-right">Frequency</th>
-                <th className="p-2 text-right">Monetary</th>
+                <th className="p-2 text-right">
+                  Recency <br />
+                  <span className="text-[11px] text-gray-500 font-normal">
+                    (давность последней активности, дни)
+                  </span>
+                </th>
+                <th className="p-2 text-right">
+                  Frequency <br />
+                  <span className="text-[11px] text-gray-500 font-normal">
+                    (частота операций, за период)
+                  </span>
+                </th>
+                <th className="p-2 text-right">
+                  Monetary <br />
+                  <span className="text-[11px] text-gray-500 font-normal">
+                    (общая сумма операций, ₸)
+                  </span>
+                </th>
               </tr>
             </thead>
             <tbody>
               {filteredRFM.map((p, i) => (
-                <tr key={i} className="border-t hover:bg-gray-50">
+                <tr key={i} className="border-t hover:bg-gray-50 transition">
                   <td className="p-2 flex items-center gap-2">
                     <span
                       className="inline-block w-3 h-3 rounded-full"
@@ -444,6 +463,13 @@ function CollapsibleRFMTable({ filteredRFM }) {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Маленькое пояснение под таблицей */}
+        <div className="text-xs text-gray-500 mt-3 pl-1">
+          <p>• Чем меньше Recency — тем недавно клиент был активен.</p>
+          <p>• Чем выше Frequency — тем чаще клиент взаимодействует с банком.</p>
+          <p>• Чем выше Monetary — тем выше ценность клиента (доход для банка).</p>
         </div>
       </div>
     </div>
