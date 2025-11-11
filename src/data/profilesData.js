@@ -165,26 +165,26 @@ export const profilesData = [
         "Пополнение депозита (20%)",
         "Коммуналка (10%)",
         "Покупки (25%)",
-        "Переводы друзьям (10%)",
+        "Переводы (10%)",
         "Прочее (10%)",
       ],
       mlInsight: "70% дохода распределяется в первые 2 дня после зарплаты",
       habitScore: 84,
 
       expenseFlow: [
-        { stage: "Поступления", amount: 100 },
-        { stage: "Оплата жилья и коммуналки", amount: 20 },
+        
+        { stage: "Оплата коммуналки", amount: 3 },
         { stage: "Снятия наличных", amount: 15 },
-        { stage: "Покупки и траты", amount: 20 },
         { stage: "Пополнение депозита", amount: 10 },
+        { stage: "Переводы внутри Банка", amount: 10 },
         { stage: "Свободные средства", amount: 5 },
       ],
 
       paymentMethods: [
-        { name: "Kaspi", value: 24 }, 
+        { name: "Kaspi QR", value: 24 }, 
         { name: "Apple Pay", value: 44 },
         { name: "Google Pay", value: 0 },
-        { name: "Карта банка", value: 42 },
+        { name: "Карта Банка через POS", value: 42 },
       ],
     },
     tags: [],
@@ -382,7 +382,7 @@ export const profilesData = [
       salarySource: "", 
       allocation: [
         "Покупки (63%)",
-        "Переводы друзьям (20%)",
+        "Переводы (20%)",
         "Прочее (17%)",
       ],
       mlInsight: "Около 63% карточных поступлений идут на Retail",
@@ -398,7 +398,7 @@ export const profilesData = [
         { name: "Kaspi QR", value: 0 }, 
         { name: "Apple Pay", value: 83 },
         { name: "Google Pay", value: 0 },
-        { name: "Карта банка", value: 17 },
+        { name: "Карта Банка через POS", value: 17 },
       ],
     },
     tags: [],
@@ -664,8 +664,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
       { name: "Apple Pay", value: 25 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 25 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -890,7 +890,7 @@ export const profilesData = [
     habitScore: 78,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Покупки и повседневные расходы", amount: 30 },
@@ -902,8 +902,8 @@ export const profilesData = [
       { name: "Kaspi QR", value: 30 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -1115,10 +1115,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -1385,7 +1385,7 @@ export const profilesData = [
     habitScore: 90,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и lifestyle", amount: 25 },
@@ -1398,8 +1398,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 15 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 15 },
     ],
   },
 
@@ -1617,7 +1617,7 @@ export const profilesData = [
     habitScore: 65,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Коммуналка", amount: 25 },
       { stage: "Покупки", amount: 35 },
       { stage: "Сбережения", amount: 25 },
@@ -1626,8 +1626,8 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 40 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 40 },
+      { name: "Google Pay", value: 15 },
       { name: "Apple Pay", value: 10 }
     ]
   },
@@ -1845,7 +1845,7 @@ export const profilesData = [
     habitScore: 72,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредитов", amount: 35 },
       { stage: "Покупки и повседневные траты", amount: 25 },
       { stage: "Коммуналка и штрафы", amount: 10 },
@@ -1857,8 +1857,8 @@ export const profilesData = [
       { name: "Kaspi QR", value: 30 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 15 },
     ],
   },
 
@@ -2055,7 +2055,7 @@ export const profilesData = [
     habitScore: 82,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Покупки и повседневные расходы", amount: 30 },
       { stage: "Коммунальные платежи", amount: 15 },
@@ -2066,8 +2066,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Kaspi QR", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -2276,7 +2276,7 @@ export const profilesData = [
     habitScore: 89,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Покупки и услуги", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
@@ -2288,8 +2288,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 40 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -2575,7 +2575,7 @@ export const profilesData = [
     habitScore: 83,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 15 },
       { stage: "Коммунальные платежи", amount: 10 },
@@ -2588,8 +2588,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -2777,7 +2777,7 @@ export const profilesData = [
     allocation: [
       "Покупки и траты (45%)",
       "Коммуналка (15%)",
-      "Переводы друзьям (15%)",
+      "Переводы (15%)",
       "Оплата штрафов и налогов (5%)",
       "Прочее (20%)",
     ],
@@ -2788,17 +2788,17 @@ export const profilesData = [
       { stage: "Поступление дохода", amount: 100 },
       { stage: "Покупки и повседневные траты", amount: 45 },
       { stage: "Коммунальные платежи", amount: 15 },
-      { stage: "Переводы друзьям", amount: 15 },
+      { stage: "Переводы ", amount: 15 },
       { stage: "Штрафы и налоги", amount: 5 },
       { stage: "Свободные средства", amount: 20 },
     ],
 
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "AlatauCityBank QR", value: 25 },
+      { name: "Google Pay", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -3000,9 +3000,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
-      { name: "Карта банка", value: 35 },
+      { name: "Карта Банка через POS", value: 35 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -3224,9 +3224,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -3445,7 +3445,7 @@ export const profilesData = [
     habitScore: 76,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Покупки и услуги", amount: 35 },
       { stage: "Коммунальные платежи", amount: 15 },
       { stage: "Пополнение депозита", amount: 20 },
@@ -3457,8 +3457,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -3670,9 +3670,9 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -3959,8 +3959,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -4162,10 +4162,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -4381,10 +4381,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -4598,8 +4598,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -4798,8 +4798,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Карта Банка через POS", value: 25 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -5011,9 +5011,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 20 },
+      { name: "Карта Банка через POS", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -5244,9 +5244,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -5491,9 +5491,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 25 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Kaspi QR", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -5724,10 +5724,10 @@ export const profilesData = [
       { stage: "Прочее", amount: 15 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 35 },
+      { name: "Карта Банка через POS", value: 35 },
       { name: "Kaspi QR", value: 25 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Apple Pay", value: 10 }
     ]
   },
@@ -5992,8 +5992,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 15 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -6181,8 +6181,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 40 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -6397,8 +6397,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 25 },
+      { name: "Google Pay", value: 20 },
       { name: "Apple Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
@@ -6597,11 +6597,11 @@ export const profilesData = [
       { stage: "Прочее", amount: 10 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 40 },
+      { name: "Карта Банка через POS", value: 40 },
       { name: "Kaspi QR", value: 25 },
       { name: "Samsung Pay", value: 20 },
       { name: "Apple Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 5 }
+      { name: "Google Pay", value: 5 }
     ]
   },
 
@@ -6811,8 +6811,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 25 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -7022,9 +7022,9 @@ export const profilesData = [
       { stage: "Прочее", amount: 30 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 40 },
+      { name: "Карта Банка через POS", value: 40 },
       { name: "Kaspi QR", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -7168,7 +7168,7 @@ export const profilesData = [
     history: [
       { date: "2025-11-06", text: "Baytaq — новая ставка 15%", campaign: "Deposit", status: "Прочитан" },
       { date: "2025-10-15", text: "Акции открыт успешно", campaign: "Invest", status: "Прочитан" },
-      { date: "2025-09-20", text: "Попробуйте оплату AlatauCityBank QR", campaign: "Digital", status: "Прочитан" }
+      { date: "2025-09-20", text: "Попробуйте оплату Google Pay", campaign: "Digital", status: "Прочитан" }
     ],
     frequency: { daily: 0.3, weekly: 1.2, monthly: 3.8 },
     conversion: { overall: "70%", clickRate: "39%" },
@@ -7236,8 +7236,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 25 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 25 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -7472,8 +7472,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -7672,8 +7672,8 @@ export const profilesData = [
       { name: "Kaspi QR", value: 30 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -7885,10 +7885,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -8106,10 +8106,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -8295,7 +8295,7 @@ export const profilesData = [
     habitScore: 45,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Покупки и траты", amount: 40 },
       { stage: "Коммунальные платежи", amount: 30 },
       { stage: "Свободные средства", amount: 30 },
@@ -8303,10 +8303,10 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Kaspi QR", value: 40 },
-      { name: "AlatauCityBank QR", value: 25 },
+      { name: "Google Pay", value: 25 },
       { name: "Samsung Pay", value: 20 },
       { name: "Apple Pay", value: 10 },
-      { name: "Карта банка", value: 5 },
+      { name: "Карта Банка через POS", value: 5 },
     ],
   },
 
@@ -8506,9 +8506,9 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -8724,8 +8724,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 5 }
     ]
@@ -8958,9 +8958,9 @@ export const profilesData = [
       { stage: "Прочее", amount: 10 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -9138,7 +9138,7 @@ export const profilesData = [
         { id: 1, date: "2025-10-05", type: "Retail", amount: 21000, location: "Small", currency: "₸" },
         { id: 2, date: "2025-10-10", type: "Коммуналка", amount: 15000, location: "eGov", currency: "₸" },
         { id: 3, date: "2025-10-17", type: "P2P перевод", amount: 25000, location: "Мобильное приложение", currency: "₸" },
-        { id: 4, date: "2025-10-21", type: "Retail", amount: 34000, location: "Kaspi Store", currency: "₸" },
+        { id: 4, date: "2025-10-21", type: "Retail", amount: 34000, location: "Kaspi QRStore", currency: "₸" },
       ],
     },
     insights: [
@@ -9154,7 +9154,7 @@ export const profilesData = [
     allocation: [
       "Покупки и траты (35%)",
       "Пополнение депозита (25%)",
-      "Переводы друзьям (15%)",
+      "Переводы (15%)",
       "Коммунальные платежи (10%)",
       "Прочее (15%)",
     ],
@@ -9162,10 +9162,10 @@ export const profilesData = [
     habitScore: 81,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Покупки и траты", amount: 35 },
       { stage: "Пополнение депозита", amount: 25 },
-      { stage: "Переводы друзьям", amount: 15 },
+      { stage: "Переводы ", amount: 15 },
       { stage: "Коммунальные платежи", amount: 10 },
       { stage: "Свободные средства", amount: 15 },
     ],
@@ -9174,8 +9174,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 40 },
       { name: "Samsung Pay", value: 30 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 5 },
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 5 },
     ],
   },
 
@@ -9373,9 +9373,9 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Apple Pay", value: 5 }
     ]
   },
@@ -9605,10 +9605,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -9830,10 +9830,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -10051,10 +10051,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -10272,10 +10272,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -10491,7 +10491,7 @@ export const profilesData = [
     mlInsight: "Ответственный платёжщик, склонен к накоплению и инвестициям",
     habitScore: 82,
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Покупки и расходы", amount: 30 },
       { stage: "Пополнение депозита", amount: 20 },
@@ -10501,8 +10501,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 25 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 20 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 20 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -10705,9 +10705,9 @@ export const profilesData = [
       { stage: "Прочее", amount: 10 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 35 },
+      { name: "Карта Банка через POS", value: 35 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -10933,7 +10933,7 @@ export const profilesData = [
     habitScore: 79,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Оплата кредита", amount: 25 },
       { stage: "Коммунальные платежи", amount: 15 },
       { stage: "Покупки и траты", amount: 30 },
@@ -10945,8 +10945,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -11188,8 +11188,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 5 }
     ]
@@ -11404,8 +11404,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -11594,18 +11594,18 @@ export const profilesData = [
       "Оплата кредита (30%)",
       "Покупки (35%)",
       "Коммуналка (15%)",
-      "Переводы друзьям (10%)",
+      "Переводы (10%)",
       "Прочее (10%)",
     ],
     mlInsight: "75% дохода расходуется в первые 3 дня после зарплаты",
     habitScore: 77,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Оплата кредита", amount: 30 },
       { stage: "Покупки и траты", amount: 35 },
       { stage: "Коммунальные платежи", amount: 15 },
-      { stage: "Переводы друзьям", amount: 10 },
+      { stage: "Переводы ", amount: 10 },
       { stage: "Свободные средства", amount: 10 },
     ],
 
@@ -11613,8 +11613,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 45 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 5 },
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 5 },
     ],
   },
 
@@ -11795,8 +11795,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 20 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -11996,10 +11996,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -12231,9 +12231,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Samsung Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -12481,8 +12481,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 30 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -12709,9 +12709,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 20 },
+      { name: "Карта Банка через POS", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -12912,7 +12912,7 @@ export const profilesData = [
     habitScore: 62,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Покупки и траты", amount: 40 },
       { stage: "Коммунальные платежи", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
@@ -12923,8 +12923,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 15 },
     ],
   },
 
@@ -13115,9 +13115,9 @@ export const profilesData = [
       { stage: "Прочее", amount: 10 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 40 },
+      { name: "Карта Банка через POS", value: 40 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 5 }
     ]
@@ -13317,10 +13317,10 @@ export const profilesData = [
       { stage: "Прочее", amount: 15 }
     ],
     paymentMethods: [
-      { name: "Карта банка", value: 40 },
+      { name: "Карта Банка через POS", value: 40 },
       { name: "Apple Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -13527,8 +13527,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 20 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -13926,8 +13926,8 @@ export const profilesData = [
       { stage: "Личные расходы", amount: 10 }
     ],
     paymentMethods: [
-      { name: "AlatauCityBank QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Google Pay", value: 30 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Kaspi QR", value: 15 },
       { name: "Samsung Pay", value: 10 }
@@ -14140,7 +14140,7 @@ export const profilesData = [
     habitScore: 85,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 15 },
       { stage: "Коммунальные платежи", amount: 10 },
@@ -14153,8 +14153,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 30 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
   tags: ["депозиты", "инвестиции", "коммунальные платежи", "активный клиент"],
@@ -14371,9 +14371,9 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -14586,10 +14586,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Samsung Pay", value: 20 },
       { name: "Apple Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -14803,10 +14803,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -15006,9 +15006,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Samsung Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -15186,10 +15186,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 35 },
+      { name: "Карта Банка через POS", value: 35 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 },
-      { name: "AlatauCityBank QR", value: 5 }
+      { name: "Google Pay", value: 5 }
     ]
   },
 
@@ -15428,10 +15428,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -15664,8 +15664,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 25 },
-      { name: "AlatauCityBank QR", value: 20 },
+      { name: "Карта Банка через POS", value: 25 },
+      { name: "Google Pay", value: 20 },
       { name: "Samsung Pay", value: 15 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -15889,7 +15889,7 @@ export const profilesData = [
     habitScore: 80,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Оплата кредита", amount: 25 },
       { stage: "Коммунальные платежи", amount: 10 },
       { stage: "Покупки", amount: 30 },
@@ -15901,8 +15901,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 40 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 5 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 5 }
     ]
   },
 
@@ -16116,9 +16116,9 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Apple Pay", value: 10 }
     ]
   },
@@ -16391,8 +16391,8 @@ export const profilesData = [
       { stage: "Резерв", amount: 5 }
     ],
     paymentMethods: [
-      { name: "AlatauCityBank QR", value: 30 },
-      { name: "Карта банка", value: 25 },
+      { name: "Google Pay", value: 30 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 20 },
       { name: "Kaspi QR", value: 15 },
       { name: "Samsung Pay", value: 10 }
@@ -16767,8 +16767,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 30 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -16986,10 +16986,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -17230,8 +17230,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
       { name: "Apple Pay", value: 25 },
-      { name: "Карта банка", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 20 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -17461,10 +17461,10 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -17662,8 +17662,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
       { name: "Kaspi QR", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -17893,7 +17893,7 @@ export const profilesData = [
     habitScore: 82,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Оплата кредита", amount: 30 },
       { stage: "Коммунальные платежи", amount: 10 },
       { stage: "Покупки", amount: 25 },
@@ -17906,8 +17906,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 10 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -18026,7 +18026,7 @@ export const profilesData = [
     campaigns: "Да",
     lastPush: {
       date: "2025-11-06",
-      text: "Адиль, попробуйте оплату через AlatauCityBank QR и получите 2% кэшбэк!",
+      text: "Адиль, попробуйте оплату через Google Pay и получите 2% кэшбэк!",
       topic: "Платежи",
       status: "Прочитан"
     },
@@ -18102,8 +18102,8 @@ export const profilesData = [
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "Карта банка", value: 30 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Карта Банка через POS", value: 30 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 10 }
     ]
@@ -18320,9 +18320,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Apple Pay", value: 40 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -18542,7 +18542,7 @@ export const profilesData = [
     habitScore: 85,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредитов", amount: 25 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 15 },
@@ -18554,8 +18554,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 30 },
       { name: "Samsung Pay", value: 25 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -18766,7 +18766,7 @@ export const profilesData = [
     habitScore: 78,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Погашение кредитов", amount: 20 },
       { stage: "Покупки", amount: 30 },
@@ -18777,8 +18777,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 20 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 20 }
     ]
   },
 
@@ -18980,9 +18980,9 @@ export const profilesData = [
     ],
 
     paymentMethods: [
-      { name: "Карта банка", value: 60 },
+      { name: "Карта Банка через POS", value: 60 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -19204,7 +19204,7 @@ export const profilesData = [
     habitScore: 73,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредитов", amount: 35 },
       { stage: "Семейные расходы", amount: 35 },
       { stage: "Покупки", amount: 15 },
@@ -19216,8 +19216,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 30 },
       { name: "Samsung Pay", value: 15 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 20 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 20 }
     ]
   },
 
@@ -19438,9 +19438,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Samsung Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Apple Pay", value: 5 }
     ]
   },
@@ -19655,8 +19655,8 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
-      { name: "AlatauCityBank QR", value: 25 },
-      { name: "Карта банка", value: 25 },
+      { name: "Google Pay", value: 25 },
+      { name: "Карта Банка через POS", value: 25 },
       { name: "Samsung Pay", value: 10 },
       { name: "Apple Pay", value: 5 }
     ]
@@ -19863,7 +19863,7 @@ export const profilesData = [
     habitScore: 82,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Семейные расходы", amount: 35 },
       { stage: "Образование детей", amount: 15 },
@@ -19875,8 +19875,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 40 },
       { name: "Samsung Pay", value: 20 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 15 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 15 }
     ]
   },
 
@@ -20133,7 +20133,7 @@ export const profilesData = [
     habitScore: 92,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Сбережения и депозиты", amount: 30 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Путешествия и досуг", amount: 20 },
@@ -20144,8 +20144,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 40 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 15 },
       { name: "Samsung Pay", value: 10 }
     ]
   },
@@ -20267,7 +20267,7 @@ export const profilesData = [
       status: "Прочитан"
     },
     history: [
-      { date: "2025-11-08", text: "Бонусы за оплату через AlatauCityBank QR", campaign: "QR", status: "Прочитан" },
+      { date: "2025-11-08", text: "Бонусы за оплату через Google Pay", campaign: "QR", status: "Прочитан" },
       { date: "2025-10-25", text: "Пополните депозит Baytaq и получите +0.5% годовых", campaign: "Deposit", status: "Прочитан" },
       { date: "2025-10-10", text: "Акции для студентов в кафе и кинотеатрах", campaign: "Retail", status: "Прочитан" }
     ],
@@ -20343,8 +20343,8 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
       { name: "Kaspi QR", value: 30 },
-      { name: "AlatauCityBank QR", value: 20 },
-      { name: "Карта банка", value: 15 },
+      { name: "Google Pay", value: 20 },
+      { name: "Карта Банка через POS", value: 15 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -20562,9 +20562,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Apple Pay", value: 40 },
-      { name: "Карта банка", value: 30 },
+      { name: "Карта Банка через POS", value: 30 },
       { name: "Kaspi QR", value: 15 },
-      { name: "AlatauCityBank QR", value: 10 },
+      { name: "Google Pay", value: 10 },
       { name: "Samsung Pay", value: 5 }
     ]
   },
@@ -20754,16 +20754,16 @@ export const profilesData = [
     habitScore: 40,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Базовые расходы", amount: 60 },
       { stage: "Коммуналка", amount: 20 },
       { stage: "Свободные средства", amount: 20 }
     ],
 
     paymentMethods: [
-      { name: "Карта банка", value: 70 },
+      { name: "Карта Банка через POS", value: 70 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 }
+      { name: "Google Pay", value: 10 }
     ]
   },
 
@@ -20946,9 +20946,9 @@ export const profilesData = [
 
     paymentMethods: [
       { name: "Kaspi QR", value: 40 },
-      { name: "AlatauCityBank QR", value: 25 },
+      { name: "Google Pay", value: 25 },
       { name: "Samsung Pay", value: 20 },
-      { name: "Карта банка", value: 15 }
+      { name: "Карта Банка через POS", value: 15 }
     ]
   },
 
@@ -21138,7 +21138,7 @@ export const profilesData = [
     habitScore: 70,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Коммунальные расходы", amount: 25 },
       { stage: "Покупки", amount: 30 },
       { stage: "Сбережения", amount: 20 },
@@ -21150,8 +21150,8 @@ export const profilesData = [
       { name: "Samsung Pay", value: 30 },
       { name: "Kaspi QR", value: 25 },
       { name: "Apple Pay", value: 20 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 }
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 }
     ]
   },
 
@@ -21328,7 +21328,7 @@ export const profilesData = [
     habitScore: 69,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Покупки и повседневные траты", amount: 35 },
       { stage: "Коммунальные платежи", amount: 15 },
@@ -21339,8 +21339,8 @@ export const profilesData = [
       { name: "Kaspi QR", value: 30 },
       { name: "Apple Pay", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 15 }
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 15 }
     ]
   },
 
@@ -21518,7 +21518,7 @@ export const profilesData = [
     habitScore: 82,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Покупки и повседневные расходы", amount: 30 },
       { stage: "Коммунальные платежи", amount: 15 },
@@ -21529,8 +21529,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 35 },
       { name: "Kaspi QR", value: 25 },
       { name: "Samsung Pay", value: 15 },
-      { name: "AlatauCityBank QR", value: 15 },
-      { name: "Карта банка", value: 10 },
+      { name: "Google Pay", value: 15 },
+      { name: "Карта Банка через POS", value: 10 },
     ],
   },
 
@@ -21733,7 +21733,7 @@ export const profilesData = [
     habitScore: 76,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Погашение кредитов", amount: 35 },
       { stage: "Семейные расходы", amount: 30 },
       { stage: "Пополнение депозита", amount: 15 },
@@ -21745,8 +21745,8 @@ export const profilesData = [
       { name: "Apple Pay", value: 28 },
       { name: "Samsung Pay", value: 22 },
       { name: "Kaspi QR", value: 20 },
-      { name: "AlatauCityBank QR", value: 10 },
-      { name: "Карта банка", value: 20 }
+      { name: "Google Pay", value: 10 },
+      { name: "Карта Банка через POS", value: 20 }
     ]
   },
 
@@ -21961,7 +21961,7 @@ export const profilesData = [
     habitScore: 83,
 
     expenseFlow: [
-      { stage: "Зарплата", amount: 100 },
+      
       { stage: "Семейные расходы", amount: 40 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Коммуналка", amount: 15 },
@@ -21972,9 +21972,9 @@ export const profilesData = [
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
       { name: "Kaspi QR", value: 25 },
-      { name: "AlatauCityBank QR", value: 15 },
+      { name: "Google Pay", value: 15 },
       { name: "Samsung Pay", value: 10 },
-      { name: "Карта банка", value: 15 }
+      { name: "Карта Банка через POS", value: 15 }
     ]
   },
 

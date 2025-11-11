@@ -14,6 +14,9 @@ import {
   CartesianGrid,
   Legend,
   LabelList,
+  LineChart,
+  Line,
+  CartesianAxis,
 } from "recharts";
 import {
   Filter,
@@ -24,6 +27,7 @@ import {
   Brain,
   Scale,
   BarChart3,
+  Calendar,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card";
 
@@ -31,6 +35,19 @@ import { loyaltyData } from "../data/loyaltyData";
 import { depositsData } from "../data/depositsData";
 import { creditsData } from "../data/creditsData";
 import { cardsData } from "../data/cardsData";
+
+/**
+ * Полный файл ClientPortrait.js
+ * Содержит:
+ * - разделение по типам продуктов (каждый тип — отдельная карточка)
+ * - плашку с датой отчёта (редактируемую)
+ * - диапазоны дат над графиками
+ * - динамическое перекрёстное отображение клиентов между продуктами
+ * - все секции: соцдем, финпок-ки, поведение, графики, инсайты, ComparisonSection
+ *
+ * Примечание: чтобы фильтрация по датам реально работала, нужны даты в исходных данных.
+ * Сейчас реализованы UI-элементы выбора дат; реальная фильтрация — опциональная доработка.
+ */
 
 const COLORS = [
   "#5B8FF9",
@@ -46,7 +63,16 @@ const COLORS = [
 ];
 
 export default function ClientPortrait() {
-  // По умолчанию показываем "Кредиты".
+  // Отчетная дата (плашка)
+  const [reportDate, setReportDate] = useState("2025-11-01");
+
+  // Диапазоны дат для графиков
+  const [newClientsRange, setNewClientsRange] = useState({ start: "", end: "" });
+  const [branchRange, setBranchRange] = useState({ start: "", end: "" });
+  const [mccRange, setMccRange] = useState({ start: "", end: "" });
+  const [categoryRange, setCategoryRange] = useState({ start: "", end: "" });
+
+  // Фильтры
   const [filters, setFilters] = useState({
     city: "Все города",
     segment: "Все сегменты",
@@ -58,7 +84,7 @@ export default function ClientPortrait() {
     age: "Все возраста",
   });
 
-  // Карта продуктов -> источников данных
+  // Карта данных по продуктам — используй свои данные
   const dataMap = useMemo(
     () => ({
       Лояльность: loyaltyData || [],
@@ -71,40 +97,60 @@ export default function ClientPortrait() {
 
   const products = useMemo(() => Object.keys(dataMap), [dataMap]);
 
-  // records для выбранного продукта
-  const productRecords = useMemo(() => dataMap[filters.product] || [], [
-    dataMap,
-    filters.product,
-  ]);
+  // records выбранного продукта (может быть массив типов)
+  const productRecords = useMemo(() => dataMap[filters.product] || [], [dataMap, filters.product]);
 
-  // records для сравнения (можно сравнить любой другой продукт)
+  // records для сравнения
   const compareRecords = useMemo(
     () => (filters.compareProduct ? dataMap[filters.compareProduct] || [] : []),
     [dataMap, filters.compareProduct]
   );
 
-  // Функция агрегации для сравнения / суммарного представления
+  // Агрегатор — если нужно собрать несколько записей в единый агрегат
   function aggregateRecords(records, productName) {
     if (!records || records.length === 0) return null;
+
+    // Если одиночная запись — стандартизируем и вернём
     if (records.length === 1) {
-      // Ensure product field exists for display
-      return { ...(records[0] || {}), product: records[0].product || productName };
+      const r = records[0];
+      const base = r.baseMetrics || r.clients || {};
+      return {
+        ...r,
+        product: r.product || productName,
+        baseMetrics: {
+          clientsCount: Number(base.clientsCount ?? base.count ?? 0),
+          avgAge: base.avgAge ?? base.avg_age ?? null,
+          avgIncome: base.avgIncome ?? base.avg_income ?? base.avgSalary ?? null,
+          genderShare: base.genderShare ?? base.gender ?? null,
+          clientsWithCredits: Number(base.clientsWithCredits ?? base.clients_with_credits ?? 0),
+          clientsWithDeposits: Number(base.clientsWithDeposits ?? base.clients_with_deposits ?? 0),
+          clientsWithCards: Number(base.clientsWithCards ?? base.clients_with_cards ?? 0),
+        },
+        metrics: r.metrics || r.financial || r.loans || {},
+        top5Branches: r.top5Branches || r.branches || [],
+        top5MccGroups: r.top5MccGroups || r.topMcc || [],
+        categories: r.categories || {},
+        insights: r.insights || "",
+      };
     }
 
-    // Generic aggregator: попытается аккумулировать базовые и финансовые числовые метрики.
+    // Агрегируем множество записей
     const agg = {
-      product: records[0].product || productName,
-      type: "Aggregate",
+      product: productName,
       baseMetrics: {
         clientsCount: 0,
-        avgAge: null,
+        avgAge: 0,
+        avgIncome: 0,
         genderShare: { male: 0, female: 0 },
-        avgIncome: null,
+        clientsWithCredits: 0,
+        clientsWithDeposits: 0,
+        clientsWithCards: 0,
       },
       metrics: {},
-      financialSums: {},
       top5Branches: [],
       top5MccGroups: [],
+      categories: {},
+      insights: "",
     };
 
     let ageWeighted = 0;
@@ -112,74 +158,87 @@ export default function ClientPortrait() {
     let maleWeighted = 0;
     let femaleWeighted = 0;
 
-    // collect numeric sums (common keys across different structures)
-    const numericSums = {};
-
     for (const r of records) {
-      const base = r.baseMetrics || r.clients || {};
-      const fin = r.metrics || r.financial || r.loans || {};
+      const b = r.baseMetrics || r.clients || {};
+      const clients = Number(b.clientsCount ?? b.count ?? 0);
 
-      const clients = Number(base.clientsCount || base.count || 0);
       agg.baseMetrics.clientsCount += clients;
 
-      if (base.avgAge) ageWeighted += Number(base.avgAge) * clients;
-      if (base.avgIncome) incomeWeighted += Number(base.avgIncome) * clients;
-      if (base.avgSalary) incomeWeighted += Number(base.avgSalary) * clients;
-      if (base.genderShare) {
-        maleWeighted += Number(base.genderShare.male || 0) * clients;
-        femaleWeighted += Number(base.genderShare.female || 0) * clients;
-      } else if (base.gender) {
-        maleWeighted += Number(base.gender.male || 0) * clients;
-        femaleWeighted += Number(base.gender.female || 0) * clients;
+      // cross metrics
+      agg.baseMetrics.clientsWithCredits += Number(
+        b.clientsWithCredits ?? b.clients_with_credits ?? r.clientsWithCredits ?? r.clients_with_credits ?? 0
+      );
+      agg.baseMetrics.clientsWithDeposits += Number(
+        b.clientsWithDeposits ?? b.clients_with_deposits ?? r.clientsWithDeposits ?? r.clients_with_deposits ?? 0
+      );
+      agg.baseMetrics.clientsWithCards += Number(
+        b.clientsWithCards ?? b.clients_with_cards ?? r.clientsWithCards ?? r.clients_with_cards ?? 0
+      );
+
+      // weighted averages
+      const ageVal = Number(b.avgAge ?? b.avg_age ?? r.avgAge ?? 0);
+      ageWeighted += ageVal * clients;
+
+      const incomeVal = Number(b.avgIncome ?? b.avg_income ?? b.avgSalary ?? r.avgIncome ?? 0);
+      incomeWeighted += incomeVal * clients;
+
+      if (b.genderShare) {
+        maleWeighted += Number(b.genderShare.male ?? 0) * clients;
+        femaleWeighted += Number(b.genderShare.female ?? 0) * clients;
+      } else if (b.gender) {
+        maleWeighted += Number(b.gender.male ?? 0) * clients;
+        femaleWeighted += Number(b.gender.female ?? 0) * clients;
       }
 
-      // collect all numeric top-level numeric fields from financial blocks
-      for (const [k, v] of Object.entries(fin)) {
-        const num = Number(v);
-        if (!Number.isNaN(num)) numericSums[k] = (numericSums[k] || 0) + num;
+      // numeric metrics
+      const fin = r.metrics || r.financial || r.loans || {};
+      for (const [k, v] of Object.entries(fin || {})) {
+        const n = Number(v);
+        if (!Number.isNaN(n)) agg.metrics[k] = (agg.metrics[k] || 0) + n;
       }
 
-      // merge branch lists (keep top by value later)
-      const branches = r.top5Branches || r.branches || [];
-      if (Array.isArray(branches) && branches.length) {
-        agg.top5Branches.push(...branches);
-      }
-      // MCC groups array
-      const mccArr = r.top5MccGroups || r.top5MccGroups;
-      if (Array.isArray(mccArr) && mccArr.length) agg.top5MccGroups.push(...mccArr);
-      // categories object (convert to array)
-      if (r.categories && typeof r.categories === "object" && !Array.isArray(r.categories)) {
-        for (const [k, val] of Object.entries(r.categories)) {
-          agg.top5MccGroups.push({ name: k, value: Number(val) || 0 });
+      // branches and mcc arrays
+      if (Array.isArray(r.top5Branches)) agg.top5Branches.push(...r.top5Branches);
+      if (Array.isArray(r.branches)) agg.top5Branches.push(...r.branches);
+      if (Array.isArray(r.top5MccGroups)) agg.top5MccGroups.push(...r.top5MccGroups);
+      if (Array.isArray(r.topMcc)) agg.top5MccGroups.push(...r.topMcc);
+
+      // categories object
+      if (r.categories && typeof r.categories === "object") {
+        for (const [k, v] of Object.entries(r.categories)) {
+          agg.categories[k] = (agg.categories[k] || 0) + Number(v || 0);
         }
+      }
+
+      if (r.insights) {
+        agg.insights = (agg.insights ? agg.insights + " | " : "") + r.insights;
       }
     }
 
     const totalClients = agg.baseMetrics.clientsCount || 1;
     agg.baseMetrics.avgAge = ageWeighted ? +(ageWeighted / totalClients).toFixed(1) : null;
     agg.baseMetrics.avgIncome = incomeWeighted ? Math.round(incomeWeighted / totalClients) : null;
-    agg.baseMetrics.genderShare.male = totalClients ? +(maleWeighted / totalClients).toFixed(2) : 0;
-    agg.baseMetrics.genderShare.female = totalClients ? +(femaleWeighted / totalClients).toFixed(2) : 0;
+    agg.baseMetrics.genderShare.male = +(maleWeighted / totalClients).toFixed(2);
+    agg.baseMetrics.genderShare.female = +(femaleWeighted / totalClients).toFixed(2);
 
-    // put numeric sums into metrics
-    agg.metrics = numericSums;
-
-    // reduce top5Branches: group by name and sum values, then take top 5
+    // reduce branches to top5
     const branchMap = {};
     agg.top5Branches.forEach((b) => {
-      if (!b || !b.name) return;
-      branchMap[b.name] = (branchMap[b.name] || 0) + Number(b.value || 0);
+      if (!b) return;
+      const name = b.name ?? b[0] ?? "—";
+      const value = Number(b.value ?? b[1] ?? 0);
+      branchMap[name] = (branchMap[name] || 0) + value;
     });
     agg.top5Branches = Object.entries(branchMap)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 5);
 
-    // reduce mcc groups (agg.top5MccGroups)
+    // reduce mcc groups
     const mccMap = {};
     agg.top5MccGroups.forEach((m) => {
       if (!m) return;
-      const name = m.name || m[0];
+      const name = m.name ?? m[0] ?? "—";
       const value = Number(m.value ?? m[1] ?? 0);
       mccMap[name] = (mccMap[name] || 0) + value;
     });
@@ -191,7 +250,7 @@ export default function ClientPortrait() {
     return agg;
   }
 
-  // Formatting helper
+  // форматирование
   const fmt = (v) =>
     v === null || v === undefined || v === "—"
       ? "—"
@@ -199,21 +258,18 @@ export default function ClientPortrait() {
       ? v.toLocaleString("ru-RU")
       : String(v);
 
-  // Decide whether product type has multiple entries (e.g. loyalty tiers)
-  const isMultiType = ["Лояльность", "Депозиты", "Кредиты", "Карты"].includes(filters.product);
+  // агрегаты
+  const left = useMemo(() => aggregateRecords(productRecords, filters.product), [productRecords, filters.product]);
+  const right = useMemo(() => (filters.compareProduct ? aggregateRecords(compareRecords, filters.compareProduct) : null), [compareRecords, filters.compareProduct]);
 
-  const left = isMultiType ? aggregateRecords(productRecords, filters.product) : (productRecords[0] || null);
-  const right = filters.compareProduct ? (isMultiType ? aggregateRecords(compareRecords, filters.compareProduct) : (compareRecords[0] || null)) : null;
+  const compareOptions = useMemo(() => ["", ...products.filter((p) => p !== filters.product)], [products, filters.product]);
 
-  // Compare options list (include empty)
-  const compareOptions = useMemo(() => {
-    const ops = products.filter((p) => p !== filters.product);
-    return ["", ...ops];
-  }, [products, filters.product]);
+  // определить, есть ли подтипы (типы продукта)
+  const hasSubtypes = ["Кредиты", "Депозиты", "Карты", "Лояльность"].includes(filters.product);
 
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-      {/* Header */}
+      {/* header */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold flex items-center gap-2 text-gray-800">
           <Filter className="text-yellow-500" /> Портрет клиента по продукту
@@ -224,7 +280,7 @@ export default function ClientPortrait() {
         </div>
       </div>
 
-      {/* Filters */}
+      {/* filters */}
       <Card className="border-gray-200 shadow-sm p-4">
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
           <Select label="🏙 Город" value={filters.city}
@@ -267,37 +323,60 @@ export default function ClientPortrait() {
         </div>
       </Card>
 
-      {/* Content */}
+      {/* content: comparison or list of cards / aggregated card */}
       <div className="space-y-6">
-        {/* Comparison */}
         {filters.compareProduct ? (
           left && right ? (
             <ComparisonSection a={left} b={right} fmt={fmt} />
           ) : (
             <div className="text-sm text-gray-600">Выберите корректные продукты для сравнения.</div>
           )
-        ) : // If multi-type (e.g. loyalty tiers) — show cards for each record, else show aggregate or single
-          isMultiType ? (
-            productRecords.length > 0 ? (
-              <div className="space-y-6">
-                {productRecords.map((r, idx) => (
-                  <PortraitCard key={idx} data={r} product={filters.product} fmt={fmt} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-gray-600">Нет данных для выбранного продукта.</div>
-            )
+        ) : hasSubtypes ? (
+          productRecords.length > 0 ? (
+            <div className="space-y-6">
+              {productRecords.map((r, idx) => (
+                <PortraitCard
+                  key={idx}
+                  data={r}
+                  product={filters.product}
+                  fmt={fmt}
+                  reportDate={reportDate}
+                  setReportDate={setReportDate}
+                  branchRange={branchRange}
+                  setBranchRange={setBranchRange}
+                  mccRange={mccRange}
+                  setMccRange={setMccRange}
+                  categoryRange={categoryRange}
+                  setCategoryRange={setCategoryRange}
+                />
+              ))}
+            </div>
           ) : (
-            // single-type (shouldn't happen as we map by product), but keep fallback
-            (productRecords[0] && <PortraitCard data={productRecords[0]} product={filters.product} fmt={fmt} />) ||
             <div className="text-sm text-gray-600">Нет данных для выбранного продукта.</div>
-          )}
+          )
+        ) : (
+          left && (
+            <PortraitCard
+              data={left}
+              product={filters.product}
+              fmt={fmt}
+              reportDate={reportDate}
+              setReportDate={setReportDate}
+              branchRange={branchRange}
+              setBranchRange={setBranchRange}
+              mccRange={mccRange}
+              setMccRange={setMccRange}
+              categoryRange={categoryRange}
+              setCategoryRange={setCategoryRange}
+            />
+          )
+        )}
       </div>
     </div>
   );
 }
 
-/* ---------- Components ---------- */
+/* ---------------- Components ---------------- */
 
 function Select({ label, value, options, onChange }) {
   return (
@@ -325,52 +404,96 @@ function Metric({ label, value }) {
   );
 }
 
-function SectionTitle({ icon: Icon, title }) {
+function SectionTitle({ icon: Icon, title, range, setRange }) {
   return (
-    <h3 className="text-gray-800 font-medium flex items-center gap-2 mt-2 mb-2">
-      <Icon size={16} className="text-yellow-500" /> {title}
-    </h3>
+    <div className="flex items-center justify-between mb-2">
+      <h3 className="text-gray-800 font-medium flex items-center gap-2">
+        <Icon size={16} className="text-yellow-500" /> {title}
+      </h3>
+      {setRange && (
+        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">
+          <Calendar size={14} className="text-yellow-600" />
+          <input
+            type="date"
+            value={range.start}
+            onChange={(e) => setRange({ ...range, start: e.target.value })}
+            className="bg-transparent outline-none text-gray-800 cursor-pointer"
+          />
+          <span>–</span>
+          <input
+            type="date"
+            value={range.end}
+            onChange={(e) => setRange({ ...range, end: e.target.value })}
+            className="bg-transparent outline-none text-gray-800 cursor-pointer"
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
-/* ---------- PortraitCard (универсальная карточка под продукт) ---------- */
+/* ---------------- PortraitCard ---------------- */
 
-function PortraitCard({ data, product, fmt }) {
-  // normalize some fields (data can differ by product)
+function PortraitCard({
+  data,
+  product,
+  fmt,
+  reportDate,
+  setReportDate,
+  branchRange,
+  setBranchRange,
+  mccRange,
+  setMccRange,
+  categoryRange,
+  setCategoryRange,
+}) {
+  // normalize
   const base = data.baseMetrics || data.clients || {};
   const metrics = data.metrics || data.financial || data.loans || {};
-  // branches may be array of {name,value}
   const branches = data.top5Branches || data.branches || [];
-  // categories: for credits it's object (categories), for loyalty/cards it's array top5MccGroups
-  const categoriesArray = data.top5MccGroups || data.top5MccGroups || null;
+  const categoriesArray = data.top5MccGroups || data.topMcc || [];
   const categoriesObj = data.categories || null;
   const behavior = data.behaviorMetrics || data.additionalMetrics || null;
-  const isCredit = product === "Кредиты";
-  const isLoyalty = product === "Лояльность";
-  const isDeposit = product === "Депозиты";
-  const isCard = product === "Карты";
 
-  // Title suffix (tier/plan/loanType/cardType)
   const suffix = data.tier || data.plan || data.loanType || data.cardType || data.type || "";
+
+  // prepare cross metrics for display depending on product
+  const cross = getCrossMetricsForProduct(product, base);
 
   return (
     <Card className="p-6 shadow-sm">
-      <CardHeader>
+      <CardHeader className="flex justify-between items-center">
         <CardTitle>
           {data.product || product} {suffix ? `— ${suffix}` : ""}
         </CardTitle>
+
+        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
+          <Calendar size={15} className="text-yellow-600" />
+          <span>
+            Данные на{" "}
+            <input
+              type="date"
+              value={reportDate}
+              onChange={(e) => setReportDate(e.target.value)}
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </span>
+        </div>
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {/* Социально-демографические */}
+        {/* Social & Demographic */}
         {Object.keys(base).length > 0 && (
           <div>
             <SectionTitle icon={Users} title="Социально-демографические" />
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <Metric label="Клиентов" value={fmt(base.clientsCount || base.count)} />
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <Metric label="Клиентов" value={fmt(base.clientsCount ?? base.count)} />
+              {cross.map((c) => (
+                <Metric key={c.label} label={c.label} value={fmt(c.value)} />
+              ))}
               <Metric label="Средний возраст" value={base.avgAge ? `${fmt(base.avgAge)} лет` : "—"} />
-              {(base.avgIncome || base.avgSalary || base.avgIncome === 0) && (
-                <Metric label="Средняя ЗП" value={`${fmt(base.avgIncome || base.avgSalary)} ₸`} />
+              {(base.avgIncome || base.avgSalary || base.avg_income) && (
+                <Metric label="Средняя ЗП" value={`${fmt(base.avgIncome ?? base.avgSalary ?? base.avg_income)} ₸`} />
               )}
               {base.genderShare ? (
                 <>
@@ -387,53 +510,33 @@ function PortraitCard({ data, product, fmt }) {
           </div>
         )}
 
-        {/* --- Лояльность: подробные финансовые метрики --- */}
-        {isLoyalty && Object.keys(metrics).length > 0 && (
+        {/* Financial / product-specific blocks */}
+        {product === "Лояльность" && Object.keys(metrics).length > 0 && (
           <div>
             <SectionTitle icon={Coins} title="Финансовые показатели (Лояльность)" />
             <div className="grid md:grid-cols-3 gap-4">
-              {metrics.transactionsSum !== undefined && (
-                <Metric label="Сумма транзакций" value={`${fmt(metrics.transactionsSum)} ₸`} />
-              )}
-              {metrics.transactionsCount !== undefined && (
-                <Metric label="Кол-во транзакций" value={fmt(metrics.transactionsCount)} />
-              )}
-              {metrics.avgTransaction !== undefined && (
-                <Metric label="Средний чек" value={`${fmt(metrics.avgTransaction)} ₸`} />
-              )}
-              {metrics.turnoverPerClient !== undefined && (
-                <Metric label="Оборот на клиента" value={`${fmt(metrics.turnoverPerClient)} ₸`} />
-              )}
-              {metrics.transactionsPerClient !== undefined && (
-                <Metric label="Транзакций на клиента" value={fmt(metrics.transactionsPerClient)} />
-              )}
-              {metrics.avgIncome !== undefined && (
-                <Metric label="Средняя ЗП" value={`${fmt(metrics.avgIncome)} ₸`} />
-              )}
+              {metrics.transactionsSum !== undefined && <Metric label="Сумма транзакций" value={`${fmt(metrics.transactionsSum)} ₸`} />}
+              {metrics.transactionsCount !== undefined && <Metric label="Кол-во транзакций" value={fmt(metrics.transactionsCount)} />}
+              {metrics.avgTransaction !== undefined && <Metric label="Средний чек" value={`${fmt(metrics.avgTransaction)} ₸`} />}
+              {metrics.turnoverPerClient !== undefined && <Metric label="Оборот на клиента" value={`${fmt(metrics.turnoverPerClient)} ₸`} />}
+              {metrics.transactionsPerClient !== undefined && <Metric label="Транзакций на клиента" value={fmt(metrics.transactionsPerClient)} />}
+              {metrics.avgIncome !== undefined && <Metric label="Средняя ЗП" value={`${fmt(metrics.avgIncome)} ₸`} />}
             </div>
           </div>
         )}
 
-        {/* --- Депозиты: аналогично лояльности (использует metrics и top5MccGroups) --- */}
-        {isDeposit && Object.keys(metrics).length > 0 && (
+        {product === "Депозиты" && Object.keys(metrics).length > 0 && (
           <div>
             <SectionTitle icon={Coins} title="Финансовые показатели (Депозиты)" />
             <div className="grid md:grid-cols-3 gap-4">
-              {metrics.transactionsSum !== undefined && (
-                <Metric label="Сумма транзакций" value={`${fmt(metrics.transactionsSum)} ₸`} />
-              )}
-              {metrics.transactionsCount !== undefined && (
-                <Metric label="Кол-во транзакций" value={fmt(metrics.transactionsCount)} />
-              )}
-              {metrics.avgTransaction !== undefined && (
-                <Metric label="Средний чек" value={`${fmt(metrics.avgTransaction)} ₸`} />
-              )}
+              {metrics.transactionsSum !== undefined && <Metric label="Сумма транзакций" value={`${fmt(metrics.transactionsSum)} ₸`} />}
+              {metrics.transactionsCount !== undefined && <Metric label="Кол-во транзакций" value={fmt(metrics.transactionsCount)} />}
+              {metrics.avgTransaction !== undefined && <Metric label="Средний чек" value={`${fmt(metrics.avgTransaction)} ₸`} />}
             </div>
           </div>
         )}
 
-        {/* --- Кредиты: кредитный портфель --- */}
-        {isCredit && Object.keys(metrics).length > 0 && (
+        {product === "Кредиты" && Object.keys(metrics).length > 0 && (
           <div>
             <SectionTitle icon={Coins} title="Кредитный портфель" />
             <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -446,8 +549,7 @@ function PortraitCard({ data, product, fmt }) {
           </div>
         )}
 
-        {/* --- Карты: metrics + behaviorMetrics --- */}
-        {isCard && (
+        {product === "Карты" && (
           <>
             {Object.keys(metrics).length > 0 && (
               <div>
@@ -473,30 +575,31 @@ function PortraitCard({ data, product, fmt }) {
           </>
         )}
 
-        {/* --- Топ-5 филиалов (универсально) --- */}
+        {/* Branches */}
         {Array.isArray(branches) && branches.length > 0 && (
           <div>
-            <SectionTitle icon={Scale} title="Топ-5 филиалов" />
+            <SectionTitle icon={Scale} title="Топ-5 филиалов" range={branchRange} setRange={setBranchRange} />
             <ChartPie data={branches} />
           </div>
         )}
 
-        {/* --- Категории / MCC:  */}
+        {/* MCC groups */}
         {Array.isArray(categoriesArray) && categoriesArray.length > 0 && (
           <div>
-            <SectionTitle icon={Brain} title={"Топ-5 MCC групп" } />
+            <SectionTitle icon={Brain} title="Топ-5 MCC групп" range={mccRange} setRange={setMccRange} />
             <ChartBarWithArray data={categoriesArray} />
           </div>
         )}
 
+        {/* Categories object */}
         {categoriesObj && Object.keys(categoriesObj).length > 0 && (
           <div>
-            <SectionTitle icon={Brain} title="Категории расходов" />
+            <SectionTitle icon={BarChart3} title="Категории расходов" range={categoryRange} setRange={setCategoryRange} />
             <ChartBar data={categoriesObj} />
           </div>
         )}
 
-        {/* Инсайты */}
+        {/* Insights */}
         {data.insights && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-gray-700 italic">
             {data.insights}
@@ -507,51 +610,175 @@ function PortraitCard({ data, product, fmt }) {
   );
 }
 
-/* ---------- Секции сравнения ---------- */
+/* ---------------- Cross metrics helper ---------------- */
+
+function getCrossMetricsForProduct(product, base) {
+  const withCredits = Number(base.clientsWithCredits ?? base.clients_with_credits ?? base.clientsWithCredit ?? 0);
+  const withDeposits = Number(base.clientsWithDeposits ?? base.clients_with_deposits ?? base.clientsWithDeposit ?? 0);
+  const withCards = Number(base.clientsWithCards ?? base.clients_with_cards ?? base.clientsWithCard ?? 0);
+
+  if (product === "Кредиты") {
+    return [
+      { label: "🏦 Клиенты с депозитом", value: withDeposits },
+      { label: "💳 Клиенты с картой", value: withCards },
+    ];
+  } else if (product === "Депозиты") {
+    return [
+      { label: "💰 Клиенты с кредитом", value: withCredits },
+      { label: "💳 Клиенты с картой", value: withCards },
+    ];
+  } else if (product === "Карты") {
+    return [
+      { label: "💰 Клиенты с кредитом", value: withCredits },
+      { label: "🏦 Клиенты с депозитом", value: withDeposits },
+    ];
+  } else {
+    // Лояльность и другие
+    return [
+      { label: "💰 Клиенты с кредитом", value: withCredits },
+      { label: "🏦 Клиенты с депозитом", value: withDeposits },
+    ];
+  }
+}
+
+/* ---------------- ComparisonSection ---------------- */
+
+/* ---------------- ComparisonSection ---------------- */
 
 function ComparisonSection({ a, b, fmt }) {
   if (!a || !b) return <div className="text-sm text-gray-600">Нет данных для сравнения.</div>;
 
-  // show a small set of comparable metrics; both a and b are aggregated records
-  const aClients = a.baseMetrics?.clientsCount || a.clients?.count || "—";
-  const bClients = b.baseMetrics?.clientsCount || b.clients?.count || "—";
+  // Основные метрики для сравнения
+  const metrics = [
+    {
+      key: "clientsCount",
+      label: "Количество клиентов",
+      a: a.baseMetrics?.clientsCount ?? 0,
+      b: b.baseMetrics?.clientsCount ?? 0,
+    },
+    {
+      key: "avgAge",
+      label: "Средний возраст",
+      a: a.baseMetrics?.avgAge ?? 0,
+      b: b.baseMetrics?.avgAge ?? 0,
+    },
+    {
+      key: "avgIncome",
+      label: "Средняя ЗП",
+      a: a.baseMetrics?.avgIncome ?? 0,
+      b: b.baseMetrics?.avgIncome ?? 0,
+    },
+    {
+      key: "clientsWithCredits",
+      label: "Клиенты с кредитами",
+      a: a.baseMetrics?.clientsWithCredits ?? 0,
+      b: b.baseMetrics?.clientsWithCredits ?? 0,
+    },
+    {
+      key: "clientsWithDeposits",
+      label: "Клиенты с депозитами",
+      a: a.baseMetrics?.clientsWithDeposits ?? 0,
+      b: b.baseMetrics?.clientsWithDeposits ?? 0,
+    },
+    {
+      key: "clientsWithCards",
+      label: "Клиенты с картами",
+      a: a.baseMetrics?.clientsWithCards ?? 0,
+      b: b.baseMetrics?.clientsWithCards ?? 0,
+    },
+  ];
 
-  // try to extract avg income / avg transaction if available
-  const aAvgIncome = a.baseMetrics?.avgIncome || a.metrics?.avgIncome || a.metrics?.avgIncome;
-  const bAvgIncome = b.baseMetrics?.avgIncome || b.metrics?.avgIncome || b.metrics?.avgIncome;
-
-  const aAvgTransaction = a.metrics?.avgTransaction || a.financial?.avgTransaction || a.metrics?.avgTransaction;
-  const bAvgTransaction = b.metrics?.avgTransaction || b.financial?.avgTransaction || b.metrics?.avgTransaction;
+  // Подготовка данных для графика
+  const chartData = metrics
+    .filter((m) => typeof m.a === "number" && typeof m.b === "number")
+    .map((m) => ({
+      name: m.label,
+      [a.product]: m.a,
+      [b.product]: m.b,
+    }));
 
   return (
     <Card className="p-6 shadow-sm">
       <CardHeader>
-        <CardTitle>
-          Сравнение: {a.product} {a.type || ""} vs {b.product} {b.type || ""}
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <BarChart3 className="text-yellow-500" />
+          Сравнение продуктов: <span className="font-semibold">{a.product}</span> vs{" "}
+          <span className="font-semibold">{b.product}</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid md:grid-cols-3 gap-3">
-          <Metric label="Клиентов (A)" value={fmt(aClients)} />
-          <Metric label="Средняя ЗП (A)" value={aAvgIncome ? `${fmt(aAvgIncome)} ₸` : "—"} />
-          <Metric label="Средний чек (A)" value={aAvgTransaction ? `${fmt(aAvgTransaction)} ₸` : "—"} />
-          <Metric label="Клиентов (B)" value={fmt(bClients)} />
-          <Metric label="Средняя ЗП (B)" value={bAvgIncome ? `${fmt(bAvgIncome)} ₸` : "—"} />
-          <Metric label="Средний чек (B)" value={bAvgTransaction ? `${fmt(bAvgTransaction)} ₸` : "—"} />
+
+      <CardContent className="space-y-6">
+        {/* Таблица с показателями */}
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {metrics.map((m) => {
+            const diff = (m.a ?? 0) - (m.b ?? 0);
+            const diffLabel =
+              diff === 0
+                ? "—"
+                : diff > 0
+                ? `+${fmt(diff)}`
+                : `−${fmt(Math.abs(diff))}`;
+            return (
+              <div
+                key={m.key}
+                className="p-3 bg-white border rounded-lg flex flex-col items-start justify-between shadow-sm"
+              >
+                <p className="text-xs text-gray-500">{m.label}</p>
+                <p className="text-sm font-semibold mt-1 text-gray-800">
+                  {fmt(m.a)} vs {fmt(m.b)}
+                </p>
+                <p
+                  className={`text-xs mt-1 ${
+                    diff > 0
+                      ? "text-green-600"
+                      : diff < 0
+                      ? "text-red-600"
+                      : "text-gray-500"
+                  }`}
+                >
+                  Разница: {diffLabel}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Визуальное сравнение */}
+        <div className="pt-4">
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart
+              data={chartData}
+              margin={{ top: 30, right: 30, left: 30, bottom: 60 }}
+              barCategoryGap="25%"
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 11, fill: "#444" }}
+                interval={0}
+                height={80}
+              />
+              <YAxis tick={{ fontSize: 11, fill: "#555" }} />
+              <Tooltip formatter={(v) => fmt(v)} />
+              <Legend verticalAlign="top" align="center" height={36} />
+              <Bar dataKey={a.product} fill="#5B8FF9" radius={[6, 6, 0, 0]} />
+              <Bar dataKey={b.product} fill="#F6BD16" radius={[6, 6, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>
   );
 }
 
-/* ---------- Диаграммы ---------- */
+/* ---------------- Charts ---------------- */
 
 function ChartPie({ data }) {
   if (!Array.isArray(data) || data.length === 0) return null;
-  // ensure objects have {name,value}
   const pieData = data.map((d) =>
-    Array.isArray(d) ? { name: d[0], value: Number(d[1] || 0) } : { name: d.name || d[0], value: Number(d.value ?? d[1] ?? 0) }
+    Array.isArray(d) ? { name: d[0], value: Number(d[1] || 0) } : { name: d.name || d[0] || "—", value: Number(d.value ?? d[1] ?? 0) }
   );
+
   return (
     <ResponsiveContainer width="100%" height={280}>
       <PieChart>
@@ -562,7 +789,7 @@ function ChartPie({ data }) {
           cx="50%"
           cy="50%"
           outerRadius={100}
-          paddingAngle={3} // gap between slices
+          paddingAngle={3}
           label={({ name, value }) => `${name}: ${value.toLocaleString("ru-RU")}`}
           labelLine
         >
@@ -575,31 +802,21 @@ function ChartPie({ data }) {
     </ResponsiveContainer>
   );
 }
+
 function ChartBar({ data }) {
   if (!data || Object.keys(data).length === 0) return null;
 
   const barData = Object.entries(data)
-    .map(([name, value]) => ({
-      name,
-      value: Number(value || 0),
-    }))
+    .map(([name, value]) => ({ name, value: Number(value || 0) }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 10);
 
-  // 🔤 Кастомный тик с переносом слов
   const CustomizedTick = ({ x, y, payload }) => {
-    const words = payload.value.split(" ");
+    const words = String(payload.value).split(" ");
     return (
       <g transform={`translate(${x},${y + 8})`}>
         {words.map((word, index) => (
-          <text
-            key={index}
-            x={0}
-            y={index * 12}
-            textAnchor="middle"
-            fill="#444"
-            fontSize={11}
-          >
+          <text key={index} x={0} y={index * 12} textAnchor="middle" fill="#444" fontSize={11}>
             {word}
           </text>
         ))}
@@ -608,65 +825,31 @@ function ChartBar({ data }) {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={420}> {/* 🔽 уменьшили с 520 */}
-      <BarChart
-        data={barData}
-        margin={{
-          top: 30,     // меньше воздуха сверху
-          right: 30,
-          left: 30,
-          bottom: 90,  // меньше снизу — график центрируется
-        }}
-        barCategoryGap="25%"
-      >
+    <ResponsiveContainer width="100%" height={420}>
+      <BarChart data={barData} margin={{ top: 30, right: 30, left: 30, bottom: 90 }} barCategoryGap="25%">
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="name"
-          interval={0}
-          height={100}
-          tick={<CustomizedTick />}
-        />
-        <YAxis
-          tick={{ fontSize: 11, fill: "#555" }}
-          width={90}
-        />
-        <Legend verticalAlign="top" align="center" iconType="square" height={30} /> {/* 🟩 Легенда сверху */}
-        <Tooltip
-          formatter={(v) =>
-            typeof v === "number" ? v.toLocaleString("ru-RU") : v
-          }
-        />
-        <Bar
-          dataKey="value"
-          fill="#5B8FF9"
-          radius={[6, 6, 0, 0]}
-          maxBarSize={55}
-        >
-          <LabelList
-            dataKey="value"
-            position="top"
-            fontSize={11}
-            fill="#333"
-            formatter={(v) => v.toLocaleString("ru-RU")}
-          />
+        <XAxis dataKey="name" interval={0} height={100} tick={<CustomizedTick />} />
+        <YAxis tick={{ fontSize: 11, fill: "#555" }} width={90} />
+        <Legend verticalAlign="top" align="center" iconType="square" height={30} />
+        <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
+        <Bar dataKey="value" fill="#5B8FF9" radius={[6, 6, 0, 0]} maxBarSize={55}>
+          <LabelList dataKey="value" position="top" fontSize={11} fill="#333" formatter={(v) => v.toLocaleString("ru-RU")} />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
-
-// Для массивных top5MccGroups форм ([{name,value}, ...]) — отображаем bar
 function ChartBarWithArray({ data }) {
   if (!Array.isArray(data) || data.length === 0) return null;
 
   const arr = data
-    .map((d) => ({ name: d.name || d[0], value: Number(d.value ?? d[1] ?? 0) }))
+    .map((d) => ({ name: d.name || d[0] || "—", value: Number(d.value ?? d[1] ?? 0) }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 10);
 
   const CustomizedTick = ({ x, y, payload }) => {
-    const words = payload.value.split(" ");
+    const words = String(payload.value).split(" ");
     return (
       <g transform={`translate(${x},${y + 8})`}>
         {words.map((word, i) => (
@@ -679,44 +862,17 @@ function ChartBarWithArray({ data }) {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={420}> {/* ⚖️ ниже, но сбалансировано */}
-      <BarChart
-        data={arr}
-        margin={{
-          top: 40, // место под легенду сверху
-          right: 30,
-          left: 30,
-          bottom: 60, // меньше — график поднимается
-        }}
-        barCategoryGap="30%"
-      >
+    <ResponsiveContainer width="100%" height={420}>
+      <BarChart data={arr} margin={{ top: 40, right: 30, left: 30, bottom: 60 }} barCategoryGap="30%">
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="name"
-          interval={0}
-          height={100}
-          tick={<CustomizedTick />}
-        />
+        <XAxis dataKey="name" interval={0} height={100} tick={<CustomizedTick />} />
         <YAxis tick={{ fontSize: 11, fill: "#555" }} width={90} />
-        {/* 🟩 Легенда теперь сверху */}
         <Legend verticalAlign="top" align="center" iconType="square" height={30} />
         <Tooltip formatter={(v) => (typeof v === "number" ? v.toLocaleString("ru-RU") : v)} />
-        <Bar
-          dataKey="value"
-          fill="#61DDAA"
-          radius={[6, 6, 0, 0]}
-          maxBarSize={60}
-        >
-          <LabelList
-            dataKey="value"
-            position="top"
-            fontSize={11}
-            fill="#333"
-            formatter={(v) => v.toLocaleString("ru-RU")}
-          />
+        <Bar dataKey="value" fill="#61DDAA" radius={[6, 6, 0, 0]} maxBarSize={60}>
+          <LabelList dataKey="value" position="top" fontSize={11} fill="#333" formatter={(v) => v.toLocaleString("ru-RU")} />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
 }
-

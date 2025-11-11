@@ -7,7 +7,9 @@ export const cardsData = [
       "clientsCount": 378000,
       "avgAge": 38,
       "genderShare": { "male": 52, "female": 48 },
-      "avgIncome": 405000
+      "avgIncome": 405000,
+      "clientsWithCredits": 155000,
+      "clientsWithDeposits": 98000,
     },
     "metrics": {
       "transactionsSum": 115660100000,
@@ -38,7 +40,9 @@ export const cardsData = [
       "clientsCount": 222000,
       "avgAge": 40,
       "genderShare": { "male": 51, "female": 49 },
-      "avgIncome": 430000
+      "avgIncome": 430000,
+      "clientsWithCredits": 155000,
+      "clientsWithDeposits": 98000,
     },
     "metrics": {
       "transactionsSum": 109356000000,

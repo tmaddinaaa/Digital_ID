@@ -10,7 +10,10 @@ export const depositsData = [
       "clientsCount": 131969,
       "avgAge": 48.0,
       "genderShare": { "male": 45, "female": 55 },
-      "avgIncome": 657755
+      "avgIncome": 657755,
+      "clientsWithCredits": 78000,
+      "clientsWithCards": 118000,
+      
     },
     "financial": {
       "transactionsSum": 74171162771,
@@ -39,10 +42,11 @@ export const depositsData = [
     "type": "Jinaq+",
     "baseMetrics": {
       "clientsCount": 4955,
-      "avgAge": 47
-,
+      "avgAge": 47,
       "genderShare": { "male": 38, "female": 62 },
-      "avgIncome": 584667
+      "avgIncome": 584667,
+      "clientsWithCredits": 78000,
+      "clientsWithCards": 118000,
     },
     "financial": {
       "transactionsSum": 2562228301,
@@ -73,6 +77,9 @@ export const depositsData = [
       "clientsCount": 2083,
       "avgAge": 28,
       "genderShare": { "male": 48, "female": 52 },
+      "clientsWithCredits": 78000,
+      "clientsWithCards": 118000,
+      "avgIncome": 453703
     },
     "financial": {
       "transactionsSum": 130967689,
@@ -80,7 +87,7 @@ export const depositsData = [
       "turnoverPerClient": 818548,
       "transactionsPerClient": 139,
       "avgTransaction": 5921,
-      "avgIncome": 453703
+
     },
     "top5Branches": [
       { "name": "Алматинский", "value": 354268658 },

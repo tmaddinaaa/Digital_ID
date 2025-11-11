@@ -288,60 +288,79 @@ const FinancialProfile = ({ data, financialInfo }) => {
       )}
 
       {/* --- 💸 Гистограмма трат --- */}
-      {funnelData.length > 0 && (
-        <div>
-          <h3 className="font-semibold mb-4 text-gray-700 flex items-center gap-2">
-            💸 Распределение трат
-            <span className="text-xs text-gray-500">(в процентах от зарплаты)</span>
-          </h3>
+{funnelData.length > 0 && (
+  <div>
+    <h3 className="font-semibold mb-4 text-gray-700 flex items-center gap-2">
+      💸 Поведение клиента в 1-ый день получения ЗП или других поступлений
+      <span className="text-xs text-gray-500">(Очередность трат)</span>
+    </h3>
 
-          <div className="bg-gradient-to-b from-yellow-50 to-white p-4 rounded-xl shadow-inner border border-gray-100">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                layout="vertical"
-                data={funnelData}
-                margin={{ top: 10, right: 20, left: 40, bottom: 10 }}
-              >
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "rgba(255,255,255,0.95)",
-                    border: "1px solid #ddd",
-                    borderRadius: "8px",
-                  }}
-                  formatter={(v) => [`${v}%`, "Доля от зарплаты"]}
-                />
-                <XAxis
-                  type="number"
-                  domain={[0, 100]}
-                  tickFormatter={(v) => `${v}%`}
-                  stroke="#555"
-                />
-                <YAxis
-                  type="category"
-                  dataKey="stage"
-                  width={180}
-                  tick={{ fill: "#444", fontSize: 12 }}
-                />
-                <Bar dataKey="amount" radius={[0, 8, 8, 0]}>
-                  <LabelList
-                    dataKey="amount"
-                    position="insideRight"
-                    formatter={(v) => `${v}%`}
-                    fill="#fff"
-                    fontSize={12}
-                  />
-                  {funnelData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      )}
+    <div className="bg-gradient-to-b from-yellow-50 to-white p-4 rounded-xl shadow-inner border border-gray-100">
+      <ResponsiveContainer width="100%" height={340}>
+        <BarChart
+          data={funnelData.map((d, i) => ({
+            ...d,
+            order: i + 1, // порядок: 1, 2, 3, 4, 5
+          }))}
+          layout="vertical"
+          margin={{ top: 20, right: 80, left: 50, bottom: 20 }}
+          barCategoryGap="25%"
+        >
+          <XAxis
+            type="number"
+            domain={[0, 100]}
+            tickFormatter={(v) => `${v}%`}
+            stroke="#666"
+            tick={{ fontSize: 12 }}
+          />
+          <YAxis
+            type="category"
+            dataKey="order"
+            width={40}
+            tick={{ fill: "#444", fontSize: 13, fontWeight: 600 }}
+          />
+          <Tooltip
+            cursor={{ fill: "rgba(0,0,0,0.03)" }}
+            formatter={(v, _, item) => [`${v}%`, item?.payload?.stage]}
+            contentStyle={{
+              backgroundColor: "rgba(255,255,255,0.95)",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+            }}
+          />
+
+          <Bar
+            dataKey="amount"
+            radius={[0, 8, 8, 0]}
+            barSize={35}
+            animationDuration={900}
+            label={({ x, y, width, height, value, index }) => {
+              const item = funnelData[index];
+              return (
+                <text
+                  x={x + width + 10}
+                  y={y + height / 2}
+                  textAnchor="start"
+                  dominantBaseline="middle"
+                  fontSize="12"
+                  fill="#333"
+                  fontWeight="500"
+                >
+                  {`${value}% ${item.stage}`}
+                </text>
+              );
+            }}
+          >
+            {funnelData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+)}
+
 
       {/* --- Методы оплаты --- */}
       {paymentMethods.length > 0 && (
