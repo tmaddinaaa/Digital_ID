@@ -23,16 +23,16 @@ import { Calendar } from "lucide-react";
 export default function SectionOverview({ data }) {
   const [reportDate, setReportDate] = useState("2025-10-01");
   const [newClientsRange, setNewClientsRange] = useState({
-    start: "2025-09-01",
-    end: "2025-09-30",
+    start: "",
+    end: "",
   });
   const [cityRange, setCityRange] = useState({
-    start: "2025-09-01",
-    end: "2025-09-30",
+    start: "",
+    end: "",
   });
   const [genderRange, setGenderRange] = useState({
-    start: "2025-09-01",
-    end: "2025-09-30",
+    start: "",
+    end: "",
   });
 
   if (!data)

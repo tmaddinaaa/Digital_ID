@@ -1,13 +1,24 @@
 export const behaviorAllData = {
   meta: { scope: "all", updatedAt: "2025-11-03T09:00:00Z" },
   charts: {
-    allocation: [
-      { category: "Бакалейные магазины, супермаркеты", share: 34 },
-      { category: "Места общественного питания, рестораны", share: 6 },
-      { category: "Маркетплейсы", share: 4 },
-      { category: "Заправочные станции (с вспомогательными услугами или без)", share: 4 },
-      { category: "Другие", share: 51 },
-    ],
+allocation: [
+  { category: "Магазины продуктовые", share: 34.5 },
+  { category: "Рестораны, Фастфуд", share: 9.3 },
+  { category: "Маркетплейсы", share: 4.3 },
+  { category: "АЗС", share: 4.2 },
+  { category: "Цифровые товары", share: 7.8 },
+  { category: "Такси", share: 2.8 },
+  { category: "Различные товары общего назначения", share: 2.3 },
+  { category: "Продажа программного обеспечения", share: 2.2 },
+  { category: "Магазины мужской и женской одежды", share: 2.1 },
+  { category: "Различные продовольственные магазины", share: 1.3 },
+  { category: "Аптеки", share: 1.8 },
+  { category: "Универмаги", share: 1.6 },
+  { category: "Рекламные услуги", share: 1.3 },
+  { category: "Автобусные линии", share: 1.3 },
+  { category: "Туристические агентства", share: 1.0 },
+  { category: "Другие", share: 22.2 },
+],
     depositComparison: [  
       { segment: "Бакалейные магазины, супермаркеты", avgBill: 3740 },
       { segment: "Места общественного питания, рестораны", avgBill: 7124 },
@@ -15,7 +26,5 @@ export const behaviorAllData = {
       { segment: "Заправочные станции (с вспомогательными услугами или без)", avgBill: 5938 },
     ],
   },
-  insights: [
-
-  ],
+  insights: [  ],
 };

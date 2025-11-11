@@ -117,10 +117,13 @@ export default function Segments() {
   });
   const [loading, setLoading] = useState(false);
 
-  // единый диапазон дат для всех графиков — по умолчанию сентябрь 2025
+  // Состояние для даты отчета
+  const [reportDate, setReportDate] = useState("2025-11-01");
+
+  // единый диапазон дат для всех графиков
   const [dateRange, setDateRange] = useState({
-    start: "2025-09-01",
-    end: "2025-09-30",
+    start: "",
+    end: "",
   });
 
   const filteredData = useMemo(() => {
@@ -143,31 +146,32 @@ export default function Segments() {
 
   return (
     <div className="space-y-8 p-6 bg-gray-50 min-h-screen">
-      {/* Заголовок + глобальный диапазон */}
+      {/* Заголовок */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
           <Filter className="text-yellow-500" /> Аналитика по сегментам
         </h1>
-
-        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">
-          <Calendar size={15} className="text-yellow-600" />
-          <input
-            type="date"
-            value={dateRange.start}
-            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-            className="bg-transparent outline-none cursor-pointer text-sm"
-          />
-          <span className="select-none">–</span>
-          <input
-            type="date"
-            value={dateRange.end}
-            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-            className="bg-transparent outline-none cursor-pointer text-sm"
-          />
-        </div>
+        {/* Удален блок с датой отчета */}
       </div>
 
       <UnifiedFilters filters={filters} setFilters={setFilters} />
+
+      {/* 📅 Дата отчёта (Плашка) - ПЕРЕМЕЩЕНА СЮДА */}
+      <div className="flex justify-end">
+        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
+          <Calendar size={16} className="text-yellow-600" />
+          <span>
+            Данные на{" "}
+            <input
+              type="date"
+              value={reportDate}
+              onChange={(e) => setReportDate(e.target.value)}
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </span>
+        </div>
+      </div>
+      {/* ------------------------------------------- */}
 
       {loading ? (
         <div className="flex justify-center py-10">
@@ -191,7 +195,9 @@ export default function Segments() {
             <CardHeader className="flex items-center justify-between gap-4">
               <div>
                 <CardTitle>Распределение клиентов по сегментам</CardTitle>
-                <p className="text-sm text-gray-500 mt-1">Период: {dateRange.start} — {dateRange.end}</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  Период: {dateRange.start} — {dateRange.end}
+                </p>
               </div>
 
               {/* Локальный контрол дат для этого блока (синхронизирован с общим dateRange) */}
@@ -279,7 +285,9 @@ export default function Segments() {
             <CardHeader className="flex items-center justify-between gap-4">
               <div>
                 <CardTitle>RFM-анализ клиентов</CardTitle>
-                <p className="text-sm text-gray-500 mt-1">Период: {dateRange.start} — {dateRange.end}</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  Период: {dateRange.start} — {dateRange.end}
+                </p>
               </div>
 
               <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1 text-gray-700">

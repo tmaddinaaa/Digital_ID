@@ -18,24 +18,36 @@ import {
 import { TrendingUp, Calendar } from "lucide-react";
 
 export default function SectionBehavior({ data }) {
-  const colors = ["#FFD966", "#FFB800", "#E59E00", "#FACC15", "#FDE68A"];
+  const colors = [
+    "#FFD966",
+    "#FFB800",
+    "#E59E00",
+    "#FACC15",
+    "#FDE68A",
+    "#FBBF24",
+    "#F59E0B",
+    "#D97706",
+    "#B45309",
+    "#FCD34D",
+    "#FCA311",
+    "#FFCA3A",
+    "#FF9F1C",
+    "#FDB813",
+    "#FEE440",
+  ];
+
   const { charts = {}, insights = [] } = data || {};
 
-  // 📅 Основная дата отчета
   const [reportDate, setReportDate] = useState("2025-10-01");
-
-  // 📆 Диапазоны для графиков
   const [spendingRange, setSpendingRange] = useState({
     start: "2025-09-01",
     end: "2025-09-30",
   });
-
   const [mccRange, setMccRange] = useState({
     start: "2025-09-01",
     end: "2025-09-30",
   });
 
-  // Подготовка данных (заглушки)
   const filteredDepositData = useMemo(() => {
     if (!charts.depositComparison) return [];
     return charts.depositComparison;
@@ -109,18 +121,46 @@ export default function SectionBehavior({ data }) {
 
             {/* 📊 Визуализация */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              {/* Пирог */}
-              <div style={{ width: "100%", height: 280, maxWidth: 400 }}>
+              {/* Пироговая диаграмма */}
+              <div style={{ width: "100%", height: 300, maxWidth: 420 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
+                  <PieChart margin={{ top: 30, right: 80, bottom: 30, left: 80 }}>
                     <Pie
                       data={charts.allocation}
                       dataKey="share"
                       nameKey="category"
-                      outerRadius={100}
-                      paddingAngle={3}
-                      label={({ value }) => `${value}%`}
-                      labelLine={false}
+                      outerRadius={110}
+                      paddingAngle={2}
+                      labelLine={true}
+                      label={({ cx, cy, midAngle, outerRadius, percent, index }) => {
+                        const RADIAN = Math.PI / 180;
+
+                        // 🔹 Автоматическая адаптация длины выносной линии
+                        let extraRadius = 20 + (index % 3) * 10; // немного варьируем длину
+                        const adjustedAngle = midAngle % 360;
+
+                        // Немного увеличиваем для верхних сегментов, чтобы не пересекались
+                        if (adjustedAngle > 60 && adjustedAngle < 120) extraRadius += 15;
+                        if (adjustedAngle > 120 && adjustedAngle < 180) extraRadius += 10;
+                        if (adjustedAngle > 240 && adjustedAngle < 300) extraRadius += 5;
+
+                        const radius = outerRadius + extraRadius;
+                        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                        return (
+                          <text
+                            x={x}
+                            y={y}
+                            fill="#555"
+                            textAnchor={x > cx ? "start" : "end"}
+                            dominantBaseline="central"
+                            fontSize={11}
+                          >
+                            {`${(percent * 100).toFixed(1)}%`}
+                          </text>
+                        );
+                      }}
                     >
                       {charts.allocation.map((_, i) => (
                         <Cell key={i} fill={colors[i % colors.length]} />
@@ -132,7 +172,7 @@ export default function SectionBehavior({ data }) {
               </div>
 
               {/* Кастомная легенда */}
-              <div className="flex flex-col gap-2 text-sm text-gray-700">
+              <div className="flex flex-col gap-2 text-sm text-gray-700 max-w-[260px]">
                 {charts.allocation.map((entry, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <span
@@ -155,15 +195,13 @@ export default function SectionBehavior({ data }) {
       {charts.depositComparison && charts.depositComparison.length > 0 && (
         <Card>
           <CardContent className="p-6 space-y-4">
-            {/* Заголовок + диапазон */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="text-lg font-medium mb-1">
                   🏦 Средний чек по категориям MCC
                 </h3>
                 <p className="text-sm text-gray-500">
-                  Сравнение среднего чека по различным категориям MCC помогает
-                  определить, где клиенты тратят больше всего.
+                  Сравнение среднего чека по различным категориям MCC помогает определить, где клиенты тратят больше всего.
                 </p>
               </div>
 
