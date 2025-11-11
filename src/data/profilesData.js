@@ -184,7 +184,8 @@ export const profilesData = [
       ],
 
       paymentMethods: [
-        { name: "Kaspi QR", value: 24 }, 
+        { name: "Kaspi QR", value: 4 }, 
+        { name: "Alatau City QR", value: 20 }, 
         { name: "Apple Pay", value: 44 },
         { name: "Google Pay", value: 0 },
         { name: "Карта Банка через POS", value: 42 },
