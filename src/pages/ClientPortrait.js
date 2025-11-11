@@ -619,24 +619,24 @@ function getCrossMetricsForProduct(product, base) {
 
   if (product === "Кредиты") {
     return [
-      { label: "🏦 Клиенты с депозитом", value: withDeposits },
-      { label: "💳 Клиенты с картой", value: withCards },
+      { label: "Из них клиенты с депозитом", value: withDeposits },
+      { label: "Из них клиенты с картой", value: withCards },
     ];
   } else if (product === "Депозиты") {
     return [
-      { label: "💰 Клиенты с кредитом", value: withCredits },
-      { label: "💳 Клиенты с картой", value: withCards },
+      { label: "Из них клиенты с кредитом", value: withCredits },
+      { label: "Из них клиенты с картой", value: withCards },
     ];
   } else if (product === "Карты") {
     return [
-      { label: "💰 Клиенты с кредитом", value: withCredits },
-      { label: "🏦 Клиенты с депозитом", value: withDeposits },
+      { label: "Из них клиенты с кредитом", value: withCredits },
+      { label: "Из них клиенты с депозитом", value: withDeposits },
     ];
   } else {
     // Лояльность и другие
     return [
-      { label: "💰 Клиенты с кредитом", value: withCredits },
-      { label: "🏦 Клиенты с депозитом", value: withDeposits },
+      { label: "Из них клиенты с кредитом", value: withCredits },
+      { label: "Из них клиенты с депозитом", value: withDeposits },
     ];
   }
 }
