@@ -205,8 +205,7 @@ export default function SectionBehavior({ data }) {
           </CardContent>
         </Card>
       )}
-      
-{/* 🏦 Средний чек по категориям MCC */}
+      {/* 🏦 Средний чек по категориям MCC */}
 {charts.transactionsBySegment && charts.transactionsBySegment.length > 0 && (
   <Card>
     <CardContent className="p-6 space-y-4">
@@ -220,7 +219,7 @@ export default function SectionBehavior({ data }) {
           </p>
         </div>
 
-        {/* 📆 Диапазон дат и фильтр MCC */}
+        {/* 📆 Фильтры */}
         <div className="flex flex-wrap items-center justify-end gap-4 ml-auto mt-2 sm:mt-0">
           {/* Фильтр по MCC */}
           <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
@@ -267,141 +266,147 @@ export default function SectionBehavior({ data }) {
         </div>
       </div>
 
-      {/* 📊 График ComposedChart */}
-      <div style={{ width: "100%", height: 400 }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart
-            data={filteredTransactionsData.map((d) => ({
-              ...d,
-              transactionSumMln: d.transactionSum / 1_000_000, // объем в млн ₸
-              transactionCountK: d.transactionCount / 1_000, // кол-во в тыс.
-            }))}
-            margin={{ top: 20, right: 40, left: 10, bottom: 100 }}
-            barCategoryGap="10%"
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-
-            {/* Ось X с переносом слов */}
-            <XAxis
-              dataKey="segment"
-              interval={0}
-              height={100}
-              tick={({ x, y, payload }) => {
-                const words = payload.value.split(" ");
-                const lineHeight = 12;
-                const startY = y + 16;
-                return (
-                  <g transform={`translate(${x},${startY})`}>
-                    <text textAnchor="middle" fontSize={11} fill="#555">
-                      {words.map((word, index) => (
-                        <tspan
-                          key={index}
-                          x="0"
-                          dy={index === 0 ? 0 : lineHeight}
-                        >
-                          {word}
-                        </tspan>
-                      ))}
-                    </text>
-                  </g>
-                );
-              }}
-            />
-
-            {/* Левая ось — Средний чек */}
-            <YAxis
-              yAxisId="left"
-              orientation="left"
-              label={{
-                value: "Средний чек (₸)",
-                angle: -90,
-                position: "insideLeft",
-                style: { fontSize: 12, fill: "#F59E0B" },
-              }}
-              tickFormatter={(v) => v.toLocaleString()}
-            />
-
-            {/* Правая ось — Объем (млн ₸) / Кол-во (тыс.) */}
-            <YAxis
-              yAxisId="right"
-              orientation="right"
-              label={{
-                value: "Объем (млн ₸) / Кол-во (тыс.)",
-                angle: -90,
-                position: "insideRight",
-                style: { fontSize: 12, fill: "#3B82F6" },
-              }}
-              tickFormatter={(v) =>
-                v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v
-              }
-            />
-
-            <Tooltip
-              formatter={(value, name) => {
-                if (name.includes("Средний чек"))
-                  return [`${value.toLocaleString()} ₸`, name];
-                if (name.includes("Объем транзакций"))
-                  return [`${value.toFixed(1)} млн ₸`, name];
-                if (name.includes("Кол-во транзакций"))
-                  return [`${value.toFixed(1)} тыс.`, name];
-                return [value, name];
-              }}
-            />
-            <Legend verticalAlign="bottom" height={36} />
-
-            {/* 🟩 Объем транзакций */}
-            <Bar
-              yAxisId="right"
-              dataKey="transactionSumMln"
-              name="Объем транзакций (млн ₸)"
-              fill="#34D399"
-              radius={[6, 6, 0, 0]}
-              barSize={20}
+      {/* 📊 График с горизонтальной прокруткой */}
+      <div className="overflow-x-auto">
+        <div style={{ width: "1400px", height: "420px", paddingRight: "30px" }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={filteredTransactionsData.map((d) => ({
+                ...d,
+                transactionSumMln: d.transactionSum / 1_000_000, // объем в млн ₸
+                transactionCountK: d.transactionCount / 1_000, // кол-во в тыс.
+              }))}
+              margin={{ top: 20, right: 40, left: 20, bottom: 100 }}
+              barCategoryGap="15%"
             >
-              <LabelList
+              <CartesianGrid strokeDasharray="3 3" />
+
+              {/* X-ось с переносом текста */}
+              <XAxis
+                dataKey="segment"
+                interval={0}
+                height={100}
+                tick={({ x, y, payload }) => {
+                  const words = payload.value.split(" ");
+                  const lineHeight = 12;
+                  const startY = y + 16;
+                  return (
+                    <g transform={`translate(${x},${startY})`}>
+                      <text textAnchor="middle" fontSize={11} fill="#555">
+                        {words.map((word, index) => (
+                          <tspan
+                            key={index}
+                            x="0"
+                            dy={index === 0 ? 0 : lineHeight}
+                          >
+                            {word}
+                          </tspan>
+                        ))}
+                      </text>
+                    </g>
+                  );
+                }}
+              />
+
+              {/* Левая ось — Средний чек */}
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                label={{
+                  value: "Средний чек (₸)",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: -10,
+                  dy: 30, // 👈 чуть вниз, чтобы не прилипало
+                  style: { fontSize: 12, fill: "#F59E0B" },
+                }}
+                tickFormatter={(v) => v.toLocaleString()}
+              />
+
+              {/* Правая ось — Объем / Кол-во */}
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                label={{
+                  value: "Объем (млн ₸) / Кол-во (тыс.)",
+                  angle: -90,
+                  position: "insideRight",
+                  dy: 30,
+                  style: { fontSize: 12, fill: "#3B82F6" },
+                }}
+                tickFormatter={(v) =>
+                  v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v
+                }
+              />
+
+              <Tooltip
+                formatter={(value, name) => {
+                  if (name.includes("Средний чек"))
+                    return [`${value.toLocaleString()} ₸`, name];
+                  if (name.includes("Объем транзакций"))
+                    return [`${value.toFixed(1)} млн ₸`, name];
+                  if (name.includes("Кол-во транзакций"))
+                    return [`${value.toFixed(1)} тыс.`, name];
+                  return [value, name];
+                }}
+              />
+              <Legend verticalAlign="bottom" height={36} />
+
+              {/* 🟩 Объем транзакций */}
+              <Bar
+                yAxisId="right"
                 dataKey="transactionSumMln"
-                position="top"
-                formatter={(v) => `${v.toFixed(1)} млн`}
-                fontSize={9}
-                fill="#065F46"
-              />
-            </Bar>
+                name="Объем транзакций (млн ₸)"
+                fill="#34D399"
+                radius={[6, 6, 0, 0]}
+                barSize={20}
+              >
+                <LabelList
+                  dataKey="transactionSumMln"
+                  position="top"
+                  formatter={(v) => `${v.toFixed(1)} млн`}
+                  fontSize={9}
+                  fill="#065F46"
+                />
+              </Bar>
 
-            {/* 🟨 Средний чек */}
-            <Bar
-              yAxisId="left"
-              dataKey="avgTransaction"
-              name="Средний чек (₸)"
-              fill="#FBBF24"
-              radius={[6, 6, 0, 0]}
-              barSize={20}
-            >
-              <LabelList
+              {/* 🟨 Средний чек */}
+              <Bar
+                yAxisId="left"
                 dataKey="avgTransaction"
-                position="bottom"
-                formatter={(v) => v.toLocaleString()}
-                fontSize={10}
-                fill="#333"
-              />
-            </Bar>
+                name="Средний чек (₸)"
+                fill="#FBBF24"
+                radius={[6, 6, 0, 0]}
+                barSize={20}
+              >
+                <LabelList
+                  dataKey="avgTransaction"
+                  position="bottom"
+                  formatter={(v) => v.toLocaleString()}
+                  fontSize={10}
+                  fill="#333"
+                />
+              </Bar>
 
-            {/* 🟦 Количество транзакций */}
-            <Line
-              yAxisId="right"
-              type="monotone"
-              dataKey="transactionCountK"
-              name="Кол-во транзакций (тыс.)"
-              stroke="#3B82F6"
-              strokeWidth={2}
-              dot={{ r: 4 }}
-              activeDot={{ r: 6 }}
-            />
-          </ComposedChart>
-        </ResponsiveContainer>
+              {/* 🟦 Количество транзакций */}
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="transactionCountK"
+                name="Кол-во транзакций (тыс.)"
+                stroke="#3B82F6"
+                strokeWidth={2}
+                dot={{ r: 4 }}
+                activeDot={{ r: 6 }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </CardContent>
   </Card>
 )}
+
 
 
 
