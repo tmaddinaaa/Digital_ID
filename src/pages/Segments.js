@@ -69,8 +69,8 @@ const BASE_DATA = {
   ],
   creditDeposit: [
     { name: "Без кредитов и депозитов", value: 72 },
-    { name: "Кредит", value: 19 },
-    { name: "Депозит", value: 9 },
+    { name: "Только Кредит", value: 19 },
+    { name: "Только Депозит", value: 9 },
     { name: "Кредит + депозит", value: 1 },
   ],
   segments: Object.entries(segmentNames).map(([key, name]) => {
