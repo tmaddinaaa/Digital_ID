@@ -69,8 +69,8 @@ const BASE_DATA = {
   ],
   creditDeposit: [
     { name: "Без кредитов и депозитов", value: 72 },
-    { name: "Только кредит", value: 19 },
-    { name: "Только депозит", value: 9 },
+    { name: "Кредит", value: 19 },
+    { name: "Депозит", value: 9 },
     { name: "Кредит + депозит", value: 1 },
   ],
   segments: Object.entries(segmentNames).map(([key, name]) => {
@@ -181,7 +181,7 @@ export default function Segments() {
         <>
           {/* KPI */}
           <div className="grid md:grid-cols-3 gap-6">
-            <MetricCard label="Количество транзакционно активных клиентов" value={filteredData.totals.totalUsers.toLocaleString()} />
+            <MetricCard label="Количество транзакционно активных/доходных клиентов" value={filteredData.totals.totalUsers.toLocaleString()} />
             <MetricCard label="Средний доход (₸) на 1 активного клиента" value={filteredData.totals.avgRevenue.toLocaleString()} highlight />
             <MetricCard
               label="Общий доход (₸)"
@@ -353,10 +353,15 @@ function MetricCard({ label, value, highlight = false, note }) {
 
 function PieCard({ title, data, dateRange, smallLabels = false }) {
   const COLORS = ["#FFB800", "#7EA8FF", "#2563eb", "#E59E00", "#FACC15"];
+
   return (
     <Card>
+      {/* Заголовок и фильтр дат */}
       <CardHeader className="flex items-center justify-between gap-3">
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-base font-semibold text-gray-800">
+          {title}
+        </CardTitle>
+
         <div className="flex items-center gap-2 text-xs bg-gray-50 border border-gray-200 rounded-md px-2 py-1 text-gray-700">
           <Calendar size={13} className="text-yellow-600" />
           <input
@@ -375,31 +380,65 @@ function PieCard({ title, data, dateRange, smallLabels = false }) {
         </div>
       </CardHeader>
 
+      {/* Диаграмма */}
       <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              data={data}
-              dataKey="value"
-              nameKey="name"
-              outerRadius={90}
-              paddingAngle={3}
-              label={({ name, value }) =>
-                smallLabels ? `${name.split(" ")[0]}: ${value}%` : `${name}: ${value}%`
-              }
-              labelLine={false}
-            >
-              {data.map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
+        <div style={{ width: "100%", height: 320 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={90}
+                innerRadius={0}
+                paddingAngle={3}
+                labelLine={false}
+                label={({ cx, cy, midAngle, outerRadius, name, value, index }) => {
+                  // вычисляем позицию текста вручную
+                  const RADIAN = Math.PI / 180;
+                  const radius = outerRadius * 1.25; // вынос надписи чуть наружу
+                  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                  // перенос длинных надписей
+                  const words = name.split(" ");
+                  const displayName =
+                    words.length > 2
+                      ? `${words.slice(0, 2).join(" ")}\n${words.slice(2).join(" ")}`
+                      : name;
+
+                  // позиционирование для длинных названий (слева / справа)
+                  const textAnchor = x > cx ? "start" : "end";
+                  const fill = COLORS[index % COLORS.length];
+
+                  return (
+                    <text
+                      x={x}
+                      y={y}
+                      textAnchor={textAnchor}
+                      fill={fill}
+                      fontSize={12}
+                      fontWeight={500}
+                      style={{ whiteSpace: "pre-line" }}
+                    >
+                      {`${displayName}: ${value}%`}
+                    </text>
+                  );
+                }}
+              >
+                {data.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(v, n) => [`${v}%`, n]} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </CardContent>
     </Card>
   );
 }
+
 
 function CollapsibleRFMTable({ filteredRFM }) {
   const [open, setOpen] = useState(false);
