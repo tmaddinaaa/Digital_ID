@@ -150,7 +150,20 @@ export const behaviorAllData = {
       { date: "2025-08-01", newUsers: 27279, newUsersChange: -9.2, mau: 824329, mauChange: -6.3, dau: 144167, dauChange: -6.3 },
       { date: "2025-09-01", newUsers: 25993, newUsersChange: -4.7, mau: 777920, mauChange: -5.6, dau: 139824, dauChange: -3.0 },
     ],
+
+      userRetention: [
+  { period: "Initial", clients: 66597, retention: 100, churn: 0 },
+  { period: "1w", clients: 47913, retention: 72, churn: 28 },
+  { period: "1m", clients: 45118, retention: 68, churn: 32 },
+  { period: "3m", clients: 41704, retention: 63, churn: 37 },
+  { period: "6m", clients: 38234, retention: 57, churn: 43 },
+  { period: "12m", clients: 31937, retention: 48, churn: 52 },
+  { period: "24m", clients: 14427, retention: 22, churn: 78 },
+],
   },
+
+
+
   insights: [],
   
 

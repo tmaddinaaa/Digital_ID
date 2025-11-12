@@ -71,6 +71,13 @@ export default function SectionBehavior({ data }) {
     end: "2025-09-01",
   });
 
+  // 📆 Диапазон дат для графика выживаемости
+const [retentionRange, setRetentionRange] = useState({
+  start: "2023-09-01",
+  end: "2025-09-01",
+});
+
+
   
   const [selectedMcc, setSelectedMcc] = useState("all");
   const [showOther, setShowOther] = useState(false);
@@ -903,7 +910,187 @@ export default function SectionBehavior({ data }) {
     </CardContent>
   </Card>
 )}
+{/* 📉 Анализ выживаемости пользователей */}
+{charts.userRetention && charts.userRetention.length > 0 && (
+  <Card>
+    <CardContent className="p-6 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h3 className="text-lg font-semibold mb-1 flex items-center gap-2">
+            📉 Анализ выживаемости пользователей
+          </h3>
+          <p className="text-sm text-gray-500">
+            Показатель выживаемости (Retention Rate) и оттока (Churn Rate) клиентов по периодам наблюдения.
+          </p>
+        </div>
 
+        {/* 📅 Диапазон дат */}
+        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+          <Calendar size={15} className="text-amber-500" />
+          <div className="flex items-center gap-2">
+            <input
+              type="date"
+              value={retentionRange.start}
+              onChange={(e) =>
+                setRetentionRange({ ...retentionRange, start: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+            <span>–</span>
+            <input
+              type="date"
+              value={retentionRange.end}
+              onChange={(e) =>
+                setRetentionRange({ ...retentionRange, end: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <div style={{ width: "100%", height: 460 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={charts.userRetention}
+              margin={{ top: 40, right: 60, left: 60, bottom: 80 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#FEF3C7" />
+
+              {/* Оси */}
+              <XAxis
+                dataKey="period"
+                tick={{ fill: "#92400E", fontSize: 12, dy: 8 }}
+                label={{
+                  value: "Период наблюдения",
+                  position: "insideBottom",
+                  offset: -5,
+                  style: { fontSize: 12, fill: "#92400E" },
+                }}
+              />
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                label={{
+                  value: "Клиенты (чел.)",
+                  angle: -90,
+                  position: "insideLeft",
+                  dy: 50,
+                  style: { fontSize: 12, fill: "#92400E" },
+                }}
+                tickFormatter={(v) => v.toLocaleString("ru-RU")}
+                tick={{ fill: "#92400E", fontSize: 11 }}
+              />
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={[0, 100]}
+                label={{
+                  value: "Процент (%)",
+                  angle: -90,
+                  position: "insideRight",
+                  dy: 50,
+                  style: { fontSize: 12, fill: "#B45309" },
+                }}
+                tick={{ fill: "#B45309", fontSize: 11 }}
+              />
+
+              <Tooltip
+                formatter={(value, name) => [
+                  name.includes("Клиенты")
+                    ? `${value.toLocaleString("ru-RU")} чел.`
+                    : `${value}%`,
+                  name,
+                ]}
+                contentStyle={{
+                  borderRadius: "8px",
+                  borderColor: "#FBBF24",
+                  backgroundColor: "#FFFBEB",
+                  fontSize: "13px",
+                }}
+              />
+              <Legend
+                verticalAlign="bottom"
+                height={40}
+                wrapperStyle={{ paddingTop: 10 }}
+              />
+
+              <defs>
+                <linearGradient id="clientsGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#FCD34D" />
+                  <stop offset="100%" stopColor="#FDBA74" />
+                </linearGradient>
+              </defs>
+
+              {/* 🟨 Количество клиентов */}
+              <Bar
+                yAxisId="left"
+                dataKey="clients"
+                name="Количество клиентов"
+                fill="url(#clientsGrad)"
+                barSize={45}
+                radius={[8, 8, 0, 0]}
+              >
+                <LabelList
+                  dataKey="clients"
+                  position="insideTop"
+                  formatter={(v) => v.toLocaleString("ru-RU")}
+                  fill="#78350F"
+                  fontSize={11}
+                  offset={5}
+                />
+              </Bar>
+
+              {/* 🟡 Выживаемость */}
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="retention"
+                name="Выживаемость (%)"
+                stroke="#F59E0B"
+                strokeWidth={3}
+                dot={{ r: 5, fill: "#FACC15", strokeWidth: 1 }}
+                activeDot={{ r: 7, fill: "#FDE68A" }}
+              >
+                <LabelList
+                  dataKey="retention"
+                  position="top"
+                  formatter={(v) => `${v}%`}
+                  fill="#92400E"
+                  fontSize={12}
+                  offset={8}
+                />
+              </Line>
+
+              {/* 🟠 Отток */}
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="churn"
+                name="Отток (%)"
+                stroke="#EA580C"
+                strokeDasharray="5 4"
+                strokeWidth={2.5}
+                dot={{ r: 5, fill: "#FDBA74", strokeWidth: 1 }}
+                activeDot={{ r: 7, fill: "#F97316" }}
+              >
+                <LabelList
+                  dataKey="churn"
+                  position="bottom"
+                  formatter={(v) => `${v}%`}
+                  fill="#B45309"
+                  fontSize={12}
+                  offset={6}
+                />
+              </Line>
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+)}
 
 
 
