@@ -285,10 +285,10 @@ export default function Profiles() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 text-gray-900">
+    <div className="flex bg-gray-50 text-gray-900">
       <div className="flex-1 p-6 overflow-auto">
         <h1 className="text-2xl font-semibold mb-4">
-          👥 Customer Data Platform
+          👥 Search Client Profile
         </h1>
 
         <UnifiedFilters

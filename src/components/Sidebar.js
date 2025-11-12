@@ -17,10 +17,9 @@ const Sidebar = ({ setIsAuthenticated }) => {
 
   const menu = [
     { path: "/", label: "Base Analytics", icon: <Database size={18} /> },
-    { path: "/profiles", label: "Customer Data Platform", icon: <Users size={18} /> },
+    { path: "/profiles", label: "Search Client Profile", icon: <Users size={18} /> },
     { path: "/segments", label: "Segments", icon: <Layers size={18} /> },
-    { path: "/models", label: "Models", icon: <Cpu size={18} /> },
-    { path: "/client-portrait", label: "Product Portrait", icon: <Brain size={18} /> }, 
+    { path: "/client-portrait", label: "Product Portrait", icon: <Brain size={18} /> },
     { path: "/ai-chat", label: "AI Chat", icon: <MessageSquare size={18} /> },
     { path: "/settings", label: "Settings", icon: <Settings size={18} /> },
   ];
@@ -33,12 +32,12 @@ const Sidebar = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="w-64 h-screen bg-white shadow-soft flex flex-col p-5 border-r border-gray-200">
+    <div className="fixed top-0 left-0 w-64 h-screen bg-white shadow-soft flex flex-col p-5 border-r border-gray-200 z-50">
       <h2 className="text-2xl font-semibold mb-8 text-primary font-nunito tracking-tight">
         Digital_ID
       </h2>
 
-      <nav className="flex flex-col space-y-2 flex-1">
+      <nav className="flex flex-col space-y-2 flex-1 overflow-y-auto">
         {menu.map((item) => (
           <NavLink
             key={item.path}

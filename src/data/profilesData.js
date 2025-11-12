@@ -169,7 +169,7 @@ export const profilesData = [
         "Коммуналка (10%)",
         "Покупки (25%)",
         "Переводы (10%)",
-        "Прочее (10%)",
+        "Прочее (35%)",
       ],
       mlInsight: "70% дохода распределяется в первые 2 дня после зарплаты",
       habitScore: 84,
@@ -657,7 +657,6 @@ export const profilesData = [
     habitScore: 88,
 
     expenseFlow: [
-      { stage: "Доход (зарплата + ИП)", amount: 100 },
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Семейные расходы", amount: 30 },
       { stage: "Депозит и сбережения", amount: 20 },
@@ -1111,11 +1110,10 @@ export const profilesData = [
     mlInsight: "Клиент с кредитной ориентацией и устойчивыми выплатами",
     habitScore: 84,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Погашение кредита", amount: 40 },
       { stage: "Покупки", amount: 25 },
       { stage: "Страхование", amount: 15 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 5 },
@@ -2790,7 +2788,6 @@ export const profilesData = [
     habitScore: 58,
 
     expenseFlow: [
-      { stage: "Поступление дохода", amount: 100 },
       { stage: "Покупки и повседневные траты", amount: 45 },
       { stage: "Коммунальные платежи", amount: 15 },
       { stage: "Переводы ", amount: 15 },
@@ -2995,7 +2992,6 @@ export const profilesData = [
     habitScore: 82,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Домашние расходы", amount: 35 },
       { stage: "Сбережения", amount: 25 },
       { stage: "Образование детей", amount: 15 },
@@ -3219,7 +3215,6 @@ export const profilesData = [
     habitScore: 84,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Сбережения", amount: 25 },
       { stage: "Путешествия", amount: 20 },
       { stage: "Инвестиции", amount: 20 },
@@ -3667,11 +3662,10 @@ export const profilesData = [
     mlInsight: "Клиент с устойчивым доходом и активной цифровой активностью, склонен к инвестициям",
     habitScore: 84,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и услуги", amount: 35 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -3953,7 +3947,6 @@ export const profilesData = [
     habitScore: 89,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Погашение кредита", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 15 },
@@ -4159,11 +4152,10 @@ export const profilesData = [
     mlInsight: "Пассивная клиентка с устойчивыми доходами, регулярно пополняет депозит",
     habitScore: 83,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Покупки и семья", amount: 40 },
       { stage: "Страхование и услуги", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -4379,10 +4371,9 @@ export const profilesData = [
     mlInsight: "Средний доход, предпочтение накопительным продуктам, низкая активность по картам",
     habitScore: 75,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Пополнение депозита", amount: 40 },
       { stage: "Семейные расходы", amount: 40 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -4594,12 +4585,11 @@ export const profilesData = [
     mlInsight: "Активный клиент с невысоким доходом, но стабильным кредитным поведением",
     habitScore: 74,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Погашение кредита", amount: 35 },
       { stage: "Питание и покупки", amount: 30 },
       { stage: "Транспорт", amount: 15 },
       { stage: "Коммуналка", amount: 10 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
@@ -4794,11 +4784,10 @@ export const profilesData = [
     mlInsight: "Молодая клиентка с низким доходом, активно использует цифровые платежи",
     habitScore: 72,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Питание и покупки", amount: 40 },
       { stage: "Коммуналка", amount: 20 },
       { stage: "Переводы и подарки", amount: 25 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -5006,12 +4995,11 @@ export const profilesData = [
     mlInsight: "Финансово активная клиентка с умеренной склонностью к инвестициям",
     habitScore: 87,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Семейные расходы", amount: 25 },
       { stage: "Питание и покупки", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -5240,11 +5228,10 @@ export const profilesData = [
     mlInsight: "Депозитный клиент с высоким уровнем вовлеченности и финансовой дисциплиной",
     habitScore: 91,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Путешествия и семья", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -5487,11 +5474,10 @@ export const profilesData = [
     mlInsight: "Премиум-клиент с диверсифицированными источниками дохода и активным финансовым управлением",
     habitScore: 93,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Инвестиции", amount: 30 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Путешествия и семья", amount: 30 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
@@ -5721,12 +5707,11 @@ export const profilesData = [
     mlInsight: "Пассивный, но устойчиво прибыльный клиент с предпринимательским доходом",
     habitScore: 91,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Инвестиции", amount: 25 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Семья и быт", amount: 20 },
       { stage: "Налоги и обслуживание ИП", amount: 15 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 35 },
@@ -5987,7 +5972,6 @@ export const profilesData = [
     mlInsight: "Творческий профи с нерегулярным доходом, дисциплинирован по кредиту, открыт к офферам по кэшбэку и travel",
     habitScore: 79,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Проф.расходы", amount: 35 },
       { stage: "Личные расходы", amount: 25 },
       { stage: "Путешествия и фестивали", amount: 20 },
@@ -6179,10 +6163,9 @@ export const profilesData = [
     mlInsight: "Малодоходная клиентка, не использует сложные банковские продукты",
     habitScore: 42,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
       { stage: "Питание и покупки", amount: 50 },
       { stage: "Коммуналка", amount: 20 },
-      { stage: "Прочее", amount: 30 }
+      { stage: "Свободные средства", amount: 30 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 40 },
@@ -6393,12 +6376,12 @@ export const profilesData = [
     mlInsight: "Сбалансированный клиент с диверсифицированным доходом и устойчивыми финансовыми привычками",
     habitScore: 87,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и услуги", amount: 25 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -6594,12 +6577,12 @@ export const profilesData = [
     mlInsight: "Кредитоориентированный клиент с высокой дисциплиной платежей",
     habitScore: 86,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 35 },
       { stage: "Семейные расходы", amount: 25 },
       { stage: "Коммунальные услуги", amount: 15 },
       { stage: "Страхование и транспорт", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 40 },
@@ -6807,12 +6790,12 @@ export const profilesData = [
     mlInsight: "Пассивный, но стабильный клиент с депозитом и страховыми продуктами",
     habitScore: 79,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Семейные расходы", amount: 35 },
       { stage: "Питание и покупки", amount: 25 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Коммуналка", amount: 10 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -7021,10 +7004,10 @@ export const profilesData = [
     mlInsight: "Клиентка с низкой активностью, без кредитной и депозитной нагрузки",
     habitScore: 41,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Питание и покупки", amount: 50 },
       { stage: "Коммуналка", amount: 20 },
-      { stage: "Прочее", amount: 30 }
+      { stage: "Свободные средства", amount: 30 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 40 },
@@ -7232,11 +7215,11 @@ export const profilesData = [
     mlInsight: "Финансово грамотная клиентка, использует сбережения и инвестиции",
     habitScore: 86,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и семья", amount: 35 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 25 },
@@ -7467,12 +7450,12 @@ export const profilesData = [
     mlInsight: "Финансово зрелая клиентка с устойчивыми доходами и активным использованием цифровых каналов",
     habitScore: 86,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 15 },
       { stage: "Покупки и услуги", amount: 30 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -7881,12 +7864,12 @@ export const profilesData = [
     mlInsight: "Активный клиент среднего дохода, с рациональным управлением средствами",
     habitScore: 87,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 30 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и транспорт", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -8103,11 +8086,11 @@ export const profilesData = [
     mlInsight: "Клиентка с устойчивыми сбережениями и умеренной активностью",
     habitScore: 81,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Инвестиции", amount: 25 },
       { stage: "Покупки", amount: 25 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -8503,7 +8486,7 @@ export const profilesData = [
     mlInsight: "Клиентка с низкой активностью, но высокой маржинальностью и устойчивыми сбережениями",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Инвестиции", amount: 25 },
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Покупки и путешествия", amount: 20 },
@@ -8721,11 +8704,11 @@ export const profilesData = [
     mlInsight: "Клиент с устойчивым, но невысоким доходом. Регулярные платежи и высокая дисциплина.",
     habitScore: 74,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 30 },
       { stage: "Коммуналка", amount: 20 },
       { stage: "Покупки и семья", amount: 35 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
@@ -8955,12 +8938,12 @@ export const profilesData = [
     mlInsight: "Клиент с диверсифицированным доходом, балансирует кредиты, сбережения и инвестиции",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Семейные расходы", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 30 },
@@ -9369,7 +9352,7 @@ export const profilesData = [
     mlInsight: "Клиент с устойчивым доходом от ИП, аккуратен в погашении кредитов",
     habitScore: 80,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 35 },
       { stage: "Домашние расходы", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
@@ -9601,12 +9584,12 @@ export const profilesData = [
     mlInsight: "Клиент со смешанным доходом, использует все ключевые продукты",
     habitScore: 89,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Расходы и семья", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -9827,11 +9810,11 @@ export const profilesData = [
     mlInsight: "Клиент с кредитной нагрузкой, но стабильными доходами и дисциплиной",
     habitScore: 79,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 40 },
       { stage: "Покупки и семья", amount: 30 },
       { stage: "Страхование и транспорт", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
@@ -10048,11 +10031,11 @@ export const profilesData = [
     mlInsight: "Пассивная, но дисциплинированная клиентка с ориентацией на накопления и страхование",
     habitScore: 83,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Покупки и семья", amount: 40 },
       { stage: "Страхование и услуги", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -10269,11 +10252,11 @@ export const profilesData = [
     mlInsight: "Сбалансированная клиентка с акцентом на депозиты и финансовую стабильность",
     habitScore: 82,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Семейные расходы", amount: 40 },
       { stage: "Страхование и услуги", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -10702,12 +10685,12 @@ export const profilesData = [
     mlInsight: "Финансово осторожная клиентка, предпочитает накопительные продукты и стабильность",
     habitScore: 84,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Питание и покупки", amount: 25 },
       { stage: "Коммунальные услуги", amount: 15 },
       { stage: "Семейные расходы", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 35 },
@@ -11185,7 +11168,7 @@ export const profilesData = [
     mlInsight: "Активный кредитный клиент, устойчивое поведение и средний уровень цифровизации",
     habitScore: 79,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредитов", amount: 35 },
       { stage: "Коммунальные услуги", amount: 15 },
       { stage: "Покупки и транспорт", amount: 30 },
@@ -11400,7 +11383,7 @@ export const profilesData = [
     mlInsight: "Сбалансированное поведение, склонность к накоплению и низкой активности",
     habitScore: 76,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Семейные расходы", amount: 30 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Инвестиции", amount: 15 },
@@ -11790,7 +11773,7 @@ export const profilesData = [
     mlInsight: "Финансово осознанная молодая специалистка, наращивает подушку безопасности через депозит",
     habitScore: 83,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Аренда и жильё", amount: 30 },
       { stage: "Питание и покупки", amount: 25 },
       { stage: "Коммуналка и связь", amount: 15 },
@@ -11993,11 +11976,11 @@ export const profilesData = [
     mlInsight: "Стабильная клиентка с депозитным поведением, предпочитает спокойные финансовые решения",
     habitScore: 82,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Покупки и семья", amount: 40 },
       { stage: "Страхование и услуги", amount: 20 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -12227,11 +12210,11 @@ export const profilesData = [
     mlInsight: "Клиентка с высоким доверием к сбережениям и инвестициям",
     habitScore: 90,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Инвестиции", amount: 25 },
       { stage: "Покупки и семья", amount: 25 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -12475,12 +12458,12 @@ export const profilesData = [
     mlInsight: "Премиальный клиент с устойчивым доходом и активным управлением капиталом",
     habitScore: 94,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Инвестиции", amount: 30 },
       { stage: "Погашение кредита", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Путешествия и отдых", amount: 15 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -12705,11 +12688,11 @@ export const profilesData = [
     mlInsight: "Премиальный депозитный клиент с высоким уровнем сбережений и умеренной активностью",
     habitScore: 90,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Семья и путешествия", amount: 30 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -13112,12 +13095,12 @@ export const profilesData = [
     mlInsight: "Пассивный, но надёжный клиент с акцентом на накопления и депозиты",
     habitScore: 78,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Бытовые расходы", amount: 25 },
       { stage: "Питание и покупки", amount: 20 },
       { stage: "Коммунальные платежи", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 40 },
@@ -13315,11 +13298,11 @@ export const profilesData = [
     mlInsight: "Пассивный, но стабильный вкладчик; предпочитает накопление и низкий риск",
     habitScore: 79,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Сбережения", amount: 40 },
       { stage: "Инвестиции", amount: 30 },
       { stage: "Покупки", amount: 15 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Карта Банка через POS", value: 40 },
@@ -13523,11 +13506,11 @@ export const profilesData = [
     mlInsight: "Клиентка со стабильным доходом, активно использует депозиты и страховые продукты",
     habitScore: 84,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Инвестиции", amount: 15 },
       { stage: "Покупки и семья", amount: 35 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -13923,7 +13906,7 @@ export const profilesData = [
     mlInsight: "Предприниматель с высоким доверием к банку, пользуется полным пакетом услуг и активно инвестирует",
     habitScore: 90,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Бизнес-расходы", amount: 40 },
       { stage: "Инвестиции", amount: 25 },
       { stage: "Погашение кредита", amount: 15 },
@@ -14369,10 +14352,10 @@ export const profilesData = [
     mlInsight: "Пассивная, но финансово дисциплинированная клиентка с устойчивыми накоплениями",
     habitScore: 82,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Покупки и семья", amount: 40 },
-      { stage: "Прочее", amount: 25 }
+      { stage: "Свободные средства", amount: 25 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -14584,10 +14567,10 @@ export const profilesData = [
     mlInsight: "Активный пользователь, но с ограниченным доходом и ориентацией на краткосрочные расходы",
     habitScore: 68,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 40 },
       { stage: "Покупки и питание", amount: 40 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -14800,11 +14783,11 @@ export const profilesData = [
     mlInsight: "Активный, но малодоходный клиент, кредитная нагрузка средняя",
     habitScore: 70,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 35 },
       { stage: "Покупки", amount: 40 },
       { stage: "Коммунальные услуги", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
@@ -15002,11 +14985,11 @@ export const profilesData = [
     mlInsight: "Активная клиентка, грамотно распределяет средства между накоплениями и расходами",
     habitScore: 87,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 30 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Покупки и услуги", amount: 35 },
-      { stage: "Прочее", amount: 15 }
+      { stage: "Свободные средства", amount: 15 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -15184,10 +15167,10 @@ export const profilesData = [
     mlInsight: "Клиентка с низким доходом, ограниченно использует банковские продукты",
     habitScore: 60,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Бытовые нужды", amount: 60 },
       { stage: "Коммунальные услуги", amount: 30 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 35 },
@@ -15424,12 +15407,12 @@ export const profilesData = [
     mlInsight: "Сбалансированный клиент с активным участием в инвестициях и страховании",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Покупки и семья", amount: 25 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -15660,7 +15643,7 @@ export const profilesData = [
     mlInsight: "Бухгалтер, планирующий тип поведения, финансовая дисциплина высокая, склонна к накоплению",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Семейные расходы", amount: 35 },
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Сбережения и депозиты", amount: 20 },
@@ -16112,7 +16095,7 @@ export const profilesData = [
     mlInsight: "Активная пользовательница, низкий доход, но высокая дисциплина по платежам",
     habitScore: 74,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Покупки и питание", amount: 40 },
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Коммуналка", amount: 15 },
@@ -16388,7 +16371,7 @@ export const profilesData = [
     mlInsight: "Ценный клиент: дисциплинированно гасит кредит, наращивает сбережения и инвестирует",
     habitScore: 92,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Бизнес-расходы", amount: 40 },
       { stage: "Инвестиции и депозит", amount: 25 },
       { stage: "Погашение кредита", amount: 15 },
@@ -16762,11 +16745,11 @@ export const profilesData = [
     mlInsight: "Финансово дисциплинированная клиентка с акцентом на накопления и инвестиции",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Инвестиции", amount: 30 },
       { stage: "Пополнение депозита", amount: 25 },
       { stage: "Покупки", amount: 25 },
-      { stage: "Прочее", amount: 20 }
+      { stage: "Свободные средства", amount: 20 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 30 },
@@ -16983,11 +16966,11 @@ export const profilesData = [
     mlInsight: "Семейная клиентка, активно пользуется депозитом и страховыми продуктами",
     habitScore: 84,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Пополнение депозита", amount: 35 },
       { stage: "Покупки и семья", amount: 40 },
       { stage: "Страхование и услуги", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -17225,12 +17208,12 @@ export const profilesData = [
     mlInsight: "Активный клиент с устойчивыми доходами, распределяет средства между кредитом и накоплениями",
     habitScore: 88,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 25 },
       { stage: "Пополнение депозита", amount: 20 },
       { stage: "Инвестиции", amount: 15 },
       { stage: "Покупки и семья", amount: 30 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 30 },
@@ -17458,11 +17441,11 @@ export const profilesData = [
     mlInsight: "Клиент с фокусом на кредитные продукты, активен в мобильном приложении",
     habitScore: 86,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Погашение кредита", amount: 40 },
       { stage: "Покупки и семья", amount: 35 },
       { stage: "Страхование и услуги", amount: 15 },
-      { stage: "Прочее", amount: 10 }
+      { stage: "Свободные средства", amount: 10 }
     ],
     paymentMethods: [
       { name: "Kaspi QR", value: 25 },
@@ -17657,12 +17640,12 @@ export const profilesData = [
     mlInsight: "Фрилансер, активен в цифровой среде, нестабильный доход",
     habitScore: 77,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Еда и покупки", amount: 40 },
       { stage: "Техника и гаджеты", amount: 25 },
       { stage: "Контент и путешествия", amount: 20 },
       { stage: "Сбережения", amount: 10 },
-      { stage: "Прочее", amount: 5 }
+      { stage: "Свободные средства", amount: 5 }
     ],
     paymentMethods: [
       { name: "Apple Pay", value: 35 },
@@ -18098,7 +18081,7 @@ export const profilesData = [
     mlInsight: "Молодой клиент, высокая вовлечённость в цифровые сервисы, низкий доход, растущий потенциал",
     habitScore: 76,
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Питание и кафе", amount: 40 },
       { stage: "Транспорт и связь", amount: 20 },
       { stage: "Учёба и материалы", amount: 20 },
@@ -18315,7 +18298,7 @@ export const profilesData = [
     habitScore: 88,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Путешествия", amount: 35 },
       { stage: "Сбережения", amount: 25 },
       { stage: "Инвестиции", amount: 20 },
@@ -18978,10 +18961,10 @@ export const profilesData = [
     habitScore: 35,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Питание", amount: 50 },
       { stage: "Коммуналка", amount: 20 },
-      { stage: "Прочее", amount: 30 }
+      { stage: "Свободные средства", amount: 30 }
     ],
 
     paymentMethods: [
@@ -19433,7 +19416,7 @@ export const profilesData = [
     habitScore: 78,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Топливо", amount: 35 },
       { stage: "Бытовые расходы", amount: 25 },
       { stage: "Коммуналка", amount: 15 },
@@ -19650,7 +19633,7 @@ export const profilesData = [
     habitScore: 65,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Кредит", amount: 30 },
       { stage: "Коммуналка", amount: 25 },
       { stage: "Питание", amount: 25 },
@@ -20337,7 +20320,7 @@ export const profilesData = [
     habitScore: 68,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Питание", amount: 35 },
       { stage: "Покупки", amount: 25 },
       { stage: "Развлечения", amount: 20 },
@@ -20557,7 +20540,7 @@ export const profilesData = [
     habitScore: 90,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Путешествия", amount: 40 },
       { stage: "Инвестиции", amount: 20 },
       { stage: "Сбережения", amount: 20 },
@@ -20942,7 +20925,7 @@ export const profilesData = [
     habitScore: 60,
 
     expenseFlow: [
-      { stage: "Доход", amount: 100 },
+      
       { stage: "Питание", amount: 40 },
       { stage: "Развлечения", amount: 25 },
       { stage: "Транспорт", amount: 20 },

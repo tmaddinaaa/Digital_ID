@@ -6,7 +6,7 @@ import {
   PieChart,
   Pie,
   Cell,
-  Bar, // Импортируем Bar
+  Bar,
   XAxis,
   YAxis,
   Tooltip,
@@ -14,20 +14,37 @@ import {
   LabelList,
   CartesianGrid,
   Legend,
-  ComposedChart, // Импортируем ComposedChart
-  Line, // Импортируем Line
+  ComposedChart,
+  Line,
 } from "recharts";
-import { TrendingUp, Calendar, Filter } from "lucide-react";
+import {
+  TrendingUp,
+  Calendar,
+  Filter,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 
 export default function SectionBehavior({ data }) {
   const colors = [
-    "#FFD966", "#FFB800", "#E59E00", "#FACC15", "#FDE68A", "#FBBF24", "#F59E0B",
-    "#D97706", "#B45309", "#FCD34D", "#FCA311", "#FFCA3A", "#FF9F1C", "#FDB813", "#FEE440",
+    "#FFD966",
+    "#FFB800",
+    "#E59E00",
+    "#FACC15",
+    "#FDE68A",
+    "#FBBF24",
+    "#F59E0B",
+    "#D97706",
+    "#B45309",
+    "#FCD34D",
+    "#FCA311",
+    "#FFCA3A",
+    "#FF9F1C",
+    "#FDB813",
+    "#FEE440",
   ];
 
   const { charts = {}, insights = [] } = data || {};
-
-  // --- 1. ВСЕ ХУКИ ВЫЗЫВАЕМ В НАЧАЛЕ ---
 
   const [reportDate, setReportDate] = useState("2025-10-01");
   const [spendingRange, setSpendingRange] = useState({
@@ -38,53 +55,41 @@ export default function SectionBehavior({ data }) {
     start: "2025-09-01",
     end: "2025-09-30",
   });
-  const [selectedMcc, setSelectedMcc] = useState("all"); 
+  const [selectedMcc, setSelectedMcc] = useState("all");
+  const [showOther, setShowOther] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  // Данные для первого графика
-  const filteredDepositData = useMemo(() => {
-    if (!charts.depositComparison) return [];
-    return charts.depositComparison;
-  }, [charts.depositComparison]);
-
-  // Данные для второго графика (MCC)
+  // MCC график
   const filteredTransactionsData = useMemo(() => {
     if (!charts.transactionsBySegment) return [];
-    
-    // Масштабируем Объем транзакций в миллионы
-    let processedData = charts.transactionsBySegment.map(item => ({
-        ...item,
-        transactionSumMln: item.transactionSum / 1_000_000, 
+    const processed = charts.transactionsBySegment.map((item) => ({
+      ...item,
+      transactionSumMln: item.transactionSum / 1_000_000,
     }));
-
-    if (selectedMcc === "all") {
-        return processedData;
-    }
-    return processedData.filter(item => item.segment === selectedMcc);
+    return selectedMcc === "all"
+      ? processed
+      : processed.filter((item) => item.segment === selectedMcc);
   }, [charts.transactionsBySegment, selectedMcc]);
-  
-  // Список MCC для фильтра
+
   const mccOptions = useMemo(() => {
     if (!charts.transactionsBySegment) return [];
-    return ["all", ...charts.transactionsBySegment.map(item => item.segment)];
+    return ["all", ...charts.transactionsBySegment.map((item) => item.segment)];
   }, [charts.transactionsBySegment]);
 
-
-  // --- 2. РАННИЙ ВЫХОД ---
+  const otherCategories = charts.otherCategories || [];
+  const visibleRows = expanded ? otherCategories : otherCategories.slice(0, 5);
 
   if (!data)
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
 
-  // --- 3. ОСНОВНОЙ РЕНДЕРИНГ ---
-
   return (
     <div className="space-y-8">
-      {/* 📊 Заголовок с датой */}
+      {/* 📊 Заголовок */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
           📊 Поведение клиентов
         </h2>
 
-        {/* 📅 Фильтр даты отчёта */}
         <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 shadow-sm">
           <Calendar size={16} className="text-yellow-600" />
           <span>
@@ -99,22 +104,22 @@ export default function SectionBehavior({ data }) {
         </div>
       </div>
 
-      {/* 💳 Распределение трат (Оставлен без изменений) */}
+      {/* 💳 Распределение трат по категориям */}
       {charts.allocation && charts.allocation.length > 0 && (
         <Card>
           <CardContent className="p-6 space-y-4">
-            {/* ... (Ваш код для первого графика) ... */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="text-lg font-medium mb-1">
                   💳 Распределение трат по категориям
                 </h3>
                 <p className="text-sm text-gray-500">
-                  Отображает долю расходов клиентов по различным категориям товаров и услуг.
+                  Отображает долю расходов клиентов по различным категориям
+                  товаров и услуг.
                 </p>
               </div>
 
-              {/* 📆 Диапазон дат */}
+              {/* 📅 Диапазон дат */}
               <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
                 <Calendar size={15} className="text-yellow-600" />
                 <div className="flex items-center gap-2">
@@ -122,7 +127,10 @@ export default function SectionBehavior({ data }) {
                     type="date"
                     value={spendingRange.start}
                     onChange={(e) =>
-                      setSpendingRange({ ...spendingRange, start: e.target.value })
+                      setSpendingRange({
+                        ...spendingRange,
+                        start: e.target.value,
+                      })
                     }
                     className="bg-transparent outline-none text-gray-800 cursor-pointer"
                   />
@@ -131,7 +139,10 @@ export default function SectionBehavior({ data }) {
                     type="date"
                     value={spendingRange.end}
                     onChange={(e) =>
-                      setSpendingRange({ ...spendingRange, end: e.target.value })
+                      setSpendingRange({
+                        ...spendingRange,
+                        end: e.target.value,
+                      })
                     }
                     className="bg-transparent outline-none text-gray-800 cursor-pointer"
                   />
@@ -139,27 +150,30 @@ export default function SectionBehavior({ data }) {
               </div>
             </div>
 
-            {/* 📊 Визуализация */}
+            {/* 📊 Диаграмма */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              {/* Пироговая диаграмма */}
-              <div style={{ width: "100%", height: 300, maxWidth: 420 }}>
+              <div style={{ width: "100%", height: 360, maxWidth: 440 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart margin={{ top: 30, right: 80, bottom: 30, left: 80 }}>
+                  <PieChart
+                    margin={{
+                      top: 40,
+                      right: 100,
+                      bottom: 60,
+                      left: 100,
+                    }}
+                  >
                     <Pie
                       data={charts.allocation}
                       dataKey="share"
                       nameKey="category"
-                      outerRadius={110}
+                      outerRadius={120}
                       paddingAngle={2}
                       labelLine={true}
                       label={({ cx, cy, midAngle, outerRadius, percent, index }) => {
+                        if (percent * 100 < 1) return null;
                         const RADIAN = Math.PI / 180;
-                        let extraRadius = 20 + (index % 3) * 10;
-                        const adjustedAngle = midAngle % 360;
-                        if (adjustedAngle > 60 && adjustedAngle < 120) extraRadius += 15;
-                        if (adjustedAngle > 120 && adjustedAngle < 180) extraRadius += 10;
-                        if (adjustedAngle > 240 && adjustedAngle < 300) extraRadius += 5;
-                        const radius = outerRadius + extraRadius;
+                        const offset = 25 + (index % 3) * 10;
+                        const radius = outerRadius + offset;
                         const x = cx + radius * Math.cos(-midAngle * RADIAN);
                         const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -167,12 +181,13 @@ export default function SectionBehavior({ data }) {
                           <text
                             x={x}
                             y={y}
-                            fill="#555"
+                            fill="#E59E00"
                             textAnchor={x > cx ? "start" : "end"}
                             dominantBaseline="central"
-                            fontSize={11}
+                            fontSize={12}
+                            fontWeight="600"
                           >
-                            {`${(percent * 100).toFixed(1)}%`}
+                            {(percent * 100).toFixed(1)}%
                           </text>
                         );
                       }}
@@ -181,31 +196,108 @@ export default function SectionBehavior({ data }) {
                         <Cell key={i} fill={colors[i % colors.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value) => `${value}%`} />
+
+                    <Tooltip
+                      formatter={(value, name) => [`${value}%`, name]}
+                      contentStyle={{
+                        borderRadius: "8px",
+                        borderColor: "#FBBF24",
+                        fontSize: "13px",
+                      }}
+                    />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
 
-              {/* Кастомная легенда */}
-              <div className="flex flex-col gap-2 text-sm text-gray-700 max-w-[260px]">
+              {/* 🧾 Легенда с прокруткой */}
+              <div className="flex flex-col gap-2 text-sm text-gray-700 max-h-[240px] overflow-y-auto pr-2">
                 {charts.allocation.map((entry, i) => (
-                  <div key={i} className="flex items-center gap-2">
+                  <div
+                    key={i}
+                    onClick={() =>
+                      entry.category === "Другое" && setShowOther(!showOther)
+                    }
+                    className={`flex items-center gap-2 cursor-pointer rounded-md p-1.5 ${
+                      entry.category === "Другое"
+                        ? "hover:bg-amber-50"
+                        : "hover:bg-gray-50"
+                    }`}
+                  >
                     <span
                       className="inline-block w-4 h-4 rounded-sm"
                       style={{ backgroundColor: colors[i % colors.length] }}
                     ></span>
-                    <span className="font-medium text-gray-800">{entry.category}</span>
+                    <span className="font-medium text-gray-800 truncate">
+                      {entry.category}
+                    </span>
                     <span className="text-amber-600 font-semibold ml-auto">
                       {entry.share}%
                     </span>
+                    {entry.category === "Другое" && (
+                      <span className="ml-1 text-gray-500">
+                        {showOther ? (
+                          <ChevronUp size={14} />
+                        ) : (
+                          <ChevronDown size={14} />
+                        )}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* 📋 Таблица “Другое” */}
+            {showOther && (
+              <div className="mt-4 border-t pt-4">
+                <h4 className="font-medium mb-2 text-gray-800">
+                  Детализация категории «Другое»
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border text-sm text-gray-700">
+                    <thead className="bg-gray-50 text-gray-600">
+                      <tr>
+                        <th className="px-3 py-2 border text-left">Категория</th>
+                        <th className="px-3 py-2 border text-right">
+                          % от общих трат
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {visibleRows.map((item, i) => (
+                        <tr key={i} className="hover:bg-gray-50">
+                          <td className="px-3 py-2 border">{item.category}</td>
+                          <td className="px-3 py-2 border text-right">
+                            {item.share.toFixed(1)}%
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="flex justify-center mt-3">
+                  <button
+                    className="text-sm text-indigo-600 hover:underline flex items-center gap-1"
+                    onClick={() => setExpanded(!expanded)}
+                  >
+                    {expanded ? (
+                      <>
+                        Свернуть <ChevronUp size={14} />
+                      </>
+                    ) : (
+                      <>
+                        Показать все <ChevronDown size={14} />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
-      {/* 🏦 Средний чек по категориям MCC */}
+{/* 🏦 Средний чек по категориям MCC */}
 {charts.transactionsBySegment && charts.transactionsBySegment.length > 0 && (
   <Card>
     <CardContent className="p-6 space-y-4">
@@ -317,7 +409,7 @@ export default function SectionBehavior({ data }) {
                   angle: -90,
                   position: "insideLeft",
                   offset: -10,
-                  dy: 30, // 👈 чуть вниз, чтобы не прилипало
+                  dy: 30,
                   style: { fontSize: 12, fill: "#F59E0B" },
                 }}
                 tickFormatter={(v) => v.toLocaleString()}
@@ -406,9 +498,6 @@ export default function SectionBehavior({ data }) {
     </CardContent>
   </Card>
 )}
-
-
-
 
       {/* 💡 Инсайты */}
       {insights && insights.length > 0 && (
