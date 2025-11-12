@@ -177,10 +177,10 @@ export const profilesData = [
       expenseFlow: [
         
         { stage: "Оплата коммуналки", amount: 3 },
-        { stage: "Снятия наличных", amount: 15 },
-        { stage: "Пополнение депозита", amount: 10 },
-        { stage: "Переводы внутри Банка", amount: 10 },
-        { stage: "Свободные средства", amount: 5 },
+        { stage: "Снятия наличных", amount: 25 },
+        { stage: "Пополнение депозита", amount: 20 },
+        { stage: "Переводы внутри Банка", amount: 15 },
+        { stage: "Свободные средства", amount: 37 },
       ],
 
       paymentMethods: [
@@ -394,7 +394,7 @@ export const profilesData = [
 
       expenseFlow: [
         { stage: "Снятия наличных", amount: 15 },
-        { stage: "Покупки и траты", amount: 78 },
+        { stage: "Покупки и траты", amount: 30 },
         { stage: "Свободные средства", amount: 55 },
       ],
 
@@ -537,6 +537,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "10%",
           openDate: "2024-03-10",
           status: "Активен"
         }
@@ -805,6 +807,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "2%",
           openDate: "2024-09-12",
           status: "Активен",
         },
@@ -1266,6 +1270,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "1%",
           openDate: "2023-09-01",
           status: "Активен",
         }
@@ -1534,6 +1540,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "10%",
           openDate: "2023-12-15",
           status: "Активен"
         }
@@ -2182,6 +2190,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "2%",
           openDate: "2024-03-10",
           status: "Активен",
         },
@@ -2421,6 +2431,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "12%",
           openDate: "2024-06-20",
           status: "Активен",
         },
@@ -2902,6 +2914,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-03-01",
           status: "Активен"
         }
@@ -3118,6 +3132,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "1%",
           openDate: "2024-04-20",
           status: "Активен"
         }
@@ -3351,6 +3367,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "1%",
           openDate: "2024-02-11",
           status: "Активен",
         },
@@ -3575,6 +3593,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-11-01",
           status: "Активен"
         }
@@ -3790,6 +3810,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-06-10",
           status: "Активен"
         }
@@ -4905,6 +4927,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-11-01",
           status: "Активен"
         }
@@ -5128,6 +5152,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-06-01",
           status: "Активен"
         }
@@ -5374,6 +5400,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-09-15",
           status: "Активен"
         }
@@ -5616,6 +5644,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-06-10",
           status: "Активен"
         }
@@ -6288,6 +6318,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-03-05",
           status: "Активен"
         }
@@ -7129,6 +7161,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-02-10",
           status: "Активен"
         }
@@ -7362,6 +7396,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-06-01",
           status: "Активен"
         }
@@ -7776,6 +7812,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-02-10",
           status: "Активен"
         }
@@ -8000,6 +8038,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-02-10",
           status: "Активен"
         }
@@ -8392,6 +8432,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-05-15",
           status: "Активен"
         }
@@ -8846,6 +8888,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-12-01",
           status: "Активен"
         }
@@ -9259,6 +9303,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-05-01",
           status: "Активен"
         }
@@ -9490,6 +9536,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-01-12",
           status: "Активен"
         }
@@ -10394,6 +10442,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-09-10",
           status: "Активен"
         }
@@ -11299,6 +11349,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-03-05",
           status: "Активен"
         }
@@ -12111,6 +12163,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-09-10",
           status: "Активен"
         }
@@ -12357,6 +12411,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-02-01",
           status: "Активен"
         }
@@ -12594,6 +12650,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-09-01",
           status: "Активен"
         }
@@ -13005,6 +13063,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-03-01",
           status: "Активен"
         }
@@ -13216,6 +13276,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-02-01",
           status: "Активен"
         }
@@ -13412,6 +13474,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-04-01",
           status: "Активен"
         }
@@ -13807,6 +13871,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-12-01",
           status: "Активен"
         }
@@ -14031,6 +14097,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-03-01",
           status: "Активен",
         },
@@ -14899,6 +14967,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-02-01",
           status: "Активен"
         }
@@ -15312,6 +15382,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-11-10",
           status: "Активен"
         }
@@ -15551,6 +15623,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-10-01",
           status: "Активен"
         }
@@ -16218,6 +16292,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-11-20",
           status: "Активен"
         }
@@ -16646,6 +16722,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-05-20",
           status: "Активен"
         }
@@ -17113,6 +17191,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-10-01",
           status: "Активен"
         }
@@ -17778,6 +17858,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-10-01",
           status: "Активен"
         }
@@ -18196,6 +18278,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-09-01",
           status: "Активен"
         }
@@ -18435,6 +18519,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-08-01",
           status: "Активен"
         }
@@ -18666,6 +18752,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2024-12-10",
           status: "Активен"
         }
@@ -20003,6 +20091,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-11-01",
           status: "Активен"
         }
@@ -20437,6 +20527,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2023-10-01",
           status: "Активен"
         }
@@ -21038,6 +21130,8 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "2%",
           openDate: "2025-04-05",
           status: "Активен"
         }

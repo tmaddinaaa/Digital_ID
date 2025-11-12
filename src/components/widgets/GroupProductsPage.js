@@ -55,6 +55,7 @@ const GroupProductsPage = ({ data }) => {
                     <th className="p-2 text-left">Название</th>
                     <th className="p-2 text-left">Тип</th>
                     <th className="p-2 text-left">Тип портфеля</th>
+                    <th className="p-2 text-left">Доля</th>
                     <th className="p-2 text-left">Дата открытия</th>
                     <th className="p-2 text-left">Статус</th>
                   </tr>
@@ -65,6 +66,7 @@ const GroupProductsPage = ({ data }) => {
                       <td className="p-2">{p.name}</td>
                       <td className="p-2">{p.type}</td>
                       <td className="p-2">{p.portfolioType || "—"}</td>
+                      <td className="p-2">{p.share || "—"}</td>
                       <td className="p-2">{p.openDate || "—"}</td>
                       <td className="p-2">{p.status}</td>
                     </tr>
