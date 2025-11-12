@@ -112,6 +112,46 @@ export const behaviorAllData = {
         avgTransaction: 10769,
       },
     ],
+    bankApps: {
+      popularApps: [
+        { bank: "FreedomBank", clients: 345.9 },
+        { bank: "BCC", clients: 341.6 },
+        { bank: "HomeCreditBank", clients: 282.3 },
+        { bank: "BerekeBank", clients: 265.7 },
+        { bank: "ForteBank", clients: 179.6 },
+        { bank: "EurasianBank", clients: 135.7 },
+        { bank: "RBKBank", clients: 93.1 },
+        { bank: "AltynBank", clients: 63.8 },
+      ],
+      appsCount: [
+        { apps: 1, clients: 342.4 },
+        { apps: 2, clients: 303.0 },
+        { apps: 3, clients: 197.0 },
+        { apps: 4, clients: 115.8 },
+        { apps: 5, clients: 65.4 },
+        { apps: 6, clients: 36.4 },
+        { apps: 7, clients: 20.1 },
+        { apps: 8, clients: 10.0 },
+        { apps: 9, clients: 3.6 },
+      ],
+    },
+
+    userDynamics: [
+      { date: "2024-10-01", newUsers: 46793, newUsersChange: 0.0, mau: 1019236, mauChange: 0.0, dau: 183821, dauChange: 0.0 },
+      { date: "2024-11-01", newUsers: 43379, newUsersChange: -7.3, mau: 1017563, mauChange: -0.2, dau: 186961, dauChange: 1.7 },
+      { date: "2024-12-01", newUsers: 42154, newUsersChange: -2.8, mau: 1011600, mauChange: -0.6, dau: 190679, dauChange: 2.0 },
+      { date: "2025-01-01", newUsers: 43492, newUsersChange: 3.2, mau: 1018101, mauChange: 0.6, dau: 180096, dauChange: -5.6 },
+      { date: "2025-02-01", newUsers: 42463, newUsersChange: -2.4, mau: 1008653, mauChange: -0.9, dau: 190802, dauChange: 5.9 },
+      { date: "2025-03-01", newUsers: 42456, newUsersChange: 0.0, mau: 1017097, mauChange: 0.8, dau: 183620, dauChange: -3.8 },
+      { date: "2025-04-01", newUsers: 43362, newUsersChange: 2.1, mau: 998238, mauChange: -1.9, dau: 178786, dauChange: -2.6 },
+      { date: "2025-05-01", newUsers: 38413, newUsersChange: -11.4, mau: 960091, mauChange: -3.8, dau: 168681, dauChange: -5.7 },
+      { date: "2025-06-01", newUsers: 31115, newUsersChange: -19.0, mau: 964150, mauChange: 0.4, dau: 169613, dauChange: 0.6 },
+      { date: "2025-07-01", newUsers: 30033, newUsersChange: -3.5, mau: 879497, mauChange: -8.8, dau: 153888, dauChange: -9.3 },
+      { date: "2025-08-01", newUsers: 27279, newUsersChange: -9.2, mau: 824329, mauChange: -6.3, dau: 144167, dauChange: -6.3 },
+      { date: "2025-09-01", newUsers: 25993, newUsersChange: -4.7, mau: 777920, mauChange: -5.6, dau: 139824, dauChange: -3.0 },
+    ],
   },
   insights: [],
+  
+
 };

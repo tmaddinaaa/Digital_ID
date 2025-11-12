@@ -16,6 +16,7 @@ import {
   Legend,
   ComposedChart,
   Line,
+  BarChart
 } from "recharts";
 import {
   TrendingUp,
@@ -55,6 +56,22 @@ export default function SectionBehavior({ data }) {
     start: "2025-09-01",
     end: "2025-09-30",
   });
+
+    // новые диапазоны для 3 нижних графиков
+  const [bankRange, setBankRange] = useState({
+    start: "2025-08-01",
+    end: "2025-11-01",
+  });
+  const [appsRange, setAppsRange] = useState({
+    start: "2025-08-01",
+    end: "2025-11-01",
+  });
+  const [userRange, setUserRange] = useState({
+    start: "2024-10-01",
+    end: "2025-09-01",
+  });
+
+  
   const [selectedMcc, setSelectedMcc] = useState("all");
   const [showOther, setShowOther] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -499,6 +516,397 @@ export default function SectionBehavior({ data }) {
   </Card>
 )}
 
+      {/* ---------------------------------------- */}
+      {/* 🏦 Наиболее популярные приложения БВУ */}
+      {/* ---------------------------------------- */}
+      {charts.bankApps?.popularApps && charts.bankApps.popularApps.length > 0 && (
+        <Card>
+          <CardContent className="p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-medium mb-1">
+                  🏦 Наиболее популярные приложения БВУ среди клиентов банка
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Количество клиентов, у которых установлены приложения банков
+                  второго уровня. 
+                </p>
+                <p className="text-sm text-gray-400">
+                  * Без учета данных Kaspi и Halyk Bank ввиду отсутствия информации в базе данных.
+                </p>
+              </div>
+
+              {/* 📅 Диапазон */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+                <Calendar size={15} className="text-amber-500" />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    value={bankRange.start}
+                    onChange={(e) =>
+                      setBankRange({ ...bankRange, start: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                  <span>–</span>
+                  <input
+                    type="date"
+                    value={bankRange.end}
+                    onChange={(e) =>
+                      setBankRange({ ...bankRange, end: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <div style={{ width: "1000px", height: 360 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={charts.bankApps.popularApps}
+                    margin={{ top: 30, right: 30, left: 20, bottom: 50 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#FEF3C7" />
+                    <XAxis
+                      dataKey="bank"
+                      angle={-20}
+                      textAnchor="end"
+                      height={70}
+                      tick={{ fill: "#92400E", fontSize: 12 }}
+                    />
+                    <YAxis
+                      label={{
+                        value: "тыс. клиентов",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { fontSize: 12, fill: "#B45309" },
+                      }}
+                    />
+                    <Tooltip
+                      formatter={(v) => `${v} тыс.`}
+                      contentStyle={{
+                        backgroundColor: "#FFFBEB",
+                        borderColor: "#FBBF24",
+                      }}
+                    />
+                    <defs>
+                      <linearGradient id="bankGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#FACC15" />
+                        <stop offset="100%" stopColor="#FBBF24" />
+                      </linearGradient>
+                    </defs>
+                    <Bar
+                      dataKey="clients"
+                      fill="url(#bankGradient)"
+                      radius={[6, 6, 0, 0]}
+                      barSize={60}
+                    >
+                      <LabelList
+                        dataKey="clients"
+                        position="top"
+                        formatter={(v) => `${v} тыс.`}
+                        fill="#78350F"
+                        fontSize={12}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* ---------------------------------------- */}
+      {/* 📱 Количество приложений БВУ у клиентов банка */}
+      {/* ---------------------------------------- */}
+      {charts.bankApps?.appsCount && charts.bankApps.appsCount.length > 0 && (
+        <Card>
+          <CardContent className="p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-medium mb-1">
+                  📱 Количество приложений БВУ у клиентов банка
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Распределение клиентов по количеству установленных банковских
+                  приложений.
+                </p>
+                <p className="text-sm text-gray-400">
+                  * Без учета данных Kaspi и Halyk Bank ввиду отсутствия информации в базе данных.
+                </p>
+              </div>
+
+              {/* 📅 Диапазон */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+                <Calendar size={15} className="text-amber-500" />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    value={appsRange.start}
+                    onChange={(e) =>
+                      setAppsRange({ ...appsRange, start: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                  <span>–</span>
+                  <input
+                    type="date"
+                    value={appsRange.end}
+                    onChange={(e) =>
+                      setAppsRange({ ...appsRange, end: e.target.value })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <ResponsiveContainer width="100%" height={360}>
+              <BarChart
+                data={charts.bankApps.appsCount}
+                margin={{ top: 30, right: 30, left: 20, bottom: 50 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#FEF3C7" />
+                <XAxis
+                  dataKey="apps"
+                  label={{
+                    value: "Количество приложений",
+                    position: "insideBottom",
+                    offset: -5,
+                    style: { fontSize: 12, fill: "#92400E" },
+                  }}
+                  tick={{ fill: "#92400E", fontSize: 12 }}
+                />
+                <YAxis
+                  label={{
+                    value: "тыс. клиентов",
+                    angle: -90,
+                    position: "insideLeft",
+                    style: { fontSize: 12, fill: "#B45309" },
+                  }}
+                />
+                <Tooltip
+                  formatter={(v) => `${v} тыс.`}
+                  contentStyle={{
+                    backgroundColor: "#FFFBEB",
+                    borderColor: "#FBBF24",
+                  }}
+                />
+                <defs>
+                  <linearGradient id="appsGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#FCD34D" />
+                    <stop offset="100%" stopColor="#FDBA74" />
+                  </linearGradient>
+                </defs>
+                <Bar
+                  dataKey="clients"
+                  fill="url(#appsGradient)"
+                  radius={[6, 6, 0, 0]}
+                >
+                  <LabelList
+                    dataKey="clients"
+                    position="top"
+                    formatter={(v) => `${v} тыс.`}
+                    fill="#78350F"
+                    fontSize={12}
+                  />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
+
+{/* 📈 Динамика пользовательской активности */}
+{charts.userDynamics && charts.userDynamics.length > 0 && (
+  <Card>
+    <CardContent className="p-6 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h3 className="text-lg font-medium mb-1">
+            📊 Динамика пользовательской активности
+          </h3>
+          <p className="text-sm text-gray-500">
+            Изменение количества новых пользователей, MAU и среднего DAU по месяцам.
+          </p>
+        </div>
+
+        {/* 📅 Диапазон */}
+        <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700 shadow-sm">
+          <Calendar size={15} className="text-amber-500" />
+          <div className="flex items-center gap-2">
+            <input
+              type="date"
+              value={userRange.start}
+              onChange={(e) =>
+                setUserRange({ ...userRange, start: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+            <span>–</span>
+            <input
+              type="date"
+              value={userRange.end}
+              onChange={(e) =>
+                setUserRange({ ...userRange, end: e.target.value })
+              }
+              className="bg-transparent outline-none text-gray-800 cursor-pointer"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <div style={{ width: "1400px", height: 460 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={charts.userDynamics.filter(
+                (d) =>
+                  new Date(d.date) >= new Date(userRange.start) &&
+                  new Date(d.date) <= new Date(userRange.end)
+              )}
+              margin={{ top: 30, right: 60, left: 40, bottom: 80 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#FEF3C7" />
+
+              <XAxis
+                dataKey="date"
+                tickFormatter={(v) =>
+                  new Date(v).toLocaleDateString("ru-RU", {
+                    month: "short",
+                    year: "2-digit",
+                  })
+                }
+                angle={-25}
+                textAnchor="end"
+                height={80}
+                tickMargin={12}
+                tick={{ fill: "#92400E", fontSize: 12 }}
+                padding={{ left: 20, right: 20 }}
+              />
+
+              <YAxis
+                yAxisId="left"
+                label={{
+                  value: "MAU / DAU (млн пользователей)",
+                  angle: -90,
+                  position: "insideLeft",
+                  dx: -5,
+                  dy: 70,
+                  style: { fontSize: 12, fill: "#92400E" },
+                }}
+                tick={{ fill: "#92400E", fontSize: 11 }}
+              />
+
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                label={{
+                  value: "Новые пользователи (тыс.)",
+                  angle: -90,
+                  position: "insideRight",
+                  dx: 25,
+                  dy: 70,
+                  style: { fontSize: 12, fill: "#B45309" },
+                }}
+                tick={{ fill: "#B45309", fontSize: 11 }}
+              />
+
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                wrapperStyle={{ paddingTop: "15px" }}
+              />
+
+              <defs>
+                <linearGradient id="mauGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#FACC15" />
+                  <stop offset="100%" stopColor="#FDE68A" />
+                </linearGradient>
+                <linearGradient id="dauGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#FBBF24" />
+                  <stop offset="100%" stopColor="#F59E0B" />
+                </linearGradient>
+              </defs>
+
+              {/* 🟨 MAU */}
+              <Bar
+                yAxisId="left"
+                dataKey="mau"
+                name="MAU (ежемес.)"
+                fill="url(#mauGradient)"
+                barSize={30}
+                radius={[6, 6, 0, 0]}
+                animationDuration={800}
+              >
+                <LabelList
+                  dataKey="mau"
+                  position="top"
+                  formatter={(v) =>
+                    v >= 1_000_000
+                      ? `${(v / 1_000_000).toFixed(1)} млн`
+                      : v.toLocaleString("ru-RU")
+                  }
+                  fill="#78350F"
+                  fontSize={11}
+                />
+              </Bar>
+
+              {/* 🟧 DAU */}
+              <Bar
+                yAxisId="left"
+                dataKey="dau"
+                name="Средний DAU"
+                fill="url(#dauGradient)"
+                barSize={30}
+                radius={[6, 6, 0, 0]}
+                animationDuration={800}
+              >
+                <LabelList
+                  dataKey="dau"
+                  position="top"
+                  formatter={(v) =>
+                    v >= 1_000_000
+                      ? `${(v / 1_000_000).toFixed(1)} млн`
+                      : v.toLocaleString("ru-RU")
+                  }
+                  fill="#78350F"
+                  fontSize={11}
+                />
+              </Bar>
+
+              {/* 🟠 Новые пользователи (линия с подписями) */}
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="newUsers"
+                name="Новые пользователи"
+                stroke="#CA8A04"
+                strokeWidth={3}
+                dot={{ r: 5, fill: "#FACC15", strokeWidth: 1 }}
+                activeDot={{ r: 7, fill: "#FCD34D" }}
+                label={{
+                  position: "top",
+                  fontSize: 11,
+                  fill: "#92400E",
+                  formatter: (v) => v.toLocaleString("ru-RU"),
+                }}
+                animationDuration={1000}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+)}
+
+
+
+
       {/* 💡 Инсайты */}
       {insights && insights.length > 0 && (
         <Card>
@@ -516,5 +924,11 @@ export default function SectionBehavior({ data }) {
         </Card>
       )}
     </div>
+
+
+
+
+
   );
+  
 }
