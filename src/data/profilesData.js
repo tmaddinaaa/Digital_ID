@@ -537,11 +537,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
-          portfolioType: "Крупный",
+          portfolioType: "Средний",
+          share: "30%",
+          openDate: "2024-10-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Малый",
           share: "10%",
-          openDate: "2024-03-10",
-          status: "Активен"
-        }
+          openDate: "2024-10-12",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2024-12-12",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -808,10 +824,11 @@ export const profilesData = [
           name: "Акции",
           type: "Инвестиции",
           portfolioType: "Средний",
-          share: "2%",
+          share: "100%",
           openDate: "2024-09-12",
           status: "Активен",
         },
+
       ],
       alatauGarant: [],
     },
@@ -1270,11 +1287,19 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "1%",
-          openDate: "2023-09-01",
+          portfolioType: "Средний",
+          share: "70%",
+          openDate: "2024-09-12",
           status: "Активен",
-        }
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "30%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -1540,11 +1565,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "20%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "20%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Денежные средства",
           portfolioType: "Крупный",
-          share: "10%",
-          openDate: "2023-12-15",
-          status: "Активен"
-        }
+          share: "60%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -2191,8 +2232,24 @@ export const profilesData = [
           name: "Акции",
           type: "Инвестиции",
           portfolioType: "Средний",
-          share: "2%",
-          openDate: "2024-03-10",
+          share: "30%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "10%",
+          openDate: "2024-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2024-09-12",
           status: "Активен",
         },
       ],
@@ -2431,9 +2488,25 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
-          portfolioType: "Крупный",
+          portfolioType: "Средний",
+          share: "28%",
+          openDate: "2023-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Малый",
           share: "12%",
-          openDate: "2024-06-20",
+          openDate: "2023-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2023-09-12",
           status: "Активен",
         },
       ],
@@ -2914,11 +2987,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-03-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -3132,11 +3221,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "1%",
-          openDate: "2024-04-20",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -3367,9 +3472,25 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "1%",
-          openDate: "2024-02-11",
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Денежные средства",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
           status: "Активен",
         },
       ],
@@ -3593,11 +3714,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Денежные средства",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-11-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -3810,11 +3947,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "40%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-06-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "53%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -4927,11 +5080,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-11-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -5153,10 +5322,26 @@ export const profilesData = [
           name: "Акции",
           type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-06-01",
-          status: "Активен"
-        }
+          share: "40%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "10%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Малый",
+          share: "50%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -5400,11 +5585,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-09-15",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -5644,11 +5845,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Денежные средства",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-06-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -6316,13 +6533,29 @@ export const profilesData = [
       title: "Продукты Группы",
       alatauInvest: [
         {
-          name: "Акции",
+          name: "Денежные средства",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
           type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-03-05",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -7161,11 +7394,20 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-02-10",
-          status: "Активен"
-        }
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "67%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+
       ],
       alatauGarant: []
     },
@@ -7396,11 +7638,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-06-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -7810,13 +8068,29 @@ export const profilesData = [
       title: "Продукты Группы",
       alatauInvest: [
         {
-          name: "Акции",
+          name: "Денежные средства",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
           type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-02-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -8038,11 +8312,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-02-10",
-          status: "Активен"
-        }
+          portfolioType: "Средний",
+          share: "10%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "20%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "70%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -8432,11 +8722,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-05-15",
-          status: "Активен"
-        }
+          share: "17%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "50%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -8888,11 +9194,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-12-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -9303,11 +9625,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "25%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Денежные средства",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-05-01",
-          status: "Активен"
-        }
+          share: "15%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -9536,11 +9874,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-01-12",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -10442,11 +10796,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-09-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -11349,11 +11719,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-03-05",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -12163,11 +12549,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-09-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -12411,11 +12813,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-02-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -12650,11 +13068,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-09-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -13063,11 +13497,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-03-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -13276,11 +13726,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-02-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -13474,11 +13940,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-04-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -13871,11 +14353,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-12-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -14097,9 +14595,25 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-03-01",
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
           status: "Активен",
         },
       ],
@@ -14967,11 +15481,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-02-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -15382,11 +15912,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-11-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -15623,11 +16169,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-10-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -16292,11 +16854,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-11-20",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -16722,11 +17300,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-05-20",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -17191,11 +17785,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-10-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -17858,11 +18468,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-10-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -18278,11 +18904,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-09-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -18519,11 +19161,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-08-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -18752,11 +19410,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2024-12-10",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
@@ -20091,11 +20765,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-11-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -20527,11 +21217,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2023-10-01",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: [
         {
@@ -21130,11 +21836,27 @@ export const profilesData = [
         {
           name: "Акции",
           type: "Инвестиции",
+          portfolioType: "Средний",
+          share: "33%",
+          openDate: "2022-09-12",
+          status: "Активен",
+        },
+        {
+          name: "Облигации",
+          type: "Инвестиции",
           portfolioType: "Малый",
-          share: "2%",
-          openDate: "2025-04-05",
-          status: "Активен"
-        }
+          share: "7%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
+        {
+          name: "Валюта",
+          type: "Инвестиции",
+          portfolioType: "Крупный",
+          share: "60%",
+          openDate: "2022-09-22",
+          status: "Активен",
+        },
       ],
       alatauGarant: []
     },
