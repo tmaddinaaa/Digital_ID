@@ -57,7 +57,8 @@ export const profilesData = [
       heatmap: "/maps/almat_heatmap.html",
       time_heatmap: "/maps/almat_time_heatmap.html",
       time_points: "/maps/almat_time_points.html",
-      table: "/tables/almat_table.xlsx" // ✅ путь к таблице
+      table: "/tables/almat_table.xlsx",
+      path_points: "/maps/almat_geo_paths.html",
     },
 
 
