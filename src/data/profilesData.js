@@ -117,7 +117,7 @@ export const profilesData = [
       ],
       frequency: { daily: 0.1, weekly: 1, monthly: 3},
       conversion: { overall: "65%", clickRate: "42%" },
-      insights: { topics: "платежи" },
+      insights: { topics: "coming" },
       topPush: { text: "Платите за коммуналку быстро и удобно!", or: "82%", ctr: "46%" },
       heatmap: {
   data: {
@@ -533,32 +533,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "30%",
-          openDate: "2024-10-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "10%",
-          openDate: "2024-10-12",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2024-12-12",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -819,17 +826,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "100%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [],
     },
     mlIndicators: {
@@ -1283,24 +1312,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "70%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "30%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -1561,32 +1605,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "20%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "20%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Денежные средства",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -2227,32 +2278,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "30%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "10%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2024-09-12",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -2484,32 +2542,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "28%",
-          openDate: "2023-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "12%",
-          openDate: "2023-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2023-09-12",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -2983,32 +3048,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -3217,32 +3289,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -3468,32 +3547,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -3710,32 +3796,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -3943,32 +4036,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "40%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "53%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -5076,32 +5176,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -5317,32 +5424,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "40%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "10%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "50%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -5581,32 +5695,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -5841,32 +5962,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -6531,32 +6659,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -7390,25 +7525,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "67%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -7634,32 +7783,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -8066,32 +8222,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -8308,32 +8471,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "10%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "20%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "70%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -8718,32 +8888,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "17%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "50%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -9190,32 +9367,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -9621,32 +9805,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "25%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Денежные средства",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "15%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -9870,32 +10061,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -10792,32 +10990,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -11715,32 +11920,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -12545,32 +12757,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -12809,32 +13028,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -13064,32 +13290,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -13493,32 +13726,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -13722,32 +13962,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -13936,32 +14183,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -14349,32 +14603,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -14591,32 +14852,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -15477,32 +15745,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
 
@@ -15908,32 +16183,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -16165,32 +16447,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -16850,32 +17139,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -17296,32 +17592,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -17781,32 +18084,39 @@ export const profilesData = [
 
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Страхование жизни",
@@ -18464,32 +18774,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -18900,32 +19217,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -19157,32 +19481,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -19406,32 +19737,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {
@@ -20761,32 +21099,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -21213,32 +21558,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: [
         {
           name: "Автострахование",
@@ -21832,32 +22184,39 @@ export const profilesData = [
     },
     groupProducts: {
       title: "Продукты Группы",
-      alatauInvest: [
-        {
-          name: "Акции",
-          type: "Инвестиции",
-          portfolioType: "Средний",
-          share: "33%",
-          openDate: "2022-09-12",
-          status: "Активен",
-        },
-        {
-          name: "Облигации",
-          type: "Инвестиции",
-          portfolioType: "Малый",
-          share: "7%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-        {
-          name: "Валюта",
-          type: "Инвестиции",
-          portfolioType: "Крупный",
-          share: "60%",
-          openDate: "2022-09-22",
-          status: "Активен",
-        },
-      ],
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
+      },
       alatauGarant: []
     },
     mlIndicators: {

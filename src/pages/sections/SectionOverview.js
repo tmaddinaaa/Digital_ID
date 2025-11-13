@@ -35,15 +35,22 @@ export default function SectionOverview({ data }) {
     end: "",
   });
 
+  const [activeClientsRange, setActiveClientsRange] = useState({
+    start: "",
+    end: "",
+  });
+
+
+
   if (!data)
     return <p className="text-gray-500 text-center mt-6">Нет данных</p>;
 
   const { kpi = {}, charts = {} } = data;
 
   const kpiDisplay = [
-    { key: "totalProfiles", label: "Всего профилей", value: kpi.totalProfiles },
-    { key: "activeProfiles", label: "Активные профили", value: kpi.activeProfiles },
-    { key: "newProfiles", label: "Новые профили", value: kpi.newProfiles },
+    { key: "totalProfiles", label: "Всего пользователей в МП", value: kpi.totalProfiles },
+    { key: "activeProfiles", label: "Активные клиенты", value: kpi.activeProfiles },
+    { key: "newProfiles", label: "Новые клиенты в МП за последний месяц", value: kpi.newProfiles },
   ];
 
   const cityData = (charts.cityDistribution || []).map((item) => ({
@@ -298,7 +305,6 @@ export default function SectionOverview({ data }) {
 
       <p className="text-sm text-gray-500 mb-3">
         Отображает количество клиентов по каждому филиалу.
-        Все филиалы отображаются полностью, названия переносятся на новую строку.
       </p>
 
       <div className={`${manyCities ? "overflow-x-auto pb-4" : ""}`}>
@@ -368,6 +374,83 @@ export default function SectionOverview({ data }) {
     </CardContent>
   </Card>
 )}
+
+   {/* 📈 Динамика активных клиентов */}
+      {charts.activeClients && charts.activeClients.length > 0 && (
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <h3 className="text-lg font-medium">
+                📈 Динамика активных клиентов (Мобильное приложение)
+              </h3>
+
+              {/* Фильтр диапазона */}
+              <div className="flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 text-gray-700">
+                <Calendar size={15} className="text-yellow-600" />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="date"
+                    value={activeClientsRange.start}
+                    onChange={(e) =>
+                      setNewClientsRange({
+                        ...activeClientsRange,
+                        start: e.target.value,
+                      })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                  <span>–</span>
+                  <input
+                    type="date"
+                    value={activeClientsRange.end}
+                    onChange={(e) =>
+                      setNewClientsRange({
+                        ...activeClientsRange,
+                        end: e.target.value,
+                      })
+                    }
+                    className="bg-transparent outline-none text-gray-800 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <p className="text-sm text-gray-500 mb-4">
+              Отображает количество активных клиентов по месяцам.
+            </p>
+
+            <AutoResizeContainer height={300}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={charts.activeClients}
+                  margin={{ top: 20, right: 30, left: 10, bottom: 20 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+                  <YAxis />
+                  <Tooltip formatter={(v) => v.toLocaleString("ru-RU")} />
+                  <Line
+                    type="monotone"
+                    dataKey="activeCount"
+                    stroke="#FFB800"
+                    strokeWidth={2}
+                    dot={{ r: 4 }}
+                  >
+                    <LabelList
+                      dataKey="activeCount"
+                      position="top"
+                      formatter={(v) => v.toLocaleString("ru-RU")}
+                      fill="#444"
+                      fontSize={11}
+                    />
+                  </Line>
+                </LineChart>
+              </ResponsiveContainer>
+            </AutoResizeContainer>
+          </CardContent>
+        </Card>
+      )}
+
 
     </div>
   );

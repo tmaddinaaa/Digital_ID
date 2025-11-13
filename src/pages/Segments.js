@@ -59,9 +59,9 @@ function getSegmentColor(segmentName) {
 /* ---------- Основные данные (пример) ---------- */
 const BASE_DATA = {
   totals: {
-    totalUsers: 1633617,
-    avgRevenue: 13687,
-    totalRevenue: 22362068598,
+    totalUsers: 1655756,
+    avgRevenue: 10038.17,
+    totalRevenue: 16620758306.35,
   },
   genderDistribution: [
     { name: "Мужчины", value: 53.48 },
@@ -182,11 +182,10 @@ export default function Segments() {
           {/* KPI */}
           <div className="grid md:grid-cols-3 gap-6">
             <MetricCard label="Количество транзакционно активных/доходных клиентов" value={filteredData.totals.totalUsers.toLocaleString()} />
-            <MetricCard label="Средний доход (₸) на 1 активного клиента" value={filteredData.totals.avgRevenue.toLocaleString()} highlight />
+            <MetricCard label="Средний доход (₸) на 1 сегментируемого клиента" value={filteredData.totals.avgRevenue.toLocaleString()} highlight />
             <MetricCard
               label="Общий доход (₸)"
               value={filteredData.totals.totalRevenue.toLocaleString()}
-              note="Без учёта комиссионных сборов"
             />
           </div>
 

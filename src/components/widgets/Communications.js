@@ -178,24 +178,14 @@ const Communications = ({ data }) => {
       </div>
 
       {/* Инсайты */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-        <h3 className="font-semibold text-yellow-800 mb-2">💡 Инсайты</h3>
-        <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-          {insights?.topics && (
-            <li>
-              Реагирует на темы:{" "}
-              <span className="font-medium">{insights.topics}</span>
-            </li>
-          )}
-          {topPush && (
-            <li>
-              Топ push:{" "}
-              <span className="font-medium">{topPush.text}</span> — OR:{" "}
-              {topPush.or}, CTR: {topPush.ctr}
-            </li>
-          )}
-        </ul>
-      </div>
+<div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+  <h3 className="font-semibold text-yellow-800 mb-2">💡 Инсайты</h3>
+
+  <div className="text-gray-600 text-sm py-2 italic">
+    ⏳ Coming soon...
+  </div>
+</div>
+
     </div>
   );
 };

@@ -3,7 +3,7 @@ export const profilesList = [
     ac_id: 100031731766,
     fio: "Жұмағали Алмат",
     iin: "910517300070",
-    city: "Алматы",
+    city: "АЛМАТЫ",
     segment: "Ценные клиенты",
     status: "Активен",
 
@@ -32,7 +32,7 @@ export const profilesList = [
     ac_id: 100031196251,
     fio: "Менетаева Алтыншаш Куанышевна",
     iin: "960108450643",
-    city: "Алматы",
+    city: "АЛМАТЫ",
     segment: "Депозитные клиенты",
     status: "Активен",
 

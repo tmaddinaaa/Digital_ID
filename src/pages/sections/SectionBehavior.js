@@ -734,7 +734,7 @@ const [retentionRange, setRetentionRange] = useState({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h3 className="text-lg font-medium mb-1">
-            📊 Динамика пользовательской активности
+            📊 Динамика пользовательской активности в МП
           </h3>
           <p className="text-sm text-gray-500">
             Изменение количества новых пользователей, MAU и среднего DAU по месяцам.

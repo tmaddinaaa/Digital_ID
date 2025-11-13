@@ -112,7 +112,7 @@ const FinancialProfile = ({ data, financialInfo }) => {
       {/* --- Таблица операций --- */}
       {data.operations && (
         <div>
-          <h3 className="font-semibold mb-3 text-gray-700">💳 Операции</h3>
+          <h3 className="font-semibold mb-3 text-gray-700">💳 Операции (ср. мес.)</h3>
           <table className="w-full border border-gray-200 rounded-lg text-sm text-gray-700">
             <thead className="bg-gray-50">
               <tr>

@@ -20,6 +20,7 @@ const Sidebar = ({ setIsAuthenticated }) => {
     { path: "/profiles", label: "Search Client Profile", icon: <Users size={18} /> },
     { path: "/segments", label: "Segments", icon: <Layers size={18} /> },
     { path: "/client-portrait", label: "Product Portrait", icon: <Brain size={18} /> },
+    { path: "/models", label: "Models", icon: <Cpu size={18} /> },
     { path: "/ai-chat", label: "AI Chat", icon: <MessageSquare size={18} /> },
     { path: "/settings", label: "Settings", icon: <Settings size={18} /> },
   ];

@@ -23,10 +23,16 @@ export const overviewAllData = {
       { month: "Авг 25", count: 27279 },
       { month: "Сен 25", count: 25993 },
     ],
-    sourceDistribution: [                
-      { source: "КХД", value: 654338 },
-      { source: "Мобильное приложение", value: 2267641 },
-      { source: "Оба источника", value: 3299584 },
+      activeClients: [
+      { month: "Янв 25", activeCount: 712172 },
+      { month: "Фев 25", activeCount: 710384 },
+      { month: "Мар 25", activeCount: 707453 },
+      { month: "Апр 25", activeCount: 705509 },
+      { month: "Май 25", activeCount: 692997 },
+      { month: "Июн 25", activeCount: 681477 },
+      { month: "Июл 25", activeCount: 671494 },
+      { month: "Авг 25", activeCount: 663820 },
+      { month: "Сен 25", activeCount: 653719},
     ],
     cityDistribution: [
       { city: "Алматинский  филиал", count: 785234 },
