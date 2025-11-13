@@ -381,7 +381,7 @@ export default function SectionOverview({ data }) {
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <h3 className="text-lg font-medium">
-                📈 Динамика активных клиентов (Мобильное приложение)
+                📈 Динамика активных клиентов 
               </h3>
 
               {/* Фильтр диапазона */}

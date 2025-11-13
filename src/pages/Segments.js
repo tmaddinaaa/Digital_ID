@@ -60,8 +60,8 @@ function getSegmentColor(segmentName) {
 const BASE_DATA = {
   totals: {
     totalUsers: 1655756,
-    avgRevenue: 10038.17,
-    totalRevenue: 16620758306.35,
+    avgRevenue: 10038,
+    totalRevenue: 16620758306,
   },
   genderDistribution: [
     { name: "Мужчины", value: 53.48 },
