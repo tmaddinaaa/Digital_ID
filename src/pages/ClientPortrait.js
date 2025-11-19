@@ -492,8 +492,14 @@ function PortraitCard({
               {cross.map((c) => (
                 <Metric key={c.label} label={c.label} value={fmt(c.value)} />
               ))}
-              <Metric label="Средний возраст" value={base.avgAge ? `${fmt(base.avgAge)} лет` : "—"} />
-              {(base.avgIncome || base.avgSalary || base.avg_income) && (
+<Metric
+  label={
+    data.product === "Депозиты" && data.type === "AQYL"
+      ? "Средний возраст родителя"
+      : "Средний возраст"
+  }
+  value={base.avgAge ? `${fmt(base.avgAge)} лет` : "—"}
+/>           {(base.avgIncome || base.avgSalary || base.avg_income) && (
                 <Metric label="Средняя ЗП" value={`${fmt(base.avgIncome ?? base.avgSalary ?? base.avg_income)} ₸`} />
               )}
               {base.genderShare ? (
