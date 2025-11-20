@@ -48,7 +48,7 @@ export default function SectionOverview({ data }) {
   const { kpi = {}, charts = {} } = data;
 
   const kpiDisplay = [
-    { key: "totalProfiles", label: "Всего пользователей в МП", value: kpi.totalProfiles },
+    { key: "totalProfiles", label: "Всего клиентских профилей", value: kpi.totalProfiles },
     { key: "activeProfiles", label: "Активные клиенты", value: kpi.activeProfiles },
     { key: "newProfiles", label: "Новые клиенты в МП за последний месяц", value: kpi.newProfiles },
   ];
