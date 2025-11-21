@@ -50,7 +50,7 @@ export default function SectionOverview({ data }) {
   const kpiDisplay = [
     { key: "totalProfiles", label: "Всего клиентских профилей", value: kpi.totalProfiles },
     { key: "activeProfiles", label: "Активные клиенты", value: kpi.activeProfiles },
-    { key: "newProfiles", label: "Новые клиенты в МП за последний месяц", value: kpi.newProfiles },
+    { key: "newProfiles", label: "Новые профили", value: kpi.newProfiles },
   ];
 
   const cityData = (charts.cityDistribution || []).map((item) => ({
