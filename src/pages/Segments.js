@@ -34,7 +34,7 @@ const segmentNames = {
   CORE_MID_INCOME_PASSIVE: "Средний доход, пассивные",
   CORE_MID_INCOME_ACTIVE: "Средний доход, активные",
   CORE_HIGH_INCOME: "Высокий доход",
-  OTHER_INCOME_ORIENTED: "Прочие источники дохода",
+  COMISSION_ORIENTED: "Комиссионные",
 };
 
 /* ---------- Цвета ---------- */
@@ -51,7 +51,7 @@ function getSegmentColor(segmentName) {
     "Средний доход, пассивные": "#06B6D4",
     "Средний доход, активные": "#EF4444",
     "Высокий доход": "#10B981",
-    "Прочие источники дохода": "#F59E0B",
+    "Комиссионные": "#F59E0B",
   };
   return COLORS[segmentName] || "#D1D5DB";
 }
@@ -74,35 +74,35 @@ const BASE_DATA = {
     { name: "Кредит + депозит", value: 1 },
   ],
   segments: Object.entries(segmentNames).map(([key, name]) => {
-    const counts = {
-      HIGH_VALUE_ALL_ROUND: 19958,
-      CREDIT_ORIENTED: 17525,
-      DEPOSIT_ORIENTED: 22999,
-      MIXED_INCOME: 3025,
-      PASSIVE_BUT_PROFITABLE: 242555,
-      LOW_ENGAGEMENT_LOW_INCOME: 39302,
-      PASSIVE_LOW_INCOME: 794864,
-      ACTIVE_BUT_LOW_INCOME: 140249,
-      CORE_MID_INCOME_PASSIVE: 212646,
-      CORE_MID_INCOME_ACTIVE: 100831,
-      CORE_HIGH_INCOME: 39652,
-      OTHER_INCOME_ORIENTED: 25432,
-    };
+const counts = {
+  HIGH_VALUE_ALL_ROUND: 40241,
+  CREDIT_ORIENTED: 16482,
+  DEPOSIT_ORIENTED: 52965,
+  MIXED_INCOME: 49524,
+  PASSIVE_BUT_PROFITABLE: 247066,
+  LOW_ENGAGEMENT_LOW_INCOME: 32779,
+  PASSIVE_LOW_INCOME: 742837,
+  ACTIVE_BUT_LOW_INCOME: 76627,
+  CORE_MID_INCOME_PASSIVE: 250667,
+  CORE_MID_INCOME_ACTIVE: 69607,
+  CORE_HIGH_INCOME: 26195,
+  COMISSION_ORIENTED: 50360,
+};
     return { name, count: counts[key] };
   }),
 };
 
 const BASE_RFM = [
-  { recency: "5", frequency: "222", monetary: 3656956, segment: "Ценные клиенты" },
-  { recency: "63", frequency: "17", monetary: 238652, segment: "Кредитные клиенты" },
-  { recency: "38", frequency: "119", monetary: 1745636, segment: "Депозитные клиенты" },
-  { recency: "70", frequency: "30", monetary: 910000, segment: "Смешанный доход" },
-  { recency: "169", frequency: "1", monetary: 1819, segment: "Пассивные низкодоходные" },
-  { recency: "150", frequency: "2", monetary: 4499, segment: "Средний доход, пассивные" },
-  { recency: "40", frequency: "94", monetary: 701708, segment: "Средний доход, активные" },
-  { recency: "77", frequency: "14", monetary: 182101, segment: "Высокий доход" },
-  { recency: "78", frequency: "42", monetary: 1158806, segment: "Прочие источники дохода" },
-  { recency: "64", frequency: "34", monetary: 178434, segment: "Активные, но малодоходные" },
+  { recency: "5", frequency: "234", monetary: 2911389, segment: "Ценные клиенты" },                     // HIGH_VALUE_ALL_ROUND
+  { recency: "57", frequency: "16", monetary: 216360, segment: "Кредитные клиенты" },                  // CREDIT_ORIENTED
+  { recency: "43", frequency: "84", monetary: 951354, segment: "Депозитные клиенты" },                 // DEPOSIT_ORIENTED
+  { recency: "86", frequency: "34", monetary: 240028, segment: "Смешанный доход" },                     // MIXED_INCOME
+  { recency: "155", frequency: "1", monetary: 1994, segment: "Пассивные низкодоходные" },              // LOW_ENGAGEMENT_LOW_INCOME
+  { recency: "151", frequency: "2", monetary: 4505, segment: "Средний доход, пассивные" },             // CORE_MID_INCOME_PASSIVE
+  { recency: "77", frequency: "20", monetary: 130621, segment: "Средний доход, активные" },           // ACTIVE_BUT_LOW_INCOME
+  { recency: "86", frequency: "8", monetary: 81793, segment: "Высокий доход" },                        // CORE_HIGH_INCOME
+  { recency: "50", frequency: "55", monetary: 303477, segment: "Комиссионные" },                       // COMISSION_ORIENTED
+  { recency: "161", frequency: "2", monetary: 3941, segment: "Активные, но малодоходные" },            // PASSIVE_LOW_INCOME
 ];
 
 /* ---------- Главный компонент ---------- */
