@@ -60,8 +60,9 @@ export default function UnifiedFilters({
   ];
   const garantProductsList = [
     "Автострахование",
-    "Путешествия",
-    "Страхование жизни",
+    "Путешествие",
+    "Страхование от несчастного случая",
+    "Страхование имущества",
   ];
   const portfolioTypesList = ["Крупный", "Средний", "Малый"];
 
