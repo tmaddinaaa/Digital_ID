@@ -88,11 +88,62 @@ export const profilesData = [
         ],
         history: [],
       },
-      groupProducts: {
-        title: "Продукты Группы",
-        alatauInvest: [],
-        alatauGarant: [],
+    groupProducts: {
+      title: "Продукты Группы",
+      alatauInvest: {
+        portfolioType: "Средний",
+        data: [
+          {
+            name: "Акции",
+            type: "Инвестиции",
+            portfolioType: "Средний",
+            share: "30%",
+            openDate: "2024-10-12",
+            status: "Активен",
+          },
+          {
+            name: "Облигации",
+            type: "Инвестиции",
+            portfolioType: "Малый",
+            share: "10%",
+            openDate: "2024-06-12",
+            status: "Активен",
+          },
+          {
+            name: "Валюта",
+            share: "60%",
+            openDate: "2024-12-12",
+            status: "Активен",
+          },
+          {
+            name: "Денежные средства",
+            share: "0%",
+            openDate: "-",
+            status: "Не активен",
+          },
+        ],
       },
+      alatauGarant: [
+        {
+          name: "Автострахование",
+          type: "Страхование авто",
+          openDate: "2024-07-01",
+          status: "Активен"
+        },
+        {
+          name: "Страхование жизни",
+          type: "Страхование гражданской ответственности",
+          openDate: "2024-09-05",
+          status: "Активен"
+        },
+        {
+          name: "Путешествие",
+          type: "Страхование в путешествии",
+          openDate: "2023-08-10",
+          status: "Не активен"
+        }
+      ]
+    },
       mlIndicators: {     
         churnRisk: "Нет",
         creditInterest: "Да",
