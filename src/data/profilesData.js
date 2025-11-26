@@ -34,8 +34,8 @@ export const profilesData = [
       bankRegistrationDuration: "1 год 4 месяца",
       hasIP: false,
       hasLegalEntity: false,
-      hasAlatauCityInvest: false,
-      hasAlatauCityGarant: false,
+      hasAlatauCityInvest: true,
+      hasAlatauCityGarant: true,
       serviceChannel: "МП",
       lifeStatus: "Актуальный",
       isPrivate: false,
@@ -620,14 +620,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-07-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-07-01",
           status: "Активен"
         }
@@ -1125,8 +1125,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-02-01",
           status: "Активен"
         }
@@ -1399,14 +1399,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-15",
           status: "Активен",
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-15",
           status: "Активен",
         }
@@ -1910,8 +1910,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-04-05",
           status: "Активен",
         },
@@ -2365,8 +2365,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-05",
           status: "Активен",
         },
@@ -2629,14 +2629,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен",
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-04-01",
           status: "Активен",
         },
@@ -3376,8 +3376,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-06-01",
           status: "Активен"
         }
@@ -4392,8 +4392,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-11-01",
           status: "Активен"
         }
@@ -4612,8 +4612,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-11-01",
           status: "Активен"
         }
@@ -5263,8 +5263,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-01",
           status: "Активен"
         }
@@ -5511,8 +5511,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-10",
           status: "Активен"
         },
@@ -5782,8 +5782,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-10",
           status: "Активен"
         },
@@ -6049,8 +6049,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-01",
           status: "Активен"
         }
@@ -6943,8 +6943,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-15",
           status: "Активен"
         }
@@ -7158,8 +7158,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-15",
           status: "Активен"
         }
@@ -8975,8 +8975,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-01",
           status: "Активен"
         }
@@ -9454,8 +9454,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-10",
           status: "Активен"
         }
@@ -9892,8 +9892,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-20",
           status: "Активен"
         }
@@ -10374,8 +10374,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -10596,8 +10596,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -11277,8 +11277,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-10",
           status: "Активен"
         }
@@ -11508,8 +11508,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-04-10",
           status: "Активен",
         },
@@ -11751,14 +11751,14 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-20",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-02-10",
           status: "Активен"
         }
@@ -12591,8 +12591,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -12844,8 +12844,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-07-01",
           status: "Активен"
         },
@@ -13115,8 +13115,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-07-01",
           status: "Активен"
         },
@@ -13377,8 +13377,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -13813,8 +13813,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-01",
           status: "Активен"
         }
@@ -14270,8 +14270,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-20",
           status: "Активен"
         }
@@ -14690,14 +14690,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-02-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-15",
           status: "Активен"
         }
@@ -14939,8 +14939,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-01-10",
           status: "Активен",
         },
@@ -16534,8 +16534,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-12",
           status: "Активен"
         }
@@ -16758,14 +16758,14 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-05-01",
           status: "Активен"
         },
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-05-01",
           status: "Активен"
         }
@@ -16986,8 +16986,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-05-01",
           status: "Активен"
         }
@@ -17226,14 +17226,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-01",
           status: "Активен"
         }
@@ -17679,8 +17679,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-10",
           status: "Активен"
         },
@@ -18399,8 +18399,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-10",
           status: "Активен"
         },
@@ -18861,14 +18861,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-02-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-02-01",
           status: "Активен"
         }
@@ -19304,14 +19304,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-09-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-09-01",
           status: "Активен"
         }
@@ -19568,8 +19568,8 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -20240,8 +20240,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-05-10",
           status: "Активен"
         }
@@ -20477,8 +20477,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-04-01",
           status: "Активен"
         }
@@ -20695,8 +20695,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-05-01",
           status: "Активен"
         }
@@ -20907,14 +20907,14 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-03-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-03-01",
           status: "Активен"
         }
@@ -21186,14 +21186,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2025-04-10",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-04-10",
           status: "Активен"
         }
@@ -21645,14 +21645,14 @@ export const profilesData = [
       },
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-09-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-09-01",
           status: "Активен"
         }
@@ -22858,8 +22858,8 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2025-05-10",
           status: "Активен"
         }
@@ -23080,14 +23080,14 @@ export const profilesData = [
       alatauInvest: [],
       alatauGarant: [
         {
-          name: "Автострахование",
-          type: "Страхование авто",
+name: "Автострахование",
+          type: "auto",
           openDate: "2024-07-01",
           status: "Активен"
         },
         {
-          name: "Страхование жизни",
-          type: "Страхование гражданской ответственности",
+          name: "Страхование от несчастного случая",
+          type: "life",
           openDate: "2024-07-01",
           status: "Активен"
         }
