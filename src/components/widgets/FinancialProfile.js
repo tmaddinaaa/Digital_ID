@@ -76,7 +76,7 @@ const FinancialProfile = ({ data, financialInfo }) => {
   return (
     <div className="bg-white rounded-xl shadow p-6 space-y-8 overflow-auto">
       {/* --- Финансовые метрики --- */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+      {/*<div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
         <div className="bg-gray-50 p-4 rounded-xl">
           <p className="text-sm text-gray-500">Доходность с клиента</p>
           <p className="font-semibold text-lg">
@@ -107,7 +107,7 @@ const FinancialProfile = ({ data, financialInfo }) => {
             {formatNumber(financialInfo?.clv)}
           </p>
         </div>
-      </div>
+      </div>*/}
 
       {/* --- Таблица операций --- */}
       {data.operations && (
