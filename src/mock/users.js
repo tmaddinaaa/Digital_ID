@@ -16,7 +16,7 @@ export const mockUsers = {
 
   analyst: {
     username: "analyst",
-    password: "1234",
+    password: "mmmaannee",
     role: "analyst",
     permissions: [
       "view_financial_profile",
@@ -27,7 +27,7 @@ export const mockUsers = {
 
   viewer: {
     username: "viewer",
-    password: "1234",
+    password: "mmmaannee",
     role: "viewer",
     permissions: [
       "view_bank_products",
