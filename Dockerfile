@@ -1,5 +1,5 @@
 # === Этап 1: сборка React-приложения ===
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 

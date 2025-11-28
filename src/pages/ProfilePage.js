@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { profilesData } from "../data/profilesData";
+
 import BasicInfo from "../components/widgets/BasicInfo";
 import Communications from "../components/widgets/Communications";
 import RelatedClients from "../components/widgets/RelatedClients";
@@ -9,13 +10,17 @@ import BankProductsPage from "../components/widgets/BankProductsPage";
 import GroupProductsPage from "../components/widgets/GroupProductsPage";
 import GeoAnalyticsWidget from "../components/widgets/GeoAnalyticsWidget";
 import CollapsibleSection from "../components/CollapsibleSection";
+
 import { ArrowLeft, UserCircle2, Eye, EyeOff } from "lucide-react";
+
+// 🔐 импорт проверок прав
+import { hasPermission } from "../utils/permissions";
 
 const ProfilePage = () => {
   const { ac_id } = useParams();
   const navigate = useNavigate();
   const [openWidget, setOpenWidget] = useState(null);
-  const [showName, setShowName] = useState(false); // 👁 логика скрытия имени
+  const [showName, setShowName] = useState(false);
   const widgetRef = useRef(null);
 
   const profile = profilesData.find((p) => p.ac_id === Number(ac_id));
@@ -52,31 +57,36 @@ const ProfilePage = () => {
   const handleOpen = (key) =>
     setOpenWidget((prev) => (prev === key ? null : key));
 
-  // 🧩 Набор виджетов
+  // 🧩 Виджеты + разграничение прав
   const widgets = [
     {
       key: "bankProducts",
       title: "🏦 Продукты Банка",
       content: <BankProductsPage data={profile} />,
+      permission: "view_bank_products",
     },
     {
       key: "groupProducts",
       title: "💼 Продукты Группы",
       content: <GroupProductsPage data={profile} />,
+      permission: "view_group_products",
     },
     {
       key: "geoAnalytics",
       title: "🗺 Геоаналитика",
       content: <GeoAnalyticsWidget data={profile} />,
+      permission: "view_geo_analytics",
     },
     {
       key: "communications",
       title: "📞 Коммуникации",
       content: <Communications data={communications} />,
+      // нет permission → доступно всем
     },
     {
       key: "financialProfile",
       title: "💳 Финансовый профиль",
+      permission: "view_financial_profile",
       content: (
         <FinancialProfile
           data={{ ...financialHabits, ...behavior }}
@@ -88,8 +98,16 @@ const ProfilePage = () => {
       key: "related",
       title: "👥 Связанные клиенты",
       content: <RelatedClients related={relatedClients} />,
+      // доступно всем
     },
   ];
+
+  // 🔒 Фильтруем виджеты по правам (admin override уже внутри hasPermission)
+  const availableWidgets = widgets.filter(
+    (w) => !w.permission || hasPermission(w.permission)
+  );
+
+  const activeWidget = availableWidgets.find((w) => w.key === openWidget);
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center px-3 sm:px-4 pb-8">
@@ -112,12 +130,10 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* 🔐 Имя клиента с кнопкой 👁 */}
+        {/* 👁️ Скрытие / отображение ФИО */}
         <div className="flex items-center gap-3 text-sm text-gray-600 truncate max-w-[180px] sm:max-w-[220px] text-right">
           <span className="truncate font-medium">
-            {showName
-              ? basicInfo?.fio || profile.name || "—"
-              : "ФИО"}
+            {showName ? basicInfo?.fio || profile.name || "—" : "ФИО"}
           </span>
           <button
             onClick={() => setShowName(!showName)}
@@ -139,7 +155,7 @@ const ProfilePage = () => {
 
       {/* 🔽 Нижние компактные виджеты */}
       <div className="flex gap-3 sm:gap-4 mt-6 w-full max-w-6xl justify-between overflow-x-auto">
-        {widgets.map(({ key, title }) => (
+        {availableWidgets.map(({ key, title }) => (
           <CollapsibleSection
             key={key}
             title={
@@ -161,7 +177,7 @@ const ProfilePage = () => {
       </div>
 
       {/* 📂 Раскрытый контент */}
-      {openWidget && (
+      {activeWidget && (
         <div
           ref={widgetRef}
           className="mt-6 w-full max-w-6xl bg-white p-5 sm:p-6 rounded-xl shadow-md outline outline-1 outline-yellow-400/60"
@@ -172,7 +188,7 @@ const ProfilePage = () => {
           }}
         >
           <div className="h-full overflow-y-auto pr-2">
-            {widgets.find((w) => w.key === openWidget)?.content}
+            {activeWidget.content}
           </div>
         </div>
       )}

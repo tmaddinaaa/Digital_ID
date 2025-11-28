@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { profilesList } from "../data/profilesList";
 import UnifiedFilters from "../components/UnifiedFilters";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; 
+import { hasPermission } from "../utils/permissions";
 
 export default function Profiles() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function Profiles() {
   // --- Состояние для скрытия/показа ФИО и ИИН ---
   // КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Изначально устанавливаем в false (скрыто)
   const [showPII, setShowPII] = useState(false);
+  const canSeePII = hasPermission("view_pii");
 
   const handleReset = () =>
     setFilters({
@@ -303,17 +305,20 @@ export default function Profiles() {
           <span className="font-semibold ml-1 mr-3">
             {filteredProfiles.length}
           </span>
-          <button
-            onClick={() => setShowPII((prev) => !prev)}
-            className="p-1 rounded-full text-gray-500 hover:text-gray-700 transition-colors"
-            title={showPII ? "Скрыть ФИО и ИИН" : "Показать ФИО и ИИН"}
-          >
-            {showPII ? (
-              <EyeIcon className="w-5 h-5" />
-            ) : (
-              <EyeSlashIcon className="w-5 h-5" />
-            )}
-          </button>
+{canSeePII && (
+  <button
+    onClick={() => setShowPII((prev) => !prev)}
+    className="p-1 rounded-full text-gray-500 hover:text-gray-700 transition-colors"
+    title={showPII ? "Скрыть ФИО и ИИН" : "Показать ФИО и ИИН"}
+  >
+    {showPII ? (
+      <EyeIcon className="w-5 h-5" />
+    ) : (
+      <EyeSlashIcon className="w-5 h-5" />
+    )}
+  </button>
+)}
+
         </div>
 
         <div className="overflow-x-auto bg-white shadow rounded-xl">
@@ -345,12 +350,9 @@ export default function Profiles() {
                 const age = birthDate ? getAgeFromBirthDate(birthDate) : "—";
 
                 // Определяем отображаемое ФИО и ИИН
-                const displayFio = showPII
-                  ? p.fio
-                  : "**********";
-                const displayIin = showPII
-                  ? p.iin
-                  : "************"; 
+const displayFio = canSeePII && showPII ? p.fio : "**********";
+const displayIin = canSeePII && showPII ? p.iin : "************";
+
 
                 return (
                   <tr
